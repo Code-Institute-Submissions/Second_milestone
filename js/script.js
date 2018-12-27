@@ -154,34 +154,36 @@ var btnEStepOne = btnE.addEventListener('click', stepOne);
 var btnWStepOne = btnW.addEventListener('click', stepOne);
 var btnSStepOne = btnS.addEventListener('click', stepOne);
 
-var surfingSpotsNorth = [surfSpots[0], surfSpots[1], surfSpots[2]];
-var surfingSpotsWest = [surfSpots[3], surfSpots[4], surfSpots[5], surfSpots[6], surfSpots[7], surfSpots[8], surfSpots[9], surfSpots[10], surfSpots[11], surfSpots[12]];
-var surfingSpotsSouth = [surfSpots[13], surfSpots[14], surfSpots[15], surfSpots[16], surfSpots[17]];
-var surfingSpotsEast = [surfSpots[18], surfSpots[19]];
+var surfingSpotsNorth = [surfSpots[0].title, surfSpots[1].title, surfSpots[2].title];
+var surfingSpotsWest = [surfSpots[3].title, surfSpots[4].title, surfSpots[5].title, surfSpots[6].title, surfSpots[7].title, surfSpots[8].title, surfSpots[9].title, surfSpots[10].title, surfSpots[11].title, surfSpots[12].title];
+var surfingSpotsSouth = [surfSpots[13].title, surfSpots[14].title, surfSpots[15].title, surfSpots[16].title, surfSpots[17].title];
+var surfingSpotsEast = [surfSpots[18].title, surfSpots[19].title];
 
-var surfingSpotsDivOne = document.createElement('div');
-    surfingSpotsDivOne.className = 'row text-center';
-    surfingSpotsDivOne.innerHTML = ('<div class="col-xs-12 button">' +
-                                    '<ul>Surfing Spots</ul>');
-// var surfingSpotsDivTwo = document.createElement('div');
-//     surfingSpotsDivTwo.className = 'col-xs-12 button';
-// var surfingSpotsUl = document.createElement('ul');
-//     surfingSpotsUl.innerHTML = 'bla bla';
+function surfTitle(spot) {
+    var result = '';
+    for (var i = 0; i < spot.length; i++) {
+        result += '<h1>'+spot[i]+'</h1>';
+    }
+    return result;
+};
 
 function stepOne(e) {
     if (surfingSpots.classList.contains('diss')) {
         directions.classList.add('diss');
-        // console.log(e.target.id);
-        // console.log(surfingSpots);
-        // console.log(surfingSpotsNorth);
+
         if (e.target.id === 'btn-n') {
-            document.body.insertBefore(surfingSpotsDivOne, forecastToday);
-            // document.body.insertBefore(surfingSpotsDivTwo, surfingSpotsUl);
-            // document.body.insertBefore(surfingSpotsDivOne, surfingSpotsDivTwo);
-        }
+            surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(surfingSpotsNorth) + '</div>' + '</div>';
+        } else if (e.target.id === 'btn-w') {
+            surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(surfingSpotsWest) + '</div>' + '</div>';
+        } else if (e.target.id === 'btn-s') {
+            surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(surfingSpotsSouth) + '</div>' + '</div>';
+        
+        } else if (e.target.id === 'btn-e') {
+            surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(surfingSpotsEast) + '</div>' + '</div>';
+        };
+
         surfingSpots.classList.remove('diss');
-    }
-};
+    }};
 
 
 
