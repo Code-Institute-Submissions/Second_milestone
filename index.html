@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" /> -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
     <title>2ndMile</title>
@@ -14,12 +15,45 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-12" id="map"></div>
-
+        <div class="col-xs-12 display" id="map"></div>
     </div>
 </div>
 
-<script src="script.js"></script>
+<div class="container-fluid" id="directions">
+    <div class="row text-center">
+        <div class="col-xs-6 padding">
+            <button type="button" class="btn btn-default btn-lg shadow" id="btn-n">NORTH</button>
+        </div>
+        <div class="col-xs-6 padding">
+            <button type="button" class="btn btn-default btn-lg shadow" id="btn-e">EAST</button>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-xs-6">
+            <button type="button padding" class="btn btn-default btn-lg shadow" id="btn-w">WEST</button>
+        </div>
+        <div class="col-xs-6">
+            <button type="button padding" class="btn btn-default btn-lg shadow" id="btn-s">SOUTH</button>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid diss" id="surfingSpots">
+</div>
+
+<div class="container-fluid diss" id="forecastToday">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">Card One</div>
+            <div class="card">Card Two</div>
+            <div class="card">Card Three</div>
+        </div>
+        <!-- <div class="col-xs-12 card">Card Two</div>
+        <div class="col-xs-12 card">Card Three</div> -->
+    </div>
+</div>
+
+<script src="js/script.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJzxh9g70_7d8SoyNin0F_XVdV_YjmInA&callback=initMap" async defer></script>
 
 </body>

@@ -1,0 +1,117 @@
+/* Main CSS */
+
+body {
+    background-color: #3E4EA4;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+/* Google Map Style */
+
+.display {
+    min-height: 60vh;
+    width: 90vw;
+    margin: 5vh 5vw;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 20px 20px -5px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 20px 20px -5px rgba(0,0,0,0.25);
+    box-shadow: 0px 20px 20px -5px rgba(0,0,0,0.25);
+}
+
+/* Button Bootstrap overwrite */
+
+button {
+    font-weight: 500;
+    width: 100px;
+    height: 50px;
+    margin: 0 auto;
+}
+
+.padding {
+    /* padding-top: 25px; */
+    padding-bottom: 25px;
+}
+
+.btn-default {
+    color: #FD6591;
+    background-color: transparent;
+    border-color: #FD6591;
+    border-radius: 0;
+    -webkit-box-shadow: 0px 20px 20px -5px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 20px 20px -5px rgba(0,0,0,0.25);
+    box-shadow: 0px 20px 20px -5px rgba(0,0,0,0.25);
+    transition: all .1s ease-in-out;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default:active,
+.btn-default:active:focus, .btn-default:active:hover {
+    color: #FD6591;
+    background-color: transparent;
+    border-color: #FD6591;
+    border-radius: 0;
+    -webkit-box-shadow: 0px 25px 30px -5px rgba(253,101,145,.25);
+    -moz-box-shadow: 0px 25px 30px -5px rgba(253,101,145,.25);
+    box-shadow: 0px 25px 30px -5px rgba(253,101,145,.25);
+    transform: scale(1.05);
+}
+
+.btn:active:focus, .btn:focus {
+    -webkit-box-shadow: 0px 25px 30px -5px rgba(253,101,145,.25);
+    -moz-box-shadow: 0px 25px 30px -5px rgba(253,101,145,.25);
+    box-shadow: 0px 25px 30px -5px rgba(253,101,145,.25);
+    transform: scale(1.05);
+}
+
+.btn-lg {
+    font-size: 26px;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.btn {
+    border: 4px;
+    border-style: solid;
+}
+
+#btn-n {
+    border-style: none;
+    border-top-style: solid;
+}
+
+#btn-e {
+    border-style: none;
+    border-right-style: solid;
+}
+
+#btn-w {
+    border-style: none;
+    border-left-style: solid;
+}
+
+#btn-s {
+    border-style: none;
+    border-bottom-style: solid;
+}
+
+/* Forecast cards style */
+
+.card {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    height: 250px;
+    width: 60vw;
+    border-radius: 10px;
+    background-color: #FD6591;
+    -webkit-box-shadow: 0px 20px 20px -5px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 20px 20px -5px rgba(0,0,0,0.25);
+    box-shadow: 0px 20px 20px -5px rgba(0,0,0,0.25);
+    transform: scale(1.06);
+}
+
+/* Interactive style for JavaScript */
+
+.diss {
+    display: none;
+}
