@@ -127,22 +127,24 @@ function initMap() {
         if (infowindow.marker != marker) {
             infowindow.marker = marker;
             infowindow.setContent(
-                '<div id=infoWindow>' + marker.title +  '</div>' +
-                '<div>' + '<button class="btn btn-default" type="submit">TODAY</button>' + '</div>' +
-                '<div>' + '<button class="btn btn-default" type="submit">NEXT 3 DAY</button>' + '</div>'
+                '<div id="infoWindow">' + marker.title +  '</div>' +
+                '<div>' + '<button class="btn btn-default mapButton" type="submit">TODAY</button>' + '</div>' +
+                '<div>' + '<button class="btn btn-default mapButton" type="submit">NEXT 3 DAY</button>' + '</div>'
                 );
             infowindow.open(map, marker);
             infowindow.addListener('closeclick', function() {
-                infowindow.setMarker = null;
-            });
+                    infowindow.setMarker = null;
+                }
+            );
         }
     }
-}
+};
+
+// Set surf spots HTML
 
 var directions = document.getElementById('directions');
 var surfingSpots = document.getElementById('surfingSpots');
-var forecastToday = document.getElementById('forecastToday');
-var forecastNext = document.getElementById('forecastNext');
+var forecast = document.getElementById('forecast');
 
 var btnN = document.getElementById('btn-n');
 var btnE = document.getElementById('btn-e');
@@ -162,10 +164,12 @@ var surfingSpotsEast = [surfSpots[18].title, surfSpots[19].title];
 function surfTitle(spot) {
     var result = '';
     for (var i = 0; i < spot.length; i++) {
-        result += '<h1>'+spot[i]+'</h1>';
+        result += '<div class="col-xs-12 padding">' + '<button class="btn btn-default spot" type="submit">'+spot[i]+'</button>' + '</div>';
     }
     return result;
 };
+
+// List of Surf Spots based on Direction
 
 function stepOne(e) {
     if (surfingSpots.classList.contains('diss')) {
@@ -183,19 +187,21 @@ function stepOne(e) {
         };
 
         surfingSpots.classList.remove('diss');
-    }};
+    }
+};
 
+// Surf Forecast per Surf Spot
 
+var spotForecast = document.getElementById('surfingSpots').addEventListener('click', function(e) {
+    console.log(e.target);
+    if (e.target && e.target.matches('button.spot')) {
+        console.log('Button element clicked');
+        }
+    }
+);
 
-
-// surfingSpots.addEventListener('click', stepOne);
+// var spotForecastSelection = spotForecast.addEventListener('click', stepTwo);
 
 // function stepTwo(e) {
-//     if (e)
-  
-  
-//     if (surfingSpots.classList.contains('diss')) {
-//         directions.classList.add('diss');
-//         surfingSpots.classList.remove('diss');
-//     }
-// };
+
+// }
