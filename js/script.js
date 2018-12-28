@@ -30,66 +30,72 @@ var surfSpots = [
 
 // Google Maps API
 
+var map;
+var styles = [
+    {
+        featureType: 'landscape',
+        elementType: 'all',
+        stylers: [
+            { color: '#3E4EA4' }
+        ]
+    },
+    {
+        featureType: 'poi',
+        elementType: 'all',
+        stylers: [
+            { visibility: 'off' }
+        ]
+    },
+    {
+        featureType: 'administrative',
+        elementType: 'labels.text.fill',
+        stylers: [
+            { color: '#ffffff' }
+        ]
+    },
+    {
+        featureType: 'administrative',
+        elementType: 'labels.text.stroke',
+        stylers: [
+            { visibility: 'off' }
+        ]
+    },
+    {
+        featureType: 'road',
+        elementType: 'geometry',
+        stylers: [
+            { visibility: 'off' }
+        ]
+    },
+    {
+        featureType: 'road',
+        elementType: 'labels',
+        stylers: [
+            { visibility: 'off' }
+        ]
+    },
+    {
+        featureType: 'water',
+        elementType: 'all',
+        stylers: [
+            { color: '#FD6591' }
+        ]
+    }
+]
+
 function initMap() {
 
-    var styles = [
-        {
-            featureType: 'landscape',
-            elementType: 'all',
-            stylers: [
-                { color: '#3E4EA4' }
-            ]
-        },
-        {
-            featureType: 'poi',
-            elementType: 'all',
-            stylers: [
-                { visibility: 'off' }
-            ]
-        },
-        {
-            featureType: 'administrative',
-            elementType: 'labels.text.fill',
-            stylers: [
-                { color: '#ffffff' }
-            ]
-        },
-        {
-            featureType: 'administrative',
-            elementType: 'labels.text.stroke',
-            stylers: [
-                { visibility: 'off' }
-            ]
-        },
-        {
-            featureType: 'road',
-            elementType: 'geometry',
-            stylers: [
-                { visibility: 'off' }
-            ]
-        },
-        {
-            featureType: 'road',
-            elementType: 'labels',
-            stylers: [
-                { visibility: 'off' }
-            ]
-        },
-        {
-            featureType: 'water',
-            elementType: 'all',
-            stylers: [
-                { color: '#FD6591' }
-            ]
-        }
-    ]
-
-    var map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 53.326116, lng: -7.946834},
         zoom: 6,
         styles: styles,
         disableDefaultUI: true,
         mapTypeControl: false
+    });
+
+      //add the listener to the map within the initMap
+    google.maps.event.addListener(map, 'click', function(event) {
+        placeMarker(event.latLng);
     });
 
     var markers = [];
@@ -120,6 +126,7 @@ function initMap() {
         bounds.extend(marker.position);
     }
 
+    
     // Extend the boundaries of the map for each marker
     // map.fitBounds(bounds);
 
@@ -177,13 +184,20 @@ function stepOne(e) {
 
         if (e.target.id === 'btn-n') {
             surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(surfingSpotsNorth) + '</div>' + '</div>';
+            map.setCenter({ lat : 55.307211, lng : -7.373801 });
+            map.setZoom(8);
         } else if (e.target.id === 'btn-w') {
             surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(surfingSpotsWest) + '</div>' + '</div>';
+            map.setCenter({ lat : 53.365468, lng : -9.814509 });
+            map.setZoom(6.8);
         } else if (e.target.id === 'btn-s') {
             surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(surfingSpotsSouth) + '</div>' + '</div>';
-        
+            map.setCenter({ lat : 51.789279, lng : -8.285663 });
+            map.setZoom(7);
         } else if (e.target.id === 'btn-e') {
             surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(surfingSpotsEast) + '</div>' + '</div>';
+            map.setCenter({ lat : 53.148223, lng : -6.077892 });
+            map.setZoom(9);
         };
 
         surfingSpots.classList.remove('hidden');
@@ -192,6 +206,11 @@ function stepOne(e) {
 
 // Surf Forecast per Surf Spot
 
+
+function selectSpot(e) {
+    
+}
+
 var spotForecast = document.getElementById('surfingSpots').addEventListener('click', function(e) {
     console.log(e.target.childNodes[0].data);
     if (e.target && e.target.matches('button.spot')) {
@@ -199,7 +218,10 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
         if (forecast.classList.contains('hidden')) {
             surfingSpots.classList.add('hidden');
 
+            // console.log(e.target);
+            // console.log(e.target.matches('button.spot'));
 
+            if (e.target.childNodes[0].data) XxXXXX
 
             forecast.classList.remove('hidden');  
         } 
