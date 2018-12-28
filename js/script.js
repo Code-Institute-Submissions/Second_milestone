@@ -172,8 +172,8 @@ function surfTitle(spot) {
 // List of Surf Spots based on Direction
 
 function stepOne(e) {
-    if (surfingSpots.classList.contains('diss')) {
-        directions.classList.add('diss');
+    if (surfingSpots.classList.contains('hidden')) {
+        directions.classList.add('hidden');
 
         if (e.target.id === 'btn-n') {
             surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(surfingSpotsNorth) + '</div>' + '</div>';
@@ -186,16 +186,23 @@ function stepOne(e) {
             surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(surfingSpotsEast) + '</div>' + '</div>';
         };
 
-        surfingSpots.classList.remove('diss');
+        surfingSpots.classList.remove('hidden');
     }
 };
 
 // Surf Forecast per Surf Spot
 
 var spotForecast = document.getElementById('surfingSpots').addEventListener('click', function(e) {
-    console.log(e.target);
+    console.log(e.target.childNodes[0].data);
     if (e.target && e.target.matches('button.spot')) {
-        console.log('Button element clicked');
+        // console.log('Button element clicked');
+        if (forecast.classList.contains('hidden')) {
+            surfingSpots.classList.add('hidden');
+
+
+
+            forecast.classList.remove('hidden');  
+        } 
         }
     }
 );
