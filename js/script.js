@@ -28,6 +28,8 @@ var surfSpots = [
     {title: 'Whiterock', county: 'Dublin', location: {lat: 53.265934, lng: -6.106232}, point: 135}
 ] 
 
+// console.log(surfSpots);
+
 // Google Maps API
 
 var map;
@@ -206,10 +208,13 @@ function stepOne(e) {
 
 // Surf Forecast per Surf Spot
 
-
-function selectSpot(e) {
-    
-}
+function search(nameKey, myArray){
+    for (var i=0; i < myArray.length; i++) {
+        if (myArray[i].title === nameKey) {
+            return myArray[i].location;
+        }
+    }
+};
 
 var spotForecast = document.getElementById('surfingSpots').addEventListener('click', function(e) {
     console.log(e.target.childNodes[0].data);
@@ -218,10 +223,12 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
         if (forecast.classList.contains('hidden')) {
             surfingSpots.classList.add('hidden');
 
-            // console.log(e.target);
-            // console.log(e.target.matches('button.spot'));
+            map.setCenter(search(e.target.childNodes[0].data, surfSpots));
+            map.setZoom(12);
 
-            if (e.target.childNodes[0].data) XxXXXX
+            // console.log(search(e.target.childNodes[0].data, surfSpots));
+
+            
 
             forecast.classList.remove('hidden');  
         } 
