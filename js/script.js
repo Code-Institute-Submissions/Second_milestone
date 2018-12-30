@@ -265,7 +265,7 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
                     sessionStorage.setItem('openWeatherApi', JSON.stringify(openWeather));
 
                 } else if (this.readyState == 4 && this.status == 402) {
-                    document.getElementById('data01').innerHTML = 'Data request exceeded! Please come back tomorrow';
+                    document.getElementById('forecast').innerHTML = 'Data request exceeded! Please come back tomorrow';
                 }  
             };
 
@@ -294,7 +294,7 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
                     sessionStorage.setItem('openWeatherExApi', JSON.stringify(openWeatherEx));
 
                 } else if (this.readyState == 4 && this.status == 402) {
-                    document.getElementById('data01').innerHTML = 'Data request exceeded! Please come back tomorrow';
+                    document.getElementById('forecast').innerHTML = 'Data request exceeded! Please come back tomorrow';
                 }  
             };
 
@@ -304,7 +304,43 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
 
             xhr.send();
 
-            
+            // ****************************************************************** Stormglass API
+
+            const params = 'airTemperature,waterTemperature,waveHeight,wavePeriod,windDirection,windSpeed';
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', `https://api.stormglass.io/point?lat=${lat}&lng=${lng}&params=${params}`, true);
+
+            xhr.setRequestHeader('Authorization', 'b891271c-e610-11e8-83ef-0242ac130004-b891282a-e610-11e8-83ef-0242ac130004');
+
+            xhr.onreadystatechange = function() {
+
+                if (this.readyState == 4 && this.status == 200) {
+                    var weatherAPI = JSON.parse(this.responseText);
+                    // console.log('Stormglass API JSON data:');
+
+            // Storing data locally
+
+                    var stormglassAPI = weatherAPI;
+                    var stormglassAPIData;
+
+                    sessionStorage.setItem('stormglassAPI', JSON.stringify(weatherAPI));
+
+                } else if (this.readyState == 4 && this.status == 402) {
+                    document.getElementById('forecast').innerHTML = 'Data request exceeded! Please come back tomorrow';
+                }
+            };
+
+            xhr.onerror = function() {
+                console.log('Request error: ');
+            };
+
+            xhr.send();
+
+
+
+
+
 
             forecast.classList.remove('hidden');  
         } 
