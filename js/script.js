@@ -208,10 +208,18 @@ function stepOne(e) {
 
 // Surf Forecast per Surf Spot
 
-function search(nameKey, myArray){
+function searchLocation(nameKey, myArray){
     for (var i=0; i < myArray.length; i++) {
         if (myArray[i].title === nameKey) {
             return myArray[i].location;
+        }
+    }
+};
+
+function searchPoint(nameKey, myArray){
+    for (var i=0; i < myArray.length; i++) {
+        if (myArray[i].title === nameKey) {
+            return myArray[i].point;
         }
     }
 };
@@ -223,10 +231,78 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
         if (forecast.classList.contains('hidden')) {
             surfingSpots.classList.add('hidden');
 
-            map.setCenter(search(e.target.childNodes[0].data, surfSpots));
+            map.setCenter(searchLocation(e.target.childNodes[0].data, surfSpots));
             map.setZoom(12);
 
-            // console.log(search(e.target.childNodes[0].data, surfSpots));
+            console.log(searchLocation(e.target.childNodes[0].data, surfSpots));
+            console.log(searchPoint(e.target.childNodes[0].data, surfSpots));
+
+            // API
+
+            // To be used with OpenWeatherMap API and Stormglass API
+
+            var lat = searchLocation(e.target.childNodes[0].data, surfSpots).lat;
+            var lng = searchLocation(e.target.childNodes[0].data, surfSpots).lng;
+
+            // ****************************************************************** OpenWeatherMap API CURRENT FORECAST
+
+            var apiOpenWeather = '74ecf887ea2ee80ab6586f67dfe5ee24';
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&APPID=${apiOpenWeather}`, true);
+
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var openWeather = JSON.parse(this.responseText);
+                    // console.log(openWeather);
+
+            // Storing data locally
+
+                    var openWeatherApi = openWeather;
+                    var openWeatherApiData;
+
+                    sessionStorage.setItem('openWeatherApi', JSON.stringify(openWeather));
+
+                } else if (this.readyState == 4 && this.status == 402) {
+                    document.getElementById('data01').innerHTML = 'Data request exceeded! Please come back tomorrow';
+                }  
+            };
+
+            xhr.onerror = function() {
+                console.log('Request error');
+            };
+
+            xhr.send();
+
+            // ****************************************************************** OpenWeatherMap API EXTENDED FORECAST
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&units=metric&APPID=${apiOpenWeather}`, true);
+
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var openWeatherEx = JSON.parse(this.responseText);
+                    // console.log(openWeatherEx);
+
+            // Storing data locally
+
+                    var openWeatherExApi = openWeatherEx;
+                    var openWeatherExApiData;
+
+                    sessionStorage.setItem('openWeatherExApi', JSON.stringify(openWeatherEx));
+
+                } else if (this.readyState == 4 && this.status == 402) {
+                    document.getElementById('data01').innerHTML = 'Data request exceeded! Please come back tomorrow';
+                }  
+            };
+
+            xhr.onerror = function() {
+                console.log('Request error');
+            };
+
+            xhr.send();
 
             
 
@@ -241,3 +317,5 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
 // function stepTwo(e) {
 
 // }
+
+
