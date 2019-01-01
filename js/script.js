@@ -215,7 +215,7 @@ function searchPoint(nameKey, myArray){
 };
 
 var spotForecast = document.getElementById('surfingSpots').addEventListener('click', function(e) {
-    console.log(e.target.childNodes[0].data);
+    // console.log(e.target.childNodes[0].data);
     if (e.target && e.target.matches('button.spot')) {
         // console.log('Button element clicked');
         if (forecast.classList.contains('hidden')) {
@@ -225,8 +225,8 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
             map.setCenter(searchLocation(e.target.childNodes[0].data, surfSpots));
             map.setZoom(12);
 
-            console.log(searchLocation(e.target.childNodes[0].data, surfSpots));
-            console.log(searchPoint(e.target.childNodes[0].data, surfSpots));
+            // console.log(searchLocation(e.target.childNodes[0].data, surfSpots));
+            // console.log(searchPoint(e.target.childNodes[0].data, surfSpots));
 
             // API
 
@@ -245,15 +245,13 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
 
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    var openWeather = JSON.parse(this.responseText);
-                    // console.log(openWeather);
+                    var openWeatherApi = JSON.parse(this.responseText);
 
             // Storing data locally
 
-                    var openWeatherApi = openWeather;
                     var openWeatherApiData;
 
-                    sessionStorage.setItem('openWeatherApi', JSON.stringify(openWeather));
+                    sessionStorage.setItem('openWeatherApi', JSON.stringify(openWeatherApi));
 
                 } else if (this.readyState == 4 && this.status == 402) {
                     document.getElementById('forecast').innerHTML = 'Data request exceeded! Please come back tomorrow';
@@ -270,7 +268,7 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
 
                 openWeatherApiData = JSON.parse(sessionStorage.getItem('openWeatherApi'));
 
-                console.log(openWeatherApiData);
+                // console.log(openWeatherApiData);
 
                 // Unix time to local time conversion
 
@@ -296,15 +294,14 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
 
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    var openWeatherEx = JSON.parse(this.responseText);
+                    var openWeatherExApi = JSON.parse(this.responseText);
                     // console.log(openWeatherEx);
 
             // Storing data locally
 
-                    var openWeatherExApi = openWeatherEx;
                     var openWeatherExApiData;
 
-                    sessionStorage.setItem('openWeatherExApi', JSON.stringify(openWeatherEx));
+                    sessionStorage.setItem('openWeatherExApi', JSON.stringify(openWeatherExApi));
 
                 } else if (this.readyState == 4 && this.status == 402) {
                     document.getElementById('forecast').innerHTML = 'Data request exceeded! Please come back tomorrow';
@@ -321,7 +318,7 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
 
                 openWeatherExApiData = JSON.parse(sessionStorage.getItem('openWeatherExApi'));
 
-                console.log(openWeatherExApiData);
+                // console.log(openWeatherExApiData);
                 
                 // console.log(openWeatherExApiData.list);
                 // console.log(unixToLocal(openWeatherExApiData.list[0].dt) + ' on ' + openWeatherExApiData.list[0].dt_txt); 
@@ -346,15 +343,14 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
             xhr.onreadystatechange = function() {
 
                 if (this.readyState == 4 && this.status == 200) {
-                    var weatherAPI = JSON.parse(this.responseText);
+                    var stormglassAPI = JSON.parse(this.responseText);
                     // console.log('Stormglass API JSON data:');
 
             // Storing data locally
 
-                    var stormglassAPI = weatherAPI;
                     var stormglassAPIData;
 
-                    sessionStorage.setItem('stormglassAPI', JSON.stringify(weatherAPI));
+                    sessionStorage.setItem('stormglassAPI', JSON.stringify(stormglassAPI));
 
                 } else if (this.readyState == 4 && this.status == 402) {
                     document.getElementById('forecast').innerHTML = 'Data request exceeded! Please come back tomorrow';
@@ -371,7 +367,7 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
 
                 var weather = stormglassAPIData;
                 
-                console.log(weather);
+                // console.log(weather);
                 
                 // DATA MANIPULATION
                 
@@ -541,7 +537,14 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
                 // var outputDay = '';
                 // var outputThreeDays = '';
                 
-                console.log(openWeatherApiData.dt);
+                // console.log(openWeatherApiData.dt);
+
+                console.log('Button clicked: ' + e.target.childNodes[0].data + ' ' + lat + ' ' + lng);
+                console.log('OpenWeather API forecast spot, location and date: ' + openWeatherApiData.name + ' ' + openWeatherApiData.coord.lat + ' ' + openWeatherApiData.coord.lon + ' ' + unixToLocal(openWeatherApiData.dt));
+
+                console.log('OpenWeatherAPI 3days forecast times:' +openWeatherExApiData.list[5].dt_txt + ' ' + openWeatherExApiData.list[13].dt_txt + ' ' + openWeatherExApiData.list[21].dt_txt);
+
+                console.log('StormGlassAPI spot: ' + weather.meta.lat + ' ' + weather.meta.lng);
 
                 forecast.innerHTML = 
                 '<div class="row text-center">' +

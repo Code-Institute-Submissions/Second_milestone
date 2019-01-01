@@ -3,6 +3,7 @@
 body {
     background-color: #3E4EA4;
     font-family: 'Roboto', sans-serif;
+    padding-top: 70px;
 }
 
 
@@ -27,7 +28,7 @@ body {
 
 /* Button Bootstrap overwrite */
 
-button {
+.row button {
     font-weight: 500;
     width: 150px;
     height: 50px;
