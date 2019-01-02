@@ -151,6 +151,8 @@ var directions = document.getElementById('directions');
 var surfingSpots = document.getElementById('surfingSpots');
 var forecast = document.getElementById('forecast');
 
+var goBack = document.getElementById('goback');
+
 var btnN = document.getElementById('btn-n').addEventListener('click', stepOne);
 var btnE = document.getElementById('btn-e').addEventListener('click', stepOne);
 var btnW = document.getElementById('btn-w').addEventListener('click', stepOne);
@@ -175,6 +177,20 @@ function stepOne(e) {
     if (surfingSpots.classList.contains('hidden')) {
         directions.classList.add('hidden');
         surfingSpots.classList.remove('hidden');
+        goBack.classList.remove('hidden');
+
+        function backToHome(e) {
+            console.log(e.target.id);
+            if (e.target.id = 'goback') {
+                directions.classList.remove('hidden');
+                surfingSpots.classList.add('hidden');
+                goBack.classList.add('hidden');
+                map.setCenter({ lat: 53.326116, lng: -7.946834 });
+                map.setZoom(6);
+            }
+        };
+
+        var goBackTo = goBack.addEventListener('click', backToHome);
 
         if (e.target.id === 'btn-n') {
             surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(surfingSpotsNorth) + '</div>' + '</div>';
@@ -353,7 +369,8 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
                     sessionStorage.setItem('stormglassAPI', JSON.stringify(stormglassAPI));
 
                 } else if (this.readyState == 4 && this.status == 402) {
-                    document.getElementById('forecast').innerHTML = 'Data request exceeded! Please come back tomorrow';
+                    // document.getElementById('forecast').innerHTML = 'Data request exceeded! Please come back tomorrow';
+                    forecast.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12">' + '<h1>We went sur... ehm Data request exceeded! Please come back tomorrow</h1>' + '</div>' + '<div class="col-xs-12">';
                 }
             };
 
@@ -367,32 +384,21 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
 
                 var weather = stormglassAPIData;
                 
-                // console.log(weather);
-                
                 // DATA MANIPULATION
-                
-                        // NOW / CURRENT FORECAST
-                
-                        // DAY FORECAST
+                    // DAY FORECAST
                 
                 // console.log(weather); // unspliced
-                
-                var weatherSpliced = (weather.hours).splice(24);
-                
+                var weatherSpliced = (weather.hours).splice(24); 
                 // console.log(weather); // day data
                 
                 var afternoon = (weather.hours).splice(-9, 6);
-                
                 var midday = (weather.hours).splice(-7, 4);
-                
                 var morning = (weather.hours).splice(-9, 6);
                 
-                // console.log(morning);
-                // console.log(midday);
-                // console.log(afternoon);
+
                 // console.log(morning[0].time); // 2018-12-18T05:00:00+00:00
                 
-                        // THREE DAYS FORECAST
+                    // THREE DAYS FORECAST
                 
                 var weatherSplicedThree = weatherSpliced.splice(72);
                 
@@ -437,62 +443,51 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
                 var middayAverage = timeOfDay(midday);
                 var afternoonAverage = timeOfDay(afternoon);
                 
-                // console.log(timeOfDay(midday));
-                // console.log(timeOfDay(morning));
-                // console.log(timeOfDay(afternoon));
-                
                 var dayOneAverage = timeOfDay(dayOne);
                 var dayTwoAverage = timeOfDay(dayTwo);
                 var dayThreeAverage = timeOfDay(dayThree);
                 
-                // console.log(timeOfDay(dayOne));
-                // console.log(timeOfDay(dayTwo));
-                // console.log(timeOfDay(dayThree));
-                
                 // console.log(morningAverage.windDirection);
                 
                 // DATA
+                    // Data break down into types and values:
                 
-                        // var output = '';  // output taken for the day
+                    var timeNow = new Date();
+            
+                    var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                    'July', 'August', 'September', 'October', 'November', 'December'];
+            
+                    var monthAsString = monthNames[timeNow.getMonth()];
                 
-                // Data break down into types and values:
+                    // console.log('Todays date: ' + timeNow.getFullYear() + '.' + monthAsString + '.' + timeNow.getDate());
                 
-                        var timeNow = new Date();
+                    // Display time for tidal & temperature information
                 
-                        var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
-                        'July', 'August', 'September', 'October', 'November', 'December'];
+                    var timeHour = ('0' + timeNow.getHours()).slice(-2);
+                    var timeMinutes = timeNow.getMinutes();
                 
-                        var monthAsString = monthNames[timeNow.getMonth()];
+                    // Function that return degrees that fall withing range of word directions:
                 
-                        // console.log('Todays date: ' + timeNow.getFullYear() + '.' + monthAsString + '.' + timeNow.getDate());
-                
-                // Display time for tidal & temperature information
-                
-                        var timeHour = ('0' + timeNow.getHours()).slice(-2);
-                        var timeMinutes = timeNow.getMinutes();
-                
-                // Function that return degrees that fall withing range of word directions:
-                
-                        function direction(value) {
-                            if (value >= 0 && value < 22.5 || value >=337.5) {
-                                return 0;
-                            } else if (value >= 22.5 && value < 67.5) {
-                                return 45;
-                            } else if (value >= 67.5 && value < 112.5) {
-                                return 90;
-                            } else if (value >= 112.5 && value < 157.5) {
-                                return 135;
-                            } else if (value >= 157.5 && value < 202.5) {
-                                return 180;
-                            } else if (value >= 202.5 && value < 247.5) {
-                                    return 225;
-                            } else if (value >= 247.5 && value <292.5) {
-                                    return 270;
-                            } else if (value >= 292.5 && value <337.5) {
-                                    return 315;
-                            }
-                        };
-                
+                    function direction(value) {
+                        if (value >= 0 && value < 22.5 || value >=337.5) {
+                            return 0;
+                        } else if (value >= 22.5 && value < 67.5) {
+                            return 45;
+                        } else if (value >= 67.5 && value < 112.5) {
+                            return 90;
+                        } else if (value >= 112.5 && value < 157.5) {
+                            return 135;
+                        } else if (value >= 157.5 && value < 202.5) {
+                            return 180;
+                        } else if (value >= 202.5 && value < 247.5) {
+                                return 225;
+                        } else if (value >= 247.5 && value <292.5) {
+                                return 270;
+                        } else if (value >= 292.5 && value <337.5) {
+                                return 315;
+                        }
+                    };
+            
                 // Wind types that usues the wind direction and surf spots pointing direction to determin tyoe of wind for location
                 
                     function windType(data) {
@@ -526,24 +521,10 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
                 
                         return check();
                     };
-                        
-                        // console.log('Type of wind result is: ' + windType(morningAverage.windDirection));
-                        // console.log('Type of wind result is: ' + windType(middayAverage.windDirection));
-                        // console.log('Type of wind result is: ' + windType(afternoonAverage.windDirection));
-                
-                // DATA OUTPUTS TO HTML
-                
-                // var outputNow = '';
-                // var outputDay = '';
-                // var outputThreeDays = '';
-                
-                // console.log(openWeatherApiData.dt);
 
                 console.log('Button clicked: ' + e.target.childNodes[0].data + ' ' + lat + ' ' + lng);
                 console.log('OpenWeather API forecast spot, location and date: ' + openWeatherApiData.name + ' ' + openWeatherApiData.coord.lat + ' ' + openWeatherApiData.coord.lon + ' ' + unixToLocal(openWeatherApiData.dt));
-
                 console.log('OpenWeatherAPI 3days forecast times:' +openWeatherExApiData.list[5].dt_txt + ' ' + openWeatherExApiData.list[13].dt_txt + ' ' + openWeatherExApiData.list[21].dt_txt);
-
                 console.log('StormGlassAPI spot: ' + weather.meta.lat + ' ' + weather.meta.lng);
 
                 forecast.innerHTML = 
