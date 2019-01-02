@@ -6,26 +6,26 @@ window.addEventListener('load', function(event) {
 // Surfing locations definition
 
 var surfSpots = [
-    {title: 'Portrush', county: 'Antrim', location: {lat: 55.170241, lng: -6.731873}, point: 0},
-    {title: 'Magheroarty', county: 'Donegal', location: {lat: 55.162985, lng: -8.143272}, point: 0},
-    {title: 'Falcarragh', county: 'Donegal', location: {lat: 55.16073, lng: -8.085937}, point: 0},
-    {title: 'Rossnowlagh', county: 'Donegal', location: {lat: 54.555689, lng: -8.210135}, point: 270},
-    {title: 'Bundoran', county: 'Donegal', location: {lat: 54.492515, lng: -8.268799}, point: 315},
-    {title: 'Easky', county: 'Sligo', location: {lat: 54.291575, lng: -8.955840}, point: 0},
-    {title: 'Inishcrone', county: 'Sligo', location: {lat: 54.211954, lng: -9.102001}, point: 0},
-    {title: 'Keel', county: 'Mayo', location: {lat: 53.973033, lng: -10.07223}, point: 225},
-    {title: 'Dun Loughan', county: 'Galway', location: {lat: 53.419440, lng: -10.148626}, point: 225},
-    {title: 'Lahinch', county: 'Clare', location: {lat: 52.933675, lng: -9.350100}, point: 225},
-    {title: 'Doonbeg', county: 'Clare', location: {lat: 52.76445, lng: -9.493389}, point: 270},
-    {title: 'Castlegregory', county: 'Kerry', location: {lat: 52.276666, lng: -10.037212}, point: 315},
-    {title: 'Inch Strand', county: 'Kerry', location: {lat: 52.137499, lng: -9.979695}, point: 225},
-    {title: 'Barley Cove', county: 'Cork', location: {lat: 51.468823, lng: -9.775531}, point: 180},
-    {title: 'Inchydoney', county: 'Cork', location: {lat: 51.595535, lng: -8.861236}, point: 135},
-    {title: 'Castlefreake', county: 'Cork', location: {lat: 51.557116, lng: -8.966045}, point: 225},
-    {title: 'Garretstown', county: 'Cork', location: {lat: 51.640028, lng: -8.564953}, point: 225},
-    {title: 'Tramore', county: 'Waterford', location: {lat: 52.156210, lng: -7.127300}, point: 180},
-    {title: 'Magheramore', county: 'Wicklow', location: {lat: 52.930841, lng: -6.023053}, point: 135},
-    {title: 'Whiterock', county: 'Dublin', location: {lat: 53.265934, lng: -6.106232}, point: 135}
+    {title: 'Portrush', county: 'Antrim', location: {lat: 55.170241, lng: -6.731873}, point: 0, map: 'north'},
+    {title: 'Magheroarty', county: 'Donegal', location: {lat: 55.162985, lng: -8.143272}, point: 0, map: 'north'},
+    {title: 'Falcarragh', county: 'Donegal', location: {lat: 55.16073, lng: -8.085937}, point: 0, map: 'north'},
+    {title: 'Rossnowlagh', county: 'Donegal', location: {lat: 54.555689, lng: -8.210135}, point: 270, map: 'west'},
+    {title: 'Bundoran', county: 'Donegal', location: {lat: 54.492515, lng: -8.268799}, point: 315, map: 'west'},
+    {title: 'Easky', county: 'Sligo', location: {lat: 54.291575, lng: -8.955840}, point: 0, map: 'west'},
+    {title: 'Inishcrone', county: 'Sligo', location: {lat: 54.211954, lng: -9.102001}, point: 0, map: 'west'},
+    {title: 'Keel', county: 'Mayo', location: {lat: 53.973033, lng: -10.07223}, point: 225, map: 'west'},
+    {title: 'Dun Loughan', county: 'Galway', location: {lat: 53.419440, lng: -10.148626}, point: 225, map: 'west'},
+    {title: 'Lahinch', county: 'Clare', location: {lat: 52.933675, lng: -9.350100}, point: 225, map: 'west'},
+    {title: 'Doonbeg', county: 'Clare', location: {lat: 52.76445, lng: -9.493389}, point: 270, map: 'west'},
+    {title: 'Castlegregory', county: 'Kerry', location: {lat: 52.276666, lng: -10.037212}, point: 315, map: 'west'},
+    {title: 'Inch Strand', county: 'Kerry', location: {lat: 52.137499, lng: -9.979695}, point: 225, map: 'west'},
+    {title: 'Barley Cove', county: 'Cork', location: {lat: 51.468823, lng: -9.775531}, point: 180, map: 'south'},
+    {title: 'Inchydoney', county: 'Cork', location: {lat: 51.595535, lng: -8.861236}, point: 135, map: 'south'},
+    {title: 'Castlefreake', county: 'Cork', location: {lat: 51.557116, lng: -8.966045}, point: 225, map: 'south'},
+    {title: 'Garretstown', county: 'Cork', location: {lat: 51.640028, lng: -8.564953}, point: 225, map: 'south'},
+    {title: 'Tramore', county: 'Waterford', location: {lat: 52.156210, lng: -7.127300}, point: 180, map: 'south'},
+    {title: 'Magheramore', county: 'Wicklow', location: {lat: 52.930841, lng: -6.023053}, point: 135, map: 'east'},
+    {title: 'Whiterock', county: 'Dublin', location: {lat: 53.265934, lng: -6.106232}, point: 135, map: 'east'}
 ] 
 
 // Google Maps API
@@ -152,6 +152,7 @@ var surfingSpots = document.getElementById('surfingSpots');
 var forecast = document.getElementById('forecast');
 
 var goBack = document.getElementById('goback');
+var go2Back = document.getElementById('go2back');
 
 var btnN = document.getElementById('btn-n').addEventListener('click', stepOne);
 var btnE = document.getElementById('btn-e').addEventListener('click', stepOne);
@@ -180,7 +181,6 @@ function stepOne(e) {
         goBack.classList.remove('hidden');
 
         function backToHome(e) {
-            console.log(e.target.id);
             if (e.target.id = 'goback') {
                 directions.classList.remove('hidden');
                 surfingSpots.classList.add('hidden');
@@ -196,23 +196,33 @@ function stepOne(e) {
             surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(surfingSpotsNorth) + '</div>' + '</div>';
             map.setCenter({ lat : 55.307211, lng : -7.373801 });
             map.setZoom(8);
+            go2Back.classList.add('north');
+            go2Back.classList.remove('west', 'east', 'south');
         } else if (e.target.id === 'btn-w') {
             surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(surfingSpotsWest) + '</div>' + '</div>';
             map.setCenter({ lat : 53.365468, lng : -9.814509 });
             map.setZoom(6.8);
+            go2Back.classList.add('west');
+            go2Back.classList.remove('north', 'east', 'south');
         } else if (e.target.id === 'btn-s') {
             surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(surfingSpotsSouth) + '</div>' + '</div>';
             map.setCenter({ lat : 51.789279, lng : -8.285663 });
             map.setZoom(7);
+            go2Back.classList.add('south');
+            go2Back.classList.remove('west', 'east', 'north');
         } else if (e.target.id === 'btn-e') {
             surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(surfingSpotsEast) + '</div>' + '</div>';
             map.setCenter({ lat : 53.148223, lng : -6.077892 });
             map.setZoom(9);
+            go2Back.classList.add('east');
+            go2Back.classList.remove('west', 'north', 'south');
         };
     }
 };
 
 // Surf Forecast per Surf Spot
+
+// Function to match the surf spot name with selection in order to get the lat and lng values
 
 function searchLocation(nameKey, myArray){
     for (var i=0; i < myArray.length; i++) {
@@ -222,6 +232,8 @@ function searchLocation(nameKey, myArray){
     }
 };
 
+// Function to match surf spots direction with forecast wind direction in order to determine the type of the wind
+
 function searchPoint(nameKey, myArray){
     for (var i=0; i < myArray.length; i++) {
         if (myArray[i].title === nameKey) {
@@ -230,16 +242,54 @@ function searchPoint(nameKey, myArray){
     }
 };
 
+// function searchDirection(nameKey, myArray){
+//     for (var i=0; i < myArray.length; i++) {
+//         if (myArray[i].map === nameKey) {
+//             return myArray[i].map;
+//         }
+//     }
+// };
+
 var spotForecast = document.getElementById('surfingSpots').addEventListener('click', function(e) {
-    // console.log(e.target.childNodes[0].data);
+    console.log(e.target.childNodes[0].data);
     if (e.target && e.target.matches('button.spot')) {
         // console.log('Button element clicked');
         if (forecast.classList.contains('hidden')) {
             surfingSpots.classList.add('hidden');
-            forecast.classList.remove('hidden');  
+            forecast.classList.remove('hidden');
+            goBack.classList.add('hidden');
+            go2Back.classList.remove('hidden');  
 
             map.setCenter(searchLocation(e.target.childNodes[0].data, surfSpots));
             map.setZoom(12);
+
+            
+
+            function backToHome(e) {
+                if (e.target.id = 'go2back') {
+                    forecast.classList.add('hidden');
+                    surfingSpots.classList.remove('hidden');
+                    go2Back.classList.add('hidden');
+                    goBack.classList.remove('hidden');
+                    
+                    // console.log(searchDirection(e.target.classList.contains('north'), surfSpots))
+                    if (e.target.classList.contains('north')) {
+                        map.setCenter({ lat : 55.307211, lng : -7.373801 });
+                        map.setZoom(8);
+                    } else if (e.target.classList.contains('west')) {
+                        map.setCenter({ lat : 53.365468, lng : -9.814509 });
+                        map.setZoom(6.8);
+                    } else if (e.target.classList.contains('south')) {
+                        map.setCenter({ lat : 51.789279, lng : -8.285663 });
+                        map.setZoom(7);
+                    } else if (e.target.classList.contains('east')) {
+                        map.setCenter({ lat : 53.148223, lng : -6.077892 });
+                        map.setZoom(9);
+                    }
+                }
+            };
+
+            var go2BackTo = go2Back.addEventListener('click', backToHome);
 
             // console.log(searchLocation(e.target.childNodes[0].data, surfSpots));
             // console.log(searchPoint(e.target.childNodes[0].data, surfSpots));
