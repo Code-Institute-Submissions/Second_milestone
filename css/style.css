@@ -158,3 +158,29 @@ body {
     color: #FD6591;
     border: none;
 }
+
+/* 3D Line Chart style */
+
+path {
+    stroke: white;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+  color: black;
+}
+
+.x.axis line, .y.axis line {
+  stroke: white;
+  opacity: 0.1;
+}
+
+.x.axis path, .y.axis path {
+  display: none;
+}
+
+#tides svg g {
+    font-size: 250;
+}
