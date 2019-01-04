@@ -159,28 +159,34 @@ var btnE = document.getElementById('btn-e').addEventListener('click', stepOne);
 var btnW = document.getElementById('btn-w').addEventListener('click', stepOne);
 var btnS = document.getElementById('btn-s').addEventListener('click', stepOne);
 
-var mapLocation = {
-    'surfingSpotsNorth': {
+var mapLocation = [
+    {
+        'id': 'north',
         'listOfSpots': [surfSpots[0].title, surfSpots[1].title, surfSpots[2].title],
         'setCenter': { lat : 55.307211, lng : -7.373801 },
         'setZoom': 8
     },
-    'surfingSpotsWest': {
+    {
+        'id': 'west',
         'listOfSpots': [surfSpots[3].title, surfSpots[4].title, surfSpots[5].title, surfSpots[6].title, surfSpots[7].title, surfSpots[8].title, surfSpots[9].title, surfSpots[10].title, surfSpots[11].title, surfSpots[12].title],
         'setCenter': { lat : 53.365468, lng : -9.814509 },
         'setZoom': 6.8
     },
-    'surfingSpotsSouth': {
+    {
+        'id': 'south',
         'listOfSpots': [surfSpots[13].title, surfSpots[14].title, surfSpots[15].title, surfSpots[16].title, surfSpots[17].title],
         'setCenter': { lat : 51.789279, lng : -8.285663 },
         'setZoom': 7
     },
-    'surfingSpotsEast': {
+    {
+        'id': 'east',
         'listOfSpots': [surfSpots[18].title, surfSpots[19].title],
         'setCenter': { lat : 53.148223, lng : -6.077892 },
         'setZoom': 9
     },
-};
+];
+
+console.log(mapLocation[0].setCenter);
 
 function surfTitle(spot) {
     var result = '';
@@ -190,22 +196,32 @@ function surfTitle(spot) {
     return result;
 };
 
-function listSpots(direction) {
-    surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(direction) + '</div>' + '</div>';
+function listSpots(nameKey, myArray) {
+    for (var i=0; i < myArray.length; i++) {
+        if (myArray[i].id === nameKey) {
+            surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(myArray[i].listOfSpots) + '</div>' + '</div>';
+        }
+    }
 }
 
 // nav bar class = north etc.. array to include direction: north etc..
 // e.target.id === 'btn-n' 1st button
 // e.target.classList.contains('north')) 2nd button
-function searchLocation(nameKey, myArray){
+function mapCenter(nameKey, myArray) {
     for (var i=0; i < myArray.length; i++) {
-        if (myArray[i].title === nameKey) {
-            return myArray[i].location;
+        if (myArray[i].id === nameKey) {
+            return myArray[i].setCenter;
         }
     }
 };
 
-map.setCenter(searchLocation(e.target.childNodes[0].data, surfSpots));
+function mapZoom(nameKey, myArray) {
+    for (var i=0; i < myArray.length; i++) {
+        if (myArray[i].id === nameKey) {
+            return myArray[i].setZoom;
+        }
+    }
+};
 
 // List of Surf Spots based on Direction
 
@@ -227,28 +243,20 @@ function stepOne(e) {
 
         var goBackTo = goBack.addEventListener('click', backToHome);
 
+        listSpots(e.target.classList[4], mapLocation);
+        map.setCenter(mapCenter(e.target.classList[4], mapLocation));
+        map.setZoom(mapZoom(e.target.classList[4], mapLocation));
+
         if (e.target.id === 'btn-n') {
-            listSpots(mapLocation.surfingSpotsNorth.listOfSpots);
-            map.setCenter(mapLocation.surfingSpotsNorth.setCenter);
-            map.setZoom(mapLocation.surfingSpotsNorth.setZoom);
             go2Back.classList.add('north');
             go2Back.classList.remove('west', 'east', 'south');
         } else if (e.target.id === 'btn-w') {
-            listSpots(mapLocation.surfingSpotsWest.listOfSpots);
-            map.setCenter(mapLocation.surfingSpotsWest.setCenter);
-            map.setZoom(mapLocation.surfingSpotsWest.setZoom);
             go2Back.classList.add('west');
             go2Back.classList.remove('north', 'east', 'south');
         } else if (e.target.id === 'btn-s') {
-            listSpots(mapLocation.surfingSpotsSouth.listOfSpots);
-            map.setCenter(mapLocation.surfingSpotsSouth.setCenter);
-            map.setZoom(mapLocation.surfingSpotsSouth.setZoom);
             go2Back.classList.add('south');
             go2Back.classList.remove('west', 'east', 'north');
         } else if (e.target.id === 'btn-e') {
-            listSpots(mapLocation.surfingSpotsEast.listOfSpots);
-            map.setCenter(mapLocation.surfingSpotsEast.setCenter);
-            map.setZoom(mapLocation.surfingSpotsEast.setZoom);
             go2Back.classList.add('east');
             go2Back.classList.remove('west', 'north', 'south');
         };
@@ -259,7 +267,7 @@ function stepOne(e) {
 
 // Function to match the surf spot name with selection in order to get the lat and lng values
 
-function searchLocation(nameKey, myArray){
+function searchLocation(nameKey, myArray) {
     for (var i=0; i < myArray.length; i++) {
         if (myArray[i].title === nameKey) {
             return myArray[i].location;
@@ -269,7 +277,7 @@ function searchLocation(nameKey, myArray){
 
 // Function to match surf spots direction with forecast wind direction in order to determine the type of the wind
 
-function searchPoint(nameKey, myArray){
+function searchPoint(nameKey, myArray) {
     for (var i=0; i < myArray.length; i++) {
         if (myArray[i].title === nameKey) {
             return myArray[i].point;
@@ -277,7 +285,7 @@ function searchPoint(nameKey, myArray){
     }
 };
 
-function searchStation(nameKey, myArray){
+function searchStation(nameKey, myArray) {
     for (var i=0; i < myArray.length; i++) {
         if (myArray[i].title === nameKey) {
             return myArray[i].station;
@@ -305,19 +313,24 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
                     go2Back.classList.add('hidden');
                     goBack.classList.remove('hidden');
                     
-                    if (e.target.classList.contains('north')) {
-                        map.setCenter(mapLocation.surfingSpotsNorth.setCenter);
-                        map.setZoom(mapLocation.surfingSpotsNorth.setZoom);
-                    } else if (e.target.classList.contains('west')) {
-                        map.setCenter(mapLocation.surfingSpotsWest.setCenter);
-                        map.setZoom(mapLocation.surfingSpotsWest.setZoom);
-                    } else if (e.target.classList.contains('south')) {
-                        map.setCenter(mapLocation.surfingSpotsSouth.setCenter);
-                        map.setZoom(mapLocation.surfingSpotsSouth.setZoom);
-                    } else if (e.target.classList.contains('east')) {
-                        map.setCenter(mapLocation.surfingSpotsEast.setCenter);
-                        map.setZoom(mapLocation.surfingSpotsEast.setZoom);
-                    }
+                    map.setCenter(mapCenter(e.target.classList[1], mapLocation));
+                    map.setZoom(mapZoom(e.target.classList[1], mapLocation));
+
+                    console.log(e.target.classList);
+
+                    // if (e.target.classList.contains('north')) {
+                    //     map.setCenter(mapLocation[0].setCenter);
+                    //     map.setZoom(mapLocation[0].setZoom);
+                    // } else if (e.target.classList.contains('west')) {
+                    //     map.setCenter(mapLocation[1].setCenter);
+                    //     map.setZoom(mapLocation[1].setZoom);
+                    // } else if (e.target.classList.contains('south')) {
+                    //     map.setCenter(mapLocation[2].setCenter);
+                    //     map.setZoom(mapLocation[2].setZoom);
+                    // } else if (e.target.classList.contains('east')) {
+                    //     map.setCenter(mapLocation[3].setCenter);
+                    //     map.setZoom(mapLocation[3].setZoom);
+                    // }
                 }
             };
 
