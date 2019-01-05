@@ -294,7 +294,7 @@ function searchStation(nameKey, myArray) {
 };
 
 var spotForecast = document.getElementById('surfingSpots').addEventListener('click', function(e) {
-    console.log(e.target.childNodes[0].data);
+    // console.log(e.target.childNodes[0].data);
     if (e.target && e.target.matches('button.spot')) {
         // console.log('Button element clicked');
         if (forecast.classList.contains('hidden')) {
@@ -315,22 +315,6 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
                     
                     map.setCenter(mapCenter(e.target.classList[1], mapLocation));
                     map.setZoom(mapZoom(e.target.classList[1], mapLocation));
-
-                    console.log(e.target.classList);
-
-                    // if (e.target.classList.contains('north')) {
-                    //     map.setCenter(mapLocation[0].setCenter);
-                    //     map.setZoom(mapLocation[0].setZoom);
-                    // } else if (e.target.classList.contains('west')) {
-                    //     map.setCenter(mapLocation[1].setCenter);
-                    //     map.setZoom(mapLocation[1].setZoom);
-                    // } else if (e.target.classList.contains('south')) {
-                    //     map.setCenter(mapLocation[2].setCenter);
-                    //     map.setZoom(mapLocation[2].setZoom);
-                    // } else if (e.target.classList.contains('east')) {
-                    //     map.setCenter(mapLocation[3].setCenter);
-                    //     map.setZoom(mapLocation[3].setZoom);
-                    // }
                 }
             };
 
@@ -362,7 +346,7 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
 
                     var openWeatherApiData;
 
-                    sessionStorage.setItem('openWeatherApi', JSON.stringify(openWeatherApi));
+                    localStorage.setItem('openWeatherApi', JSON.stringify(openWeatherApi));
 
                 } else if (this.readyState == 4 && this.status == 402) {
                     document.getElementById('forecast').innerHTML = 'Data request exceeded! Please come back tomorrow';
@@ -377,7 +361,7 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
 
             // Session Storage and API JSON Data Manipulation
 
-                openWeatherApiData = JSON.parse(sessionStorage.getItem('openWeatherApi'));
+                openWeatherApiData = JSON.parse(localStorage.getItem('openWeatherApi'));
 
                 // console.log(openWeatherApiData);
 
@@ -406,13 +390,13 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     var openWeatherExApi = JSON.parse(this.responseText);
-                    // console.log(openWeatherEx);
+                    // console.log(openWeatherExApi);
 
             // Storing data locally
 
                     var openWeatherExApiData;
 
-                    sessionStorage.setItem('openWeatherExApi', JSON.stringify(openWeatherExApi));
+                    localStorage.setItem('openWeatherExApi', JSON.stringify(openWeatherExApi));
 
                 } else if (this.readyState == 4 && this.status == 402) {
                     document.getElementById('forecast').innerHTML = 'Data request exceeded! Please come back tomorrow';
@@ -427,7 +411,7 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
 
             // Session Storage and API JSON Data Manipulation
 
-                openWeatherExApiData = JSON.parse(sessionStorage.getItem('openWeatherExApi'));
+                openWeatherExApiData = JSON.parse(localStorage.getItem('openWeatherExApi'));
 
                 // console.log(openWeatherExApiData);
                 
@@ -461,7 +445,9 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
 
                     var stormglassAPIData;
 
-                    sessionStorage.setItem('stormglassAPI', JSON.stringify(stormglassAPI));
+                    localStorage.setItem('stormglassAPI', JSON.stringify(stormglassAPI));
+
+
 
                 } else if (this.readyState == 4 && this.status == 402) {
                     // document.getElementById('forecast').innerHTML = 'Data request exceeded! Please come back tomorrow';
@@ -474,8 +460,40 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
             };
 
             xhr.send();
+// _______________________________________________________________________________________
 
-                stormglassAPIData = JSON.parse(sessionStorage.getItem('stormglassAPI'));
+            var timeToday = new Date();
+            // Adding second digit for day and month < 10
+            
+            function addZero(n) {
+                return n < 10 ? '0' + n : '' + n;
+            };
+            
+            var timeTodayFormat = timeToday.getFullYear() + '-' + addZero(timeToday.getMonth()) + '-' + addZero(timeToday.getDate());
+    
+            var timeTomorrow = timeToday.setDate(timeToday.getDate() +1);
+    
+            // Unix time to local time conversion
+    
+            function timeConverter(t) {
+                var tmr = new Date(t);
+                var year = tmr.getFullYear();
+                var month = addZero(tmr.getMonth());
+                var day = addZero(tmr.getDate());
+                var time = year + '-' + month + '-' + day;
+                return time; 
+            }
+
+                var timestamp = timeConverter(new Date());
+                console.log(timestamp);
+
+                stormglassAPIData = JSON.parse(localStorage.getItem('stormglassAPI'));
+                console.log(stormglassAPIData.meta.start);
+                console.log(timeConverter(new Date()));
+
+// _______________________________________________________________________________________
+
+                // if (stormglassAPIData)
 
                 var weather = stormglassAPIData;
                 
@@ -627,7 +645,7 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
             return n < 10 ? '0' + n : '' + n;
         };
         
-        var timeTodayFormat = timeToday.getFullYear() + '-' + addZero(timeToday.getMonth()) + '-' + addZero(timeToday.getDate());
+        var timeTodayFormat = timeToday.getFullYear() + '-' + addZero(timeToday.getMonth() + 1) + '-' + addZero(timeToday.getDate());
 
         var timeTomorrow = timeToday.setDate(timeToday.getDate() +1);
 
@@ -636,7 +654,7 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
         function timeConverter(t) {
             var tmr = new Date(t);
             var year = tmr.getFullYear();
-            var month = addZero(tmr.getMonth());
+            var month = addZero(tmr.getMonth() + 1);
             var day = addZero(tmr.getDate());
             var time = year + '-' + month + '-' + day;
             return time; 
@@ -662,13 +680,13 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
         xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var data = JSON.parse(this.responseText);
-                // console.log(data);
+                console.log(data);
                 // console.log(data.table.rows[0][2] + ' + ' + data.table.rows[10][2]);
 
                 // D3.js DATA
 
                 var tidePrediction = data.table.rows[0][2];
-                // console.log(tidePrediction);
+                console.log(tidePrediction);
 
                 var tidesTime = [];
                 var tidesValue = [];
@@ -698,7 +716,7 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
                     return tidesTimeValue[time] = tidesValue[i];
                 });
 
-                // console.log(tidesTime[10]);
+                console.log(tidesTime);
 
                 // UTC time to Hour and Minutes
 
@@ -725,7 +743,7 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
                         });
                 };
 
-                // console.log(dataApi);
+                console.log(dataApi);
 
         // LINE CHART
 
