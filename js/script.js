@@ -1,8 +1,3 @@
-window.addEventListener('load', function(event) {
-    console.log('All resources finished loading!');
-
-  });
-
 // Surfing locations definition
 
 var surfSpots = [
@@ -392,27 +387,21 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
 
             // Creating variable with surfSpots.title to be used for the key in the Local Storage
             var stormGlassApi;
-            // var stormGlassData = storageKey(e.target.childNodes[0].data, surfSpots);
-            // var spotTitle = e.target.childNodes[0].data
-            // var stormGlassData = {spotTitle};
-            // console.log(stormGlassData);
             var time = new Date().getFullYear() + ':' + new Date().getMonth() + ':' + new Date().getDate();
-            // var time2 = '2019-0-3'
-            // console.log(time);
             var params = 'airTemperature,waterTemperature,waveHeight,wavePeriod,windDirection,windSpeed';
             var xhr = new XMLHttpRequest();
             xhr.open('GET', `https://api.stormglass.io/point?lat=${lat}&lng=${lng}&params=${params}`, true);
             xhr.setRequestHeader('Authorization', 'b891271c-e610-11e8-83ef-0242ac130004-b891282a-e610-11e8-83ef-0242ac130004')
 
             if (localStorage.stormGlassData) {
-                if (JSON.parse(localStorage.getItem('stormGlassData')).timestamp === time) {
-                    weather = JSON.parse(localStorage.getItem('stormGlassData'));
+                if (JSON.parse(localStorage.getItem('stormGlassData')).timestamp === time && JSON.parse(localStorage.getItem('stormGlassData')).surfSpot === e.target.childNodes[0].data) {
+                    console.log('Happy days');
                 } else {
                     localStorage.removeItem('stormGlassData');
                     xhr.onreadystatechange = function() {
                         if (this.readyState == 4 && this.status == 200) {
                         // dataApi = { data: JSON.parse(this.responseText), timestamp: time};
-                        stormGlassApi = { data: JSON.parse(this.responseText), timestamp: time };
+                        stormGlassApi = { data: JSON.parse(this.responseText), timestamp: time, surfSpot: e.target.childNodes[0].data };
                         // console.log(stormGlassApi.data);
                         // localStorage.setItem('dataLocStorage', JSON.stringify(dataApi)); 
                         localStorage.setItem('stormGlassData', JSON.stringify(stormGlassApi)); 
@@ -429,7 +418,7 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
                 xhr.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
                     // dataApi = { data: JSON.parse(this.responseText), timestamp: time};
-                    stormGlassApi = { data: JSON.parse(this.responseText), timestamp: time };
+                    stormGlassApi = { data: JSON.parse(this.responseText), timestamp: time, surfSpot: e.target.childNodes[0].data };
                     // console.log(stormGlassApi.data);
                     // localStorage.setItem('dataLocStorage', JSON.stringify(dataApi)); 
                     localStorage.setItem('stormGlassData', JSON.stringify(stormGlassApi)); 
@@ -487,28 +476,22 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
             var timeTomorrow = timeToday.setDate(timeToday.getDate() +1);
             console.log(timeTomorrow);
             // Unix time to local time conversion
+
             function timeConverter(t) {
                 var tmr = new Date(t);
                 var year = tmr.getFullYear();
-                var mnth = (tmr.getMonth() + 1);
-                var month = addZero(mnth);
+                var month = addZero(tmr.getMonth() + 1);
                 var day = addZero(tmr.getDate());
                 var time = year + '-' + month + '-' + day;
                 return time; 
             }
+
             console.log(timeConverter(timeTomorrow));
-            function timeConvDayMonth(t) {
-                var tmr = new Date(t);
-                var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-                var month = monthNames[tmr.getMonth()];
-                var day = tmr.getDate();
-                var time = day + ' ' + month;
-                return time; 
-            }
 
             var timeFrom = timeTodayFormat + 'T00%3A00%3A00Z';
             var timeTo = timeConverter(timeTomorrow) + 'T00%3A00%3A00Z';
             var stationId = searchStation(e.target.childNodes[0].data, surfSpots);
+            console.log(timeFrom);
             console.log(timeTo);
             var xhr = new XMLHttpRequest();
 
@@ -696,30 +679,9 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
 
         // StormGlassAPI 
 
-        var timeToday = new Date();
-        // Adding second digit for day and month < 10
-        
-        function addZero(n) {
-            return n < 10 ? '0' + n : '' + n;
-        };
-        
-        var timeTodayFormat = timeToday.getFullYear() + '-' + addZero(timeToday.getMonth()) + '-' + addZero(timeToday.getDate());
-        var timeTomorrow = timeToday.setDate(timeToday.getDate() +1);
-
-        // Unix time to local time conversion
-
-        function timeConverter(t) {
-            var tmr = new Date(t);
-            var year = tmr.getFullYear();
-            var month = addZero(tmr.getMonth());
-            var day = addZero(tmr.getDate());
-            var time = year + '-' + month + '-' + day;
-            return time; 
-        }
-
         // Fetching the API from LocalStorage
-        var weather = (JSON.parse(localStorage.getItem('stormGlassData'))).data;
-        console.log(weather);        
+        var stormGlassDataApi = JSON.parse(localStorage.getItem('stormGlassData'));
+        var weather = stormGlassDataApi.data;
         // DATA MANIPULATION
             // DAY FORECAST
         // console.log(weather); // unspliced
