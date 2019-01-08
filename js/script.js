@@ -1,26 +1,26 @@
 // Surfing locations definition
 
 var surfSpots = [
-    {title: 'Portrush', county: 'Antrim', location: {lat: 55.170241, lng: -6.731873}, point: 0, map: 'north', station: '%22Malin%20Head%20-%20Portmore%20Pier%22'},
-    {title: 'Magheroarty', county: 'Donegal', location: {lat: 55.162985, lng: -8.143272}, point: 0, map: 'north', station: '%22Aranmore%20Island%20-%20Leabgarrow%22'},
-    {title: 'Falcarragh', county: 'Donegal', location: {lat: 55.16073, lng: -8.085937}, point: 0, map: 'north', station: '%22Aranmore%20Island%20-%20Leabgarrow%22'},
-    {title: 'Rossnowlagh', county: 'Donegal', location: {lat: 54.555689, lng: -8.210135}, point: 270, map: 'west', station: '%22Killybegs%20Port%22'},
-    {title: 'Bundoran', county: 'Donegal', location: {lat: 54.492515, lng: -8.268799}, point: 315, map: 'west', station: '%22Killybegs%20Port%22'},
-    {title: 'Easky', county: 'Sligo', location: {lat: 54.291575, lng: -8.955840}, point: 0, map: 'west', station: '%22Sligo%22'},
-    {title: 'Inishcrone', county: 'Sligo', location: {lat: 54.211954, lng: -9.102001}, point: 0, map: 'west', station: '%22Sligo%22'},
-    {title: 'Keel', county: 'Mayo', location: {lat: 53.973033, lng: -10.07223}, point: 225, map: 'west', station: '%22Ballyglass%20Harbour%22'},
-    {title: 'Dun Loughan', county: 'Galway', location: {lat: 53.419440, lng: -10.148626}, point: 225, map: 'west', station: '%22OPW%20Rossaveel%20Pier%22'},
-    {title: 'Lahinch', county: 'Clare', location: {lat: 52.933675, lng: -9.350100}, point: 225, map: 'west', station: '%22OPW%20Rossaveel%20Pier%22'},
-    {title: 'Doonbeg', county: 'Clare', location: {lat: 52.76445, lng: -9.493389}, point: 270, map: 'west', station: '%22OPW%20Rossaveel%20Pier%22'},
-    {title: 'Castlegregory', county: 'Kerry', location: {lat: 52.276666, lng: -10.037212}, point: 315, map: 'west', station: '%22Dingle%20Harbour%22'},
-    {title: 'Inch Strand', county: 'Kerry', location: {lat: 52.137499, lng: -9.979695}, point: 225, map: 'west', station: '%22Dingle%20Harbour%22'},
-    {title: 'Barley Cove', county: 'Cork', location: {lat: 51.468823, lng: -9.775531}, point: 180, map: 'south', station: '%22Castletownbere%20Port%22'},
-    {title: 'Inchydoney', county: 'Cork', location: {lat: 51.595535, lng: -8.861236}, point: 135, map: 'south', station: '%22OPW%20Ringaskiddy%22'},
-    {title: 'Castlefreake', county: 'Cork', location: {lat: 51.557116, lng: -8.966045}, point: 225, map: 'south', station: '%22OPW%20Ringaskiddy%22'},
-    {title: 'Garretstown', county: 'Cork', location: {lat: 51.640028, lng: -8.564953}, point: 225, map: 'south', station: '%22OPW%20Ringaskiddy%22'},
-    {title: 'Tramore', county: 'Waterford', location: {lat: 52.156210, lng: -7.127300}, point: 180, map: 'south', station: '%22Dunmore%20East%20Harbour%22'},
-    {title: 'Magheramore', county: 'Wicklow', location: {lat: 52.930841, lng: -6.023053}, point: 135, map: 'east', station: '%22OPW%20Arklow%20Harbour%22'},
-    {title: 'Whiterock', county: 'Dublin', location: {lat: 53.265934, lng: -6.106232}, point: 135, map: 'east', station: '%22Dublin%20Port%22'}
+    {title: 'Portrush', county: 'Antrim', location: {lat: 55.170241, lng: -6.731873}, point: 0, map: 'north', station: '%22Malin_Head%22', stationGfs: '%22Malin_Head%22', buoy: '%22M4%22'},
+    {title: 'Magheroarty', county: 'Donegal', location: {lat: 55.162985, lng: -8.143272}, point: 0, map: 'north', station: '%22Aranmore%22', stationGfs: '%22Malin_Head%22', buoy: '%22M4%22'},
+    {title: 'Falcarragh', county: 'Donegal', location: {lat: 55.16073, lng: -8.085937}, point: 0, map: 'north', station: '%22Aranmore%22', stationGfs: '%22Malin_Head%22', buoy: '%22M4%22'},
+    {title: 'Rossnowlagh', county: 'Donegal', location: {lat: 54.555689, lng: -8.210135}, point: 270, map: 'west', station: '%22Killybegs%22', stationGfs: '%22Achill%22', buoy: '%22M4%22'},
+    {title: 'Bundoran', county: 'Donegal', location: {lat: 54.492515, lng: -8.268799}, point: 315, map: 'west', station: '%22Killybegs%22', stationGfs: '%22Achill%22', buoy: '%22M4%22'},
+    {title: 'Easky', county: 'Sligo', location: {lat: 54.291575, lng: -8.955840}, point: 0, map: 'west', station: '%22Sligo%22', stationGfs: '%22Achill%22', buoy: '%22M4%22'},
+    {title: 'Inishcrone', county: 'Sligo', location: {lat: 54.211954, lng: -9.102001}, point: 0, map: 'west', station: '%22Sligo%22', stationGfs: '%22Achill%22', buoy: '%22M4%22'},
+    {title: 'Keel', county: 'Mayo', location: {lat: 53.973033, lng: -10.07223}, point: 225, map: 'west', station: '%22Ballyglass%22', stationGfs: '%22Achill%22', buoy: '%22Belmullet_Inner%22'},
+    {title: 'Dun Loughan', county: 'Galway', location: {lat: 53.419440, lng: -10.148626}, point: 225, map: 'west', station: '%22Rossaveel%22', stationGfs: '%22Achill%22', buoy: '%22Belmullet_Inner%22'},
+    {title: 'Lahinch', county: 'Clare', location: {lat: 52.933675, lng: -9.350100}, point: 225, map: 'west', station: '%22Rossaveel%22', stationGfs: '%22Achill%22', buoy: '%22Spiddal%22'},
+    {title: 'Doonbeg', county: 'Clare', location: {lat: 52.76445, lng: -9.493389}, point: 270, map: 'west', station: '%22Rossaveel%22', stationGfs: '%22Achill%22', buoy: '%22Spiddal%22'},
+    {title: 'Castlegregory', county: 'Kerry', location: {lat: 52.276666, lng: -10.037212}, point: 315, map: 'west', station: '%22Dingle%22', stationGfs: '%22Mizen_Head%22', buoy: '%22Spiddal%22'},
+    {title: 'Inch Strand', county: 'Kerry', location: {lat: 52.137499, lng: -9.979695}, point: 225, map: 'west', station: '%22Dingle%22', stationGfs: '%22Mizen_Head%22', buoy: '%22Spiddal%22'},
+    {title: 'Barley Cove', county: 'Cork', location: {lat: 51.468823, lng: -9.775531}, point: 180, map: 'south', station: '%22Castletownbere%22', stationGfs: '%22Mizen_Head%22', buoy: '%22M3%22'},
+    {title: 'Inchydoney', county: 'Cork', location: {lat: 51.595535, lng: -8.861236}, point: 135, map: 'south', station: '%22Ringaskiddy%22', stationGfs: '%22Cork%22', buoy: '%22Cork%22'},
+    {title: 'Castlefreake', county: 'Cork', location: {lat: 51.557116, lng: -8.966045}, point: 225, map: 'south', station: '%22Ringaskiddy%22', stationGfs: '%22Cork%22', buoy: '%22Cork%22'},
+    {title: 'Garretstown', county: 'Cork', location: {lat: 51.640028, lng: -8.564953}, point: 225, map: 'south', station: '%22Ringaskiddy%22', stationGfs: '%22Cork%22', buoy: '%22Cork%22'},
+    {title: 'Tramore', county: 'Waterford', location: {lat: 52.156210, lng: -7.127300}, point: 180, map: 'south', station: '%22Dunmore_East%22', stationGfs: '%22Wexford%22', buoy: '%22M5%22'},
+    {title: 'Magheramore', county: 'Wicklow', location: {lat: 52.930841, lng: -6.023053}, point: 135, map: 'east', station: '%22Arklow%22', stationGfs: '%22Dublin%22', buoy: '%22M2%22'},
+    {title: 'Whiterock', county: 'Dublin', location: {lat: 53.265934, lng: -6.106232}, point: 135, map: 'east', station: '%22Dublin_Port%22', stationGfs: '%22Dublin%22', buoy: '%22M2%22'}
 ] 
 
 // Surfing direction definition
@@ -284,6 +284,23 @@ function searchStation(nameKey, myArray) {
         }
     }
 };
+
+function searchStationGfs(nameKey, myArray) {
+    for (var i=0; i < myArray.length; i++) {
+        if (myArray[i].title === nameKey) {
+            return myArray[i].stationGfs;
+        }
+    }
+};
+
+function searchBuoy(nameKey, myArray) {
+    for (var i=0; i < myArray.length; i++) {
+        if (myArray[i].title === nameKey) {
+            return myArray[i].buoy;
+        }
+    }
+};
+
 //  ************************************************
 function storageKey(nameKey, myArray) {
     for (var i=0; i < myArray.length; i++) {
@@ -310,47 +327,78 @@ function stepTwo(e) {
             
             // API
             // To be used with OpenWeatherMap API 
-            var lat = searchLocation(e.target.childNodes[0].data, surfSpots).lat;
-            var lng = searchLocation(e.target.childNodes[0].data, surfSpots).lng;
+            // var lat = searchLocation(e.target.childNodes[0].data, surfSpots).lat;
+            // var lng = searchLocation(e.target.childNodes[0].data, surfSpots).lng;
 
-            // Fetch API
+            // Fetch API from Marine Institute of Ireland
 
-            var apiOpenWeather = '74ecf887ea2ee80ab6586f67dfe5ee24';
+            var timeToday = new Date();
 
-            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&APPID=${apiOpenWeather}`
-                ).then(function(response) {
-                    return response.json();
-                }).then(function(data) {
-                    console.log(JSON.stringify(data));
-                }).catch(function(e) {
-                    return requestError(e);
-                });
-            
-
-            var openWeather = function(data) {
-                return JSON.parse(data);
-            }
-
-            openWeatherApiData = JSON.parse(localStorage.getItem('openWeatherApi'));
-                    
-            // Unix time to local time conversion
-        
-            function unixToLocal(t) {
-                var dt = new Date(t*1000);
-                var hr = dt.getHours();
-                var m = '0' + dt.getMinutes();
-                return hr+ ':' +m.substr(-2); 
-            }
-        
-            // var sunrise = openWeatherApiData.sys.sunrise;
-            // var sunset = openWeatherApiData.sys.sunset;
-            
-            // OpenWeatherApi EXTENDED
-            openWeatherExApiData = JSON.parse(localStorage.getItem('openWeatherExApi'));
-            // console.log(openWeatherExApiData);
-            function weatherDesc(time) {
-                return openWeatherExApiData.list[time].weather[0].description;
+            // Adding second digit for day and month < 10
+            function addZero(n) {
+                return n < 10 ? '0' + n : '' + n;
             };
+            
+            var timeTodayFormat = timeToday.getFullYear() + '-' + addZero(timeToday.getMonth() + 1) + '-' + addZero(timeToday.getDate());
+
+            var timeTomorrow = timeToday.setDate(timeToday.getDate() +3);
+
+            // Unix time to local time conversion
+            function timeConverter(t) {
+                var tmr = new Date(t);
+                var year = tmr.getFullYear();
+                var month = addZero(tmr.getMonth() + 1);
+                var day = addZero(tmr.getDate());
+                var time = year + '-' + month + '-' + day;
+                return time; 
+            }
+
+            var timeFrom = timeTodayFormat + 'T00%3A00%3A00Z';
+            var timeTo = timeConverter(timeTomorrow) + 'T00%3A00%3A00Z';
+            var station = searchStation(e.target.childNodes[0].data, surfSpots);
+            var stationGfs = searchStationGfs(e.target.childNodes[0].data, surfSpots);
+            var buoy = searchBuoy(e.target.childNodes[0].data, surfSpots);
+
+            console.log(station + ' ' + stationGfs + ' ' + buoy)
+
+            fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${buoy}`
+            ).then(function(response) {
+                return response.json();
+            }).then(function(data) {
+                console.log(data.table.rows[0][1]);
+                var buoyData = { data: data, timestamp: `${timeTodayFormat}`}
+                localStorage.setItem(`buoy_${e.target.childNodes[0].data}`, JSON.stringify(buoyData));
+            }).catch(function(error) {
+                return console.error('Error:', error);
+            });
+
+            fetch(`https://erddap.marine.ie/erddap/tabledap/GFS-WeatherTimeSeries.json?time%2CstationID%2CWindSpeed%2CWindDirection&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${stationGfs}`
+            ).then(function(response) {
+                return response.json();
+            }).then(function(data) {
+                console.log(data);
+                var gfsData = { data: data, timestamp: `${timeTodayFormat}`}
+                localStorage.setItem(`gfs_${e.target.childNodes[0].data}`, JSON.stringify(gfsData));
+            }).catch(function(error) {
+                return console.error('Error:', error);
+            });
+
+            fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-TidePrediction.json?time%2CstationID%2CWater_Level_ODM&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${station}`
+            ).then(function(response) {
+                return response.json();
+            }).then(function(data) {
+                console.log(data);
+                var tideData = { data: data, timestamp: `${timeTodayFormat}`}
+                localStorage.setItem(`tide_${e.target.childNodes[0].data}`, JSON.stringify(tideData));
+            }).catch(function(error) {
+                return console.error('Error:', error);
+            });
+            
+
+            // if (JSON.parse(localStorage.getItem('stormGlassData')).timestamp === time && JSON.parse(localStorage.getItem('stormGlassData')).surfSpot === e.target.childNodes[0].data) {
+            //     //                     console.log('Happy days');
+            // }
+
 
 
 
@@ -375,169 +423,8 @@ function stepTwo(e) {
     }
 }
 
-//             // API
-//             // To be used with OpenWeatherMap API and Stormglass API
-//             var lat = searchLocation(e.target.childNodes[0].data, surfSpots).lat;
-//             var lng = searchLocation(e.target.childNodes[0].data, surfSpots).lng;
 
-//             // OpenWeatherMap API CURRENT FORECAST
 
-//             var openWeatherKey = '74ecf887ea2ee80ab6586f67dfe5ee24';
-//             var xhr = new XMLHttpRequest();
-//             xhr.open('GET', `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&APPID=${openWeatherKey}`, true);
-//             xhr.onreadystatechange = function() {
-//                 if (this.readyState == 4 && this.status == 200) {
-//                     var openWeatherApi = JSON.parse(this.responseText);
-
-//                     // Storing data locally
-//                     var openWeatherApiData;
-//                     localStorage.setItem('openWeatherApi', JSON.stringify(openWeatherApi));
-
-//                 } else if (this.readyState == 4 && this.status == 402) {
-//                     document.getElementById('forecast').innerHTML = 'Data request exceeded! Please come back tomorrow';
-//                 }  
-//             };
-
-//             xhr.onerror = function() {
-//                 console.log('Request error');
-//             };
-//             xhr.send();
-
-//             // OpenWeatherMap API EXTENDED FORECAST
-
-//             var xhr = new XMLHttpRequest();
-//             xhr.open('GET', `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&units=metric&APPID=${openWeatherKey}`, true);
-//             xhr.onreadystatechange = function() {
-//                 if (this.readyState == 4 && this.status == 200) {
-//                     var openWeatherExApi = JSON.parse(this.responseText);
-
-//                     // Storing data locally 
-//                     var openWeatherExApiData;
-//                     localStorage.setItem('openWeatherExApi', JSON.stringify(openWeatherExApi));
-
-//                 } else if (this.readyState == 4 && this.status == 402) {
-//                     document.getElementById('forecast').innerHTML = 'Data request exceeded! Please come back tomorrow';
-//                 }  
-//             };
-
-//             xhr.onerror = function() {
-//                 console.log('Request error');
-//             };
-
-//             xhr.send();
-
-//             // Stormglass API
-
-//             // ##############################################################
-//             // ##############################################################
-//             // ##############################################################
-
-//             // Creating variable with surfSpots.title to be used for the key in the Local Storage
-//             var stormGlassApi;
-//             var time = new Date().getFullYear() + ':' + new Date().getMonth() + ':' + new Date().getDate();
-//             var params = 'airTemperature,waterTemperature,waveHeight,wavePeriod,windDirection,windSpeed';
-//             var xhr = new XMLHttpRequest();
-//             xhr.open('GET', `https://api.stormglass.io/point?lat=${lat}&lng=${lng}&params=${params}`, true);
-//             xhr.setRequestHeader('Authorization', 'b891271c-e610-11e8-83ef-0242ac130004-b891282a-e610-11e8-83ef-0242ac130004')
-
-//             if (localStorage.stormGlassData) {
-//                 if (JSON.parse(localStorage.getItem('stormGlassData')).timestamp === time && JSON.parse(localStorage.getItem('stormGlassData')).surfSpot === e.target.childNodes[0].data) {
-//                     console.log('Happy days');
-//                 } else {
-//                     localStorage.removeItem('stormGlassData');
-//                     xhr.onreadystatechange = function() {
-//                         if (this.readyState == 4 && this.status == 200) {
-//                         // dataApi = { data: JSON.parse(this.responseText), timestamp: time};
-//                         stormGlassApi = { data: JSON.parse(this.responseText), timestamp: time, surfSpot: e.target.childNodes[0].data };
-//                         // console.log(stormGlassApi.data);
-//                         // localStorage.setItem('dataLocStorage', JSON.stringify(dataApi)); 
-//                         localStorage.setItem('stormGlassData', JSON.stringify(stormGlassApi)); 
-//                         } else if (this.readyState == 4 && this.status == 402) {
-//                             forecast.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12">' + '<h1>We went sur... ehm Data request exceeded! Please come back tomorrow</h1>' + '</div>' + '<div class="col-xs-12">';
-//                         }  
-//                     };              
-//                 xhr.onerror = function() {
-//                     console.log('Request error');
-//                 };
-//                 xhr.send(); 
-//                 }
-//             } else {
-//                 xhr.onreadystatechange = function() {
-//                     if (this.readyState == 4 && this.status == 200) {
-//                     // dataApi = { data: JSON.parse(this.responseText), timestamp: time};
-//                     stormGlassApi = { data: JSON.parse(this.responseText), timestamp: time, surfSpot: e.target.childNodes[0].data };
-//                     // console.log(stormGlassApi.data);
-//                     // localStorage.setItem('dataLocStorage', JSON.stringify(dataApi)); 
-//                     localStorage.setItem('stormGlassData', JSON.stringify(stormGlassApi)); 
-//                     } else if (this.readyState == 4 && this.status == 402) {
-//                         forecast.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12">' + '<h1>We went sur... ehm Data request exceeded! Please come back tomorrow</h1>' + '</div>' + '<div class="col-xs-12">';
-//                     }  
-//                 };              
-//                 xhr.onerror = function() {
-//                     console.log('Request error');
-//                 };
-//                 xhr.send(); 
-//             }
-
-//             // ##############################################################
-//             // ##############################################################
-//             // ##############################################################
-
-//             // const params = 'airTemperature,waterTemperature,waveHeight,wavePeriod,windDirection,windSpeed';
-
-//             // var xhr = new XMLHttpRequest();
-//             // xhr.open('GET', `https://api.stormglass.io/point?lat=${lat}&lng=${lng}&params=${params}`, true);
-//             // xhr.setRequestHeader('Authorization', 'b891271c-e610-11e8-83ef-0242ac130004-b891282a-e610-11e8-83ef-0242ac130004');
-
-//             // xhr.onreadystatechange = function() {
-//             //     if (this.readyState == 4 && this.status == 200) {
-//             //         var stormglassAPI = JSON.parse(this.responseText);
-
-//             //         // Storing data locally
-//             //         var stormglassAPIData;
-//             //         localStorage.setItem('stormglassAPI', JSON.stringify(stormglassAPI));
-
-//             //     } else if (this.readyState == 4 && this.status == 402) {
-//             //         // document.getElementById('forecast').innerHTML = 'Data request exceeded! Please come back tomorrow';
-//             //         forecast.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12">' + '<h1>We went sur... ehm Data request exceeded! Please come back tomorrow</h1>' + '</div>' + '<div class="col-xs-12">';
-//             //     }
-//             // };
-
-//             // xhr.onerror = function() {
-//             //     console.log('Request error: ');
-//             // };
-
-//             // xhr.send();
-                
-//             // Marine Institute of Ireland API
-
-//             var timeToday = new Date();
-
-//             // Adding second digit for day and month < 10
-//             function addZero(n) {
-//                 return n < 10 ? '0' + n : '' + n;
-//             };
-            
-//             var timeTodayFormat = timeToday.getFullYear() + '-' + addZero(timeToday.getMonth() + 1) + '-' + addZero(timeToday.getDate());
-
-//             var timeTomorrow = timeToday.setDate(timeToday.getDate() +1);
-
-//             // Unix time to local time conversion
-//             function timeConverter(t) {
-//                 var tmr = new Date(t);
-//                 var year = tmr.getFullYear();
-//                 var month = addZero(tmr.getMonth() + 1);
-//                 var day = addZero(tmr.getDate());
-//                 var time = year + '-' + month + '-' + day;
-//                 return time; 
-//             }
-
-//             var timeFrom = timeTodayFormat + 'T00%3A00%3A00Z';
-//             var timeTo = timeConverter(timeTomorrow) + 'T00%3A00%3A00Z';
-//             var stationId = searchStation(e.target.childNodes[0].data, surfSpots);
-//             var xhr = new XMLHttpRequest();
-
-//             xhr.open('GET', `https://erddap.marine.ie/erddap/tabledap/IMI-TidePrediction.json?time%2CstationID%2CWater_Level_ODM&time%3E=${timeFrom}&time%3C=${timeTo}&stationID%3E=${stationId}`, true);
 
 //             xhr.onreadystatechange = function() {
 //                 if (this.readyState == 4 && this.status == 200) {
