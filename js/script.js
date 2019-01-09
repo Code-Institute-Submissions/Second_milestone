@@ -324,11 +324,6 @@ function stepTwo(e) {
 
             map.setCenter(searchLocation(e.target.childNodes[0].data, surfSpots));
             map.setZoom(12);
-            
-            // API
-            // To be used with OpenWeatherMap API 
-            // var lat = searchLocation(e.target.childNodes[0].data, surfSpots).lat;
-            // var lng = searchLocation(e.target.childNodes[0].data, surfSpots).lng;
 
             // Fetch API from Marine Institute of Ireland
 
@@ -359,47 +354,131 @@ function stepTwo(e) {
             var stationGfs = searchStationGfs(e.target.childNodes[0].data, surfSpots);
             var buoy = searchBuoy(e.target.childNodes[0].data, surfSpots);
 
-            console.log(station + ' ' + stationGfs + ' ' + buoy)
 
-            fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${buoy}`
-            ).then(function(response) {
-                return response.json();
-            }).then(function(data) {
-                console.log(data.table.rows[0][1]);
-                var buoyData = { data: data, timestamp: `${timeTodayFormat}`}
-                localStorage.setItem(`buoy_${e.target.childNodes[0].data}`, JSON.stringify(buoyData));
-            }).catch(function(error) {
-                return console.error('Error:', error);
+            var forecastData = new Promise(function(resolve, reject) {
+                if (localStorage.length != 0) {
+                    if ((JSON.parse(localStorage.getItem(`buoy_${e.target.childNodes[0].data}`))).timestamp === `${timeTodayFormat}`) {
+                        return JSON.parse(localStorage.getItem(`buoy_${e.target.childNodes[0].data}`));
+                    } else {
+
+                        localStorage.clear();
+
+                        fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${buoy}`
+                        ).then(function(response) {
+                            return response.json();
+                        }).then(function(data) {
+                            var buoyData = { data: data, timestamp: `${timeTodayFormat}`}
+                            localStorage.setItem(`buoy_${e.target.childNodes[0].data}`, JSON.stringify(buoyData));
+                        }).catch(function(error) {
+                            return console.error('Error:', error);
+                        });
+    
+                        fetch(`https://erddap.marine.ie/erddap/tabledap/GFS-WeatherTimeSeries.json?time%2CstationID%2CWindSpeed%2CWindDirection&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${stationGfs}`
+                        ).then(function(response) {
+                            return response.json();
+                        }).then(function(data) {
+                            var gfsData = { data: data, timestamp: `${timeTodayFormat}`}
+                            localStorage.setItem(`gfs_${e.target.childNodes[0].data}`, JSON.stringify(gfsData));
+                        }).catch(function(error) {
+                            return console.error('Error:', error);
+                        });
+    
+                        fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-TidePrediction.json?time%2CstationID%2CWater_Level_ODM&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${station}`
+                        ).then(function(response) {
+                            return response.json();
+                        }).then(function(data) {
+                            var tideData = { data: data, timestamp: `${timeTodayFormat}`}
+                            localStorage.setItem(`tide_${e.target.childNodes[0].data}`, JSON.stringify(tideData));
+                        }).catch(function(error) {
+                            return console.error('Error:', error);
+                        });
+                    }
+                } else {
+                    fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${buoy}`
+                        ).then(function(response) {
+                            return response.json();
+                        }).then(function(data) {
+                            var buoyData = { data: data, timestamp: `${timeTodayFormat}`}
+                            localStorage.setItem(`buoy_${e.target.childNodes[0].data}`, JSON.stringify(buoyData));
+                        }).catch(function(error) {
+                            return console.error('Error:', error);
+                        });
+    
+                        fetch(`https://erddap.marine.ie/erddap/tabledap/GFS-WeatherTimeSeries.json?time%2CstationID%2CWindSpeed%2CWindDirection&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${stationGfs}`
+                        ).then(function(response) {
+                            return response.json();
+                        }).then(function(data) {
+                            var gfsData = { data: data, timestamp: `${timeTodayFormat}`}
+                            localStorage.setItem(`gfs_${e.target.childNodes[0].data}`, JSON.stringify(gfsData));
+                        }).catch(function(error) {
+                            return console.error('Error:', error);
+                        });
+    
+                        fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-TidePrediction.json?time%2CstationID%2CWater_Level_ODM&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${station}`
+                        ).then(function(response) {
+                            return response.json();
+                        }).then(function(data) {
+                            var tideData = { data: data, timestamp: `${timeTodayFormat}`}
+                            localStorage.setItem(`tide_${e.target.childNodes[0].data}`, JSON.stringify(tideData));
+                        }).catch(function(error) {
+                            return console.error('Error:', error);
+                        });
+                }                
             });
 
-            fetch(`https://erddap.marine.ie/erddap/tabledap/GFS-WeatherTimeSeries.json?time%2CstationID%2CWindSpeed%2CWindDirection&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${stationGfs}`
-            ).then(function(response) {
-                return response.json();
-            }).then(function(data) {
-                console.log(data);
-                var gfsData = { data: data, timestamp: `${timeTodayFormat}`}
-                localStorage.setItem(`gfs_${e.target.childNodes[0].data}`, JSON.stringify(gfsData));
-            }).catch(function(error) {
-                return console.error('Error:', error);
+            forecastData.then(function() {
+                // D3.js DATA
+                var tidePrediction = data.table.rows[0][2];
+
+                var tidesTime = [];
+                var tidesValue = [];
+                var tidesTimeValue = {};
+
+                var delta = 10;
+                // console.log(data.table.rows.length);
+                // console.log(delta);
+
+                // for (i = 0; i < data.table.rows.length; i = i + delta) {
+                //     tidesTime.push(data.table.rows[i][0]);
+                // }
+
+                for (i = 0; i < 240; i = i + delta) {
+                    tidesTime.push(data.table.rows[i][0]);
+                }
+
+                // for (i = 0; i < data.table.rows.length; i = i + delta) {
+                //     tidesValue.push(data.table.rows[i][2]);
+                // }
+
+                for (i = 0; i < 240; i = i + delta) {
+                    tidesValue.push(data.table.rows[i][2]);
+                }
+
+                tidesTime.forEach(function (time, i) {
+                    return tidesTimeValue[time] = tidesValue[i];
+                });
+
+                // UTC time to Hour and Minutes
+
+                var time = new Date(tidesTime[10]);
+                var timeHM = time.getUTCHours() + ':' + time.getUTCMinutes();
+
+                var dataApi = [];
+
+                for (i = 0; i < 240; i = i + delta) {
+                    dataApi.push (
+                        {
+                            // date: data.table.rows[i][0],
+                            date: (new Date(data.table.rows[i][0])).getUTCHours(),
+                            value: data.table.rows[i][2]
+                        });
+                };
             });
 
-            fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-TidePrediction.json?time%2CstationID%2CWater_Level_ODM&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${station}`
-            ).then(function(response) {
-                return response.json();
-            }).then(function(data) {
-                console.log(data);
-                var tideData = { data: data, timestamp: `${timeTodayFormat}`}
-                localStorage.setItem(`tide_${e.target.childNodes[0].data}`, JSON.stringify(tideData));
-            }).catch(function(error) {
-                return console.error('Error:', error);
-            });
+            
             
 
-            // if (JSON.parse(localStorage.getItem('stormGlassData')).timestamp === time && JSON.parse(localStorage.getItem('stormGlassData')).surfSpot === e.target.childNodes[0].data) {
-            //     //                     console.log('Happy days');
-            // }
-
-
+            
 
 
             // Back button
@@ -425,57 +504,7 @@ function stepTwo(e) {
 
 
 
-
-//             xhr.onreadystatechange = function() {
-//                 if (this.readyState == 4 && this.status == 200) {
-//                     var data = JSON.parse(this.responseText);
-
-//                     // D3.js DATA
-//                     var tidePrediction = data.table.rows[0][2];
-
-//                     var tidesTime = [];
-//                     var tidesValue = [];
-//                     var tidesTimeValue = {};
-
-//                     var delta = 10;
-//                     // console.log(data.table.rows.length);
-//                     // console.log(delta);
-
-//                     // for (i = 0; i < data.table.rows.length; i = i + delta) {
-//                     //     tidesTime.push(data.table.rows[i][0]);
-//                     // }
-
-//                     for (i = 0; i < 240; i = i + delta) {
-//                         tidesTime.push(data.table.rows[i][0]);
-//                     }
-
-//                     // for (i = 0; i < data.table.rows.length; i = i + delta) {
-//                     //     tidesValue.push(data.table.rows[i][2]);
-//                     // }
-
-//                     for (i = 0; i < 240; i = i + delta) {
-//                         tidesValue.push(data.table.rows[i][2]);
-//                     }
-
-//                     tidesTime.forEach(function (time, i) {
-//                         return tidesTimeValue[time] = tidesValue[i];
-//                     });
-
-//                     // UTC time to Hour and Minutes
-
-//                     var time = new Date(tidesTime[10]);
-//                     var timeHM = time.getUTCHours() + ':' + time.getUTCMinutes();
-
-//                     var dataApi = [];
-
-//                     for (i = 0; i < 240; i = i + delta) {
-//                         dataApi.push (
-//                             {
-//                                 // date: data.table.rows[i][0],
-//                                 date: (new Date(data.table.rows[i][0])).getUTCHours(),
-//                                 value: data.table.rows[i][2]
-//                             });
-//                     };
+                    
 
 //         // LINE CHART
 
