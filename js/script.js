@@ -251,7 +251,7 @@ function stepOne(e) {
         listSpots(e.target.classList[4], mapLocation);
         map.setCenter(mapCenter(e.target.classList[4], mapLocation));
         map.setZoom(mapZoom(e.target.classList[4], mapLocation));
-
+        
         if (e.target.id === 'btn-n') {
             go2Back.classList.add('north');
             go2Back.classList.remove('west', 'east', 'south');
@@ -313,7 +313,6 @@ function searchBuoy(nameKey, myArray) {
     }
 };
 
-//  ************************************************
 function storageKey(nameKey, myArray) {
     for (var i=0; i < myArray.length; i++) {
         if (myArray[i].title === nameKey) {
@@ -445,98 +444,91 @@ function stepTwo(e) {
 
                 // Function that return degrees that fall withing range of word directions:
         
-//             function direction(value) {
-//                     if (value >= 0 && value < 22.5 || value >=337.5) {
-//                     return 0;
-//                 } else if (value >= 22.5 && value < 67.5) {
-//                     return 45;
-//                 } else if (value >= 67.5 && value < 112.5) {
-//                     return 90;
-//                 } else if (value >= 112.5 && value < 157.5) {
-//                     return 135;
-//                 } else if (value >= 157.5 && value < 202.5) {
-//                     return 180;
-//                 } else if (value >= 202.5 && value < 247.5) {
-//                         return 225;
-//                 } else if (value >= 247.5 && value <292.5) {
-//                         return 270;
-//                 } else if (value >= 292.5 && value <337.5) {
-//                         return 315;
-//                 }
-//             };
+            function direction(value) {
+                return ((value >= 0 && value < 22.5) || value >=337.5) ? 0
+                    : (value >= 22.5 && value < 67.5) ? 45
+                    : (value >= 67.5 && value < 112.5) ? 90
+                    : (value >= 112.5 && value < 157.5) ? 135
+                    : (value >= 157.5 && value < 202.5) ? 180
+                    : (value >= 202.5 && value < 247.5) ? 225
+                    : (value >= 247.5 && value <292.5) ? 270
+                    : (value >= 292.5 && value <337.5) ? 315
+                    : null;
+            }
+            
+            console.log(direction(windMorningAverage.windDirection)); 
+ 
+            // Wind types that usues the wind direction and surf spots pointing direction to determin tyoe of wind for location
         
-//             // Wind types that usues the wind direction and surf spots pointing direction to determin tyoe of wind for location
+            function windType(data) {
         
-//             function windType(data) {
+                var wind = direction(data);
+                var point = surfSpots.point;
         
-//                 var wind = direction(data);
-//                 var point = surfSpots.point;
+                // console.log('Wind & Surf Spot wind directions: ' + wind + ' ' + point);
         
-//                 // console.log('Wind & Surf Spot wind directions: ' + wind + ' ' + point);
+                var range = [wind, point];
         
-//                 var range = [wind, point];
-        
-//                 // console.log('An Array of wind & point direction values: ' + range);
+                // console.log('An Array of wind & point direction values: ' + range);
                 
-//                 function check() {
-//                     if ((wind - point) === 0) {
-//                     return 'OFF';
-//                     } else if (
-//                     (range[0] === 0) && (range[1] === 180) ||
-//                     (range[0] === 180) && (range[1] === 0) ||
-//                     (range[0] === 90) && (range[1] === 270) ||
-//                     (range[0] === 270) && (range[1] === 90) ||
-//                     (range[0] === 45) && (range[1] === 225) ||
-//                     (range[0] === 225) && (range[1] === 45) ||
-//                     (range[0] === 135) && (range[1] === 315) ||
-//                     (range[0] === 315) && (range[1] === 135)) {
-//                     return 'ON';
-//                     } else {
-//                     return 'CROSS';
-//                     }
-//                 }
-        
-//                 return check();
-//             };
+                function check(wind, point) {
+                    var direction;
+                    var windArray = [[0, 180], [90, 270], [45, 225], [135, 315]];
 
+                    if (wind - point === 0) {
+                        return 'OFF';
+                    }
 
-                // Tide Data: D3.js DATA definition
+                    windArray.forEach(function (index) {
+                        if (index.includes(wind) && index.includes(point)) {
+                            return direction = true;
+                        }
+                    });
 
-                var tidePrediction = tidesData.table.rows;
-                // console.log(tidePrediction);
-                var tidesTime = [];
-                var tidesValue = [];
-                var tidesTimeValue = {};
-    
-                var delta = 10;
-    
-                for (i = 0; i < 240; i = i + delta) {
-                    tidesTime.push(tidePrediction[i][0]);
+                    return direction ? 'ON' : 'CROSS';
                 }
-    
-                for (i = 0; i < 240; i = i + delta) {
-                    tidesValue.push(tidePrediction[i][2]);
-                }
-    
-                tidesTime.forEach(function (time, i) {
-                    return tidesTimeValue[time] = tidesValue[i];
-                });
-    
-                // UTC time to Hour and Minutes
-    
-                var time = new Date(tidesTime[10]);
-                var timeHM = time.getUTCHours() + ':' + time.getUTCMinutes();
-    
-                var dataApi = [];
-    
-                for (i = 0; i < 240; i = i + delta) {
-                    dataApi.push (
-                        {
-                            // date: tidePrediction[i][0],
-                            date: (new Date(tidePrediction[i][0])).getUTCHours(),
-                            value: tidePrediction[i][2]
-                        });
-                };
+                return check();
+            }
+
+            console.log(windType(windMorningAverage.windDirection));   
+                    
+            // Tide Data: D3.js DATA definition
+
+            var tidePrediction = tidesData.table.rows;
+            // console.log(tidePrediction);
+            var tidesTime = [];
+            var tidesValue = [];
+            var tidesTimeValue = {};
+
+            var delta = 10;
+
+            for (i = 0; i < 240; i = i + delta) {
+                tidesTime.push(tidePrediction[i][0]);
+            }
+
+            for (i = 0; i < 240; i = i + delta) {
+                tidesValue.push(tidePrediction[i][2]);
+            }
+
+            tidesTime.forEach(function (time, i) {
+                return tidesTimeValue[time] = tidesValue[i];
+            });
+
+            // UTC time to Hour and Minutes
+
+            var time = new Date(tidesTime[10]);
+            var timeHM = time.getUTCHours() + ':' + time.getUTCMinutes();
+
+            var dataApi = [];
+
+            for (i = 0; i < 240; i = i + delta) {
+                dataApi.push (
+                    {
+                        // date: tidePrediction[i][0],
+                        date: (new Date(tidePrediction[i][0])).getUTCHours(),
+                        value: tidePrediction[i][2]
+                    });
+            };
 
                 // forecast.innerHTML = 
                 //     `<div class="row text-center">
@@ -619,77 +611,77 @@ function stepTwo(e) {
                 //         <div class="col-xs-12" id="tides"></div>
                 //     </div>`
         
-                // LINE CHART creation
+            // LINE CHART creation
 
-                /* implementation heavily influenced by http://bl.ocks.org/1166403 */
-                
-                // define dimensions of graph
-                var m = [10, 10, 10, 10]; // margins
-                var w = 350 - m[1] - m[3]; // width
-                var h = 150 - m[0] - m[2]; // height
-                
-                // create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
-                // var data = [-3, -6, -2, 0, 5, 2, 0, -3, -8, -9, -2, 5, 9, 13];
-                var data = tidesValue;
+            /* implementation heavily influenced by http://bl.ocks.org/1166403 */
+            
+            // define dimensions of graph
+            var m = [10, 10, 10, 10]; // margins
+            var w = 350 - m[1] - m[3]; // width
+            var h = 150 - m[0] - m[2]; // height
+            
+            // create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
+            // var data = [-3, -6, -2, 0, 5, 2, 0, -3, -8, -9, -2, 5, 9, 13];
+            var data = tidesValue;
 
-                // X scale will fit all values from data[] within pixels 0-w
-                var x = d3.scaleLinear().domain([0, tidesValue.length]).range([0, w]);
-                // Y scale will fit values from 0-10 within pixels h-0 (Note the inverted domain for the y-scale: bigger is up!)
-                var y = d3.scaleLinear().domain([d3.min(tidesValue), d3.max(tidesValue)]).range([h, 0]);
-                    // automatically determining max range can work something like this
-                    // var y = d3.scale.linear().domain([0, d3.max(data)]).range([h, 0]);
+            // X scale will fit all values from data[] within pixels 0-w
+            var x = d3.scaleLinear().domain([0, tidesValue.length]).range([0, w]);
+            // Y scale will fit values from 0-10 within pixels h-0 (Note the inverted domain for the y-scale: bigger is up!)
+            var y = d3.scaleLinear().domain([d3.min(tidesValue), d3.max(tidesValue)]).range([h, 0]);
+                // automatically determining max range can work something like this
+                // var y = d3.scale.linear().domain([0, d3.max(data)]).range([h, 0]);
 
-                // create a line function that can convert data[] into x and y points
-                var line = d3.line()
-                // assign the X function to plot our line as we wish
-                .x(function(d,i) { 
-                    // verbose logging to show what's actually being done
-                    // console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
-                    // return the X coordinate where we want to plot this datapoint
-                    return x(i); 
-                })
-                .y(function(d) { 
-                    // verbose logging to show what's actually being done
-                    // console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + " using our yScale.");
-                    // return the Y coordinate where we want to plot this datapoint
-                    return y(d); 
-                })
-                .curve(d3.curveBasis)
+            // create a line function that can convert data[] into x and y points
+            var line = d3.line()
+            // assign the X function to plot our line as we wish
+            .x(function(d,i) { 
+                // verbose logging to show what's actually being done
+                // console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
+                // return the X coordinate where we want to plot this datapoint
+                return x(i); 
+            })
+            .y(function(d) { 
+                // verbose logging to show what's actually being done
+                // console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + " using our yScale.");
+                // return the Y coordinate where we want to plot this datapoint
+                return y(d); 
+            })
+            .curve(d3.curveBasis)
 
-                // Add an SVG element with the desired dimensions and margin.
-                var graph = d3.select("#tides").append("svg:svg")
-                    .attr("width", w + m[1] + m[3])
-                    .attr("height", h + m[0] + m[2])
-                    .append("svg:g")
-                    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+            // Add an SVG element with the desired dimensions and margin.
+            var graph = d3.select("#tides").append("svg:svg")
+                .attr("width", w + m[1] + m[3])
+                .attr("height", h + m[0] + m[2])
+                .append("svg:g")
+                .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
-                // create yAxis
-                var xAxis = d3.axisBottom().scale(x).ticks(4).tickSize(-h);
-                // Add the x-axis.
-                graph.append("svg:g")
-                    .attr("class", "x axis")
-                    .attr("transform", "translate(0," + h + ")")
-                    .call(xAxis);
+            // create yAxis
+            var xAxis = d3.axisBottom().scale(x).ticks(4).tickSize(-h);
+            // Add the x-axis.
+            graph.append("svg:g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + h + ")")
+                .call(xAxis);
 
-                // // create left yAxis
-                // var yAxisLeft = d3.axisLeft().scale(y);
-                // // Add the y-axis to the left
-                // graph.append("svg:g")
-                //       .attr("class", "y axis")
-                //       .attr("transform", "translate(-10,0)")
-                //       .call(yAxisLeft);
-                
-                // Add the line by appending an svg:path element with the data line we created above
-                // do this AFTER the axes above so that the line is above the tick-lines
-                graph.append("svg:path").attr("d", line(data));
+            // // create left yAxis
+            // var yAxisLeft = d3.axisLeft().scale(y);
+            // // Add the y-axis to the left
+            // graph.append("svg:g")
+            //       .attr("class", "y axis")
+            //       .attr("transform", "translate(-10,0)")
+            //       .call(yAxisLeft);
+            
+            // Add the line by appending an svg:path element with the data line we created above
+            // do this AFTER the axes above so that the line is above the tick-lines
+            graph.append("svg:path").attr("d", line(data));
 
-                graph.append("line")
-                //   .attr("x1",-6)
-                    .attr("y1",y(0))//so that the line passes through the y 0
-                    .attr("x2",w)
-                    .attr("y2",y(0))//so that the line passes through the y 0
-                    .style("stroke", "black")
-                    .style("opacity", ".5");
+            graph.append("line")
+            //   .attr("x1",-6)
+                .attr("y1",y(0))//so that the line passes through the y 0
+                .attr("x2",w)
+                .attr("y2",y(0))//so that the line passes through the y 0
+                .style("stroke", "black")
+                .style("opacity", ".5");
 
             };
 
