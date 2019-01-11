@@ -372,7 +372,7 @@ function stepTwo(e) {
             async function forecastData() {
                 var buoyApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${buoy}`);
                 var buoyData = await buoyApi.json();
-                console.log(buoyData.table);
+                // console.log(buoyData.table);
 
                 var gfsApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/GFS-WeatherTimeSeries.json?time%2CstationID%2CWindSpeed%2CWindDirection&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${stationGfs}`);
                 var gfsData = await gfsApi.json();
@@ -380,12 +380,130 @@ function stepTwo(e) {
 
                 var tidesApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-TidePrediction.json?time%2CstationID%2CWater_Level_ODM&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${station}`);
                 var tidesData = await tidesApi.json();
-                console.log(tidesData.table);
+                // console.log(tidesData.table);
 
-                // D3.js DATA definition
+                // Buoy Data: Wave Height and Period
+
+                var waveData = buoyData.table.rows;
+                var waveAfternoon = waveData.splice(-19, 11);
+                var waveMidday = waveData.splice(-17, 9);
+                var waveMorning = waveData.splice(-19, 11);
+                // GFS Data: Wind Speed and Direction
+
+                var windData = gfsData.table.rows;
+                var windAfternoon = windData.splice(-28, 3);
+                var windMidday = windData.splice(-26, 1);
+                var windMorning = windData.splice(-27, 2);
+
+                function wave(time) {
+                    var totalWaveHeight = 0;
+                    var totalWavePeriod = 0;
+                
+                    time.forEach(function(hour) {
+                        totalWaveHeight += hour[2];
+                        totalWavePeriod += hour[3];
+                        });
+                
+                    var average = new Object();
+                    average['waveHeight'] = Math.round(totalWaveHeight / time.length);
+                    average['wavePeriod'] = Math.round(totalWavePeriod / time.length);
+                    return average;
+                }
+
+                function wind(time) {
+                    var totalWindDirection = 0;
+                    var totalWindSpeed = 0;
+                
+                    time.forEach(function(hour) {
+                        totalWindDirection += hour[3];
+                        totalWindSpeed += hour[2];
+                        });
+                
+                    var average = new Object();
+                    average['windDirection'] = Math.round(totalWindDirection / time.length);
+                    average['windSpeed'] = Math.round((totalWindSpeed * 0.5144444) / time.length);
+                    return average;
+                }
+                
+                var waveMorningAverage = wave(waveAfternoon);
+                var waveMiddayAverage = wave(waveMidday);
+                var waveAfternoonAverage = wave(waveMorning);
+                var windMorningAverage = wind(windAfternoon);
+                var windMiddayAverage = wind(windMidday);
+                var windAfternoonAverage = wind(windMorning);
+                
+                console.log(waveMorningAverage);
+                console.log(waveMiddayAverage);
+                console.log(waveAfternoonAverage);
+                console.log(windMorningAverage);
+                console.log(windMiddayAverage);
+                console.log(windAfternoonAverage);
+
+                // var dayOneAverage = timeOfDay(dayOne);
+                // var dayTwoAverage = timeOfDay(dayTwo);
+                // var dayThreeAverage = timeOfDay(dayThree);
+
+                // Function that return degrees that fall withing range of word directions:
+        
+//             function direction(value) {
+//                     if (value >= 0 && value < 22.5 || value >=337.5) {
+//                     return 0;
+//                 } else if (value >= 22.5 && value < 67.5) {
+//                     return 45;
+//                 } else if (value >= 67.5 && value < 112.5) {
+//                     return 90;
+//                 } else if (value >= 112.5 && value < 157.5) {
+//                     return 135;
+//                 } else if (value >= 157.5 && value < 202.5) {
+//                     return 180;
+//                 } else if (value >= 202.5 && value < 247.5) {
+//                         return 225;
+//                 } else if (value >= 247.5 && value <292.5) {
+//                         return 270;
+//                 } else if (value >= 292.5 && value <337.5) {
+//                         return 315;
+//                 }
+//             };
+        
+//             // Wind types that usues the wind direction and surf spots pointing direction to determin tyoe of wind for location
+        
+//             function windType(data) {
+        
+//                 var wind = direction(data);
+//                 var point = surfSpots.point;
+        
+//                 // console.log('Wind & Surf Spot wind directions: ' + wind + ' ' + point);
+        
+//                 var range = [wind, point];
+        
+//                 // console.log('An Array of wind & point direction values: ' + range);
+                
+//                 function check() {
+//                     if ((wind - point) === 0) {
+//                     return 'OFF';
+//                     } else if (
+//                     (range[0] === 0) && (range[1] === 180) ||
+//                     (range[0] === 180) && (range[1] === 0) ||
+//                     (range[0] === 90) && (range[1] === 270) ||
+//                     (range[0] === 270) && (range[1] === 90) ||
+//                     (range[0] === 45) && (range[1] === 225) ||
+//                     (range[0] === 225) && (range[1] === 45) ||
+//                     (range[0] === 135) && (range[1] === 315) ||
+//                     (range[0] === 315) && (range[1] === 135)) {
+//                     return 'ON';
+//                     } else {
+//                     return 'CROSS';
+//                     }
+//                 }
+        
+//                 return check();
+//             };
+
+
+                // Tide Data: D3.js DATA definition
 
                 var tidePrediction = tidesData.table.rows;
-                console.log(tidePrediction);
+                // console.log(tidePrediction);
                 var tidesTime = [];
                 var tidesValue = [];
                 var tidesTimeValue = {};
