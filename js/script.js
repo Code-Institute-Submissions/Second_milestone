@@ -1,8 +1,26 @@
 // Surfing locations definition
 
 var surfSpots = [
-    {title: 'Portrush', county: 'Antrim', location: {lat: 55.170241, lng: -6.731873}, point: 0, map: 'north', station: '%22Malin_Head%22', stationGfs: '%22Malin_Head%22', buoy: '%22M4%22'},
-    {title: 'Magheroarty', county: 'Donegal', location: {lat: 55.162985, lng: -8.143272}, point: 0, map: 'north', station: '%22Aranmore%22', stationGfs: '%22Malin_Head%22', buoy: '%22M4%22'},
+    {
+        title: 'Portrush', 
+        county: 'Antrim', 
+        location: {lat: 55.170241, lng: -6.731873}, 
+        point: 0, 
+        map: 'north', 
+        station: '%22Malin_Head%22', 
+        stationGfs: '%22Malin_Head%22', 
+        buoy: '%22M4%22'
+    },
+    {
+        title: 'Magheroarty', 
+        county: 'Donegal', 
+        location: {lat: 55.162985, lng: -8.143272}, 
+        point: 0, 
+        map: 'north', 
+        station: '%22Aranmore%22', 
+        stationGfs: '%22Malin_Head%22', 
+        buoy: '%22M4%22'
+    },
     {title: 'Falcarragh', county: 'Donegal', location: {lat: 55.16073, lng: -8.085937}, point: 0, map: 'north', station: '%22Aranmore%22', stationGfs: '%22Malin_Head%22', buoy: '%22M4%22'},
     {title: 'Rossnowlagh', county: 'Donegal', location: {lat: 54.555689, lng: -8.210135}, point: 270, map: 'west', station: '%22Killybegs%22', stationGfs: '%22Achill%22', buoy: '%22M4%22'},
     {title: 'Bundoran', county: 'Donegal', location: {lat: 54.492515, lng: -8.268799}, point: 315, map: 'west', station: '%22Killybegs%22', stationGfs: '%22Achill%22', buoy: '%22M4%22'},
@@ -21,7 +39,7 @@ var surfSpots = [
     {title: 'Tramore', county: 'Waterford', location: {lat: 52.156210, lng: -7.127300}, point: 180, map: 'south', station: '%22Dunmore_East%22', stationGfs: '%22Wexford%22', buoy: '%22M5%22'},
     {title: 'Magheramore', county: 'Wicklow', location: {lat: 52.930841, lng: -6.023053}, point: 135, map: 'east', station: '%22Arklow%22', stationGfs: '%22Dublin%22', buoy: '%22M2%22'},
     {title: 'Whiterock', county: 'Dublin', location: {lat: 53.265934, lng: -6.106232}, point: 135, map: 'east', station: '%22Dublin_Port%22', stationGfs: '%22Dublin%22', buoy: '%22M2%22'}
-] 
+]; 
 
 // Surfing direction definition
 
@@ -56,13 +74,7 @@ var mapLocation = [
 
 var map;
 var styles = [
-    {
-        featureType: 'landscape',
-        elementType: 'all',
-        stylers: [
-            { color: '#3E4EA4' }
-        ]
-    },
+    {featureType: 'landscape', elementType: 'all', stylers: [{ color: '#3E4EA4' }]},
     {
         featureType: 'poi',
         elementType: 'all',
@@ -105,7 +117,7 @@ var styles = [
             { color: '#FD6591' }
         ]
     }
-]
+];
 
 // Map initializing and markers definition
 
@@ -156,9 +168,9 @@ function initMap() {
         if (infowindow.marker != marker) {
             infowindow.marker = marker;
             infowindow.setContent(
-                '<div id="infoWindow">' + marker.title +  '</div>' +
-                '<div>' + '<button class="btn btn-default mapButton" type="submit">TODAY</button>' + '</div>' +
-                '<div>' + '<button class="btn btn-default mapButton" type="submit">NEXT 3 DAY</button>' + '</div>'
+                `<div id="infoWindow">${marker.title}</div>
+                <div><button class="btn btn-default mapButton" type="submit">TODAY</button></div>
+                <div><button class="btn btn-default mapButton" type="submit">NEXT 3 DAY</button></div>`
                 );
             infowindow.open(map, marker);
             infowindow.addListener('closeclick', function() {
@@ -187,7 +199,7 @@ var btnS = document.getElementById('btn-s').addEventListener('click', stepOne);
 function surfTitle(spot) {
     var result = '';
     for (var i = 0; i < spot.length; i++) {
-        result += '<div class="col-xs-12 padding">' + '<button class="btn btn-default spot" type="submit">'+spot[i]+'</button>' + '</div>';
+        result += `<div class="col-xs-12 padding"><button class="btn btn-default spot" type="submit">${spot[i]}</button></div>`;
     }
     return result;
 };
@@ -195,7 +207,7 @@ function surfTitle(spot) {
 function listSpots(nameKey, myArray) {
     for (var i=0; i < myArray.length; i++) {
         if (myArray[i].id === nameKey) {
-            surfingSpots.innerHTML = '<div class="row text-center">' + '<div class="col-xs-12 button">' + surfTitle(myArray[i].listOfSpots) + '</div>' + '</div>';
+            surfingSpots.innerHTML = `<div class="row text-center"><div class="col-xs-12 button">${surfTitle(myArray[i].listOfSpots)}</div></div>`;
         }
     }
 }
@@ -314,6 +326,7 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
 
 function stepTwo(e) {
     console.log(e.target.childNodes[0].data);
+    var selection = e.target.childNodes[0].data;
     if (e.target && e.target.matches('button.spot')) {
         // console.log('Button element clicked');
         if (forecast.classList.contains('hidden')) {
@@ -322,7 +335,7 @@ function stepTwo(e) {
             goBack.classList.add('hidden');
             go2Back.classList.remove('hidden');  
 
-            map.setCenter(searchLocation(e.target.childNodes[0].data, surfSpots));
+            map.setCenter(searchLocation(selection, surfSpots));
             map.setZoom(12);
 
             // Fetch API from Marine Institute of Ireland
@@ -336,7 +349,7 @@ function stepTwo(e) {
             
             var timeTodayFormat = timeToday.getFullYear() + '-' + addZero(timeToday.getMonth() + 1) + '-' + addZero(timeToday.getDate());
 
-            var timeTomorrow = timeToday.setDate(timeToday.getDate() +3);
+            var timeTomorrow = timeToday.setDate(timeToday.getDate() + 4);
 
             // Unix time to local time conversion
             function timeConverter(t) {
@@ -350,136 +363,219 @@ function stepTwo(e) {
 
             var timeFrom = timeTodayFormat + 'T00%3A00%3A00Z';
             var timeTo = timeConverter(timeTomorrow) + 'T00%3A00%3A00Z';
-            var station = searchStation(e.target.childNodes[0].data, surfSpots);
-            var stationGfs = searchStationGfs(e.target.childNodes[0].data, surfSpots);
-            var buoy = searchBuoy(e.target.childNodes[0].data, surfSpots);
+            var station = searchStation(selection, surfSpots);
+            var stationGfs = searchStationGfs(selection, surfSpots);
+            var buoy = searchBuoy(selection, surfSpots);
+            console.log(timeFrom);
+            console.log(timeTo);
 
+            async function forecastData() {
+                var buoyApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${buoy}`);
+                var buoyData = await buoyApi.json();
+                console.log(buoyData.table);
 
-            var forecastData = new Promise(function(resolve, reject) {
-                if (localStorage.length != 0) {
-                    if ((JSON.parse(localStorage.getItem(`buoy_${e.target.childNodes[0].data}`))).timestamp === `${timeTodayFormat}`) {
-                        return JSON.parse(localStorage.getItem(`buoy_${e.target.childNodes[0].data}`));
-                    } else {
+                var gfsApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/GFS-WeatherTimeSeries.json?time%2CstationID%2CWindSpeed%2CWindDirection&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${stationGfs}`);
+                var gfsData = await gfsApi.json();
+                console.log(gfsData.table);
 
-                        localStorage.clear();
+                var tidesApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-TidePrediction.json?time%2CstationID%2CWater_Level_ODM&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${station}`);
+                var tidesData = await tidesApi.json();
+                console.log(tidesData.table);
 
-                        fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${buoy}`
-                        ).then(function(response) {
-                            return response.json();
-                        }).then(function(data) {
-                            var buoyData = { data: data, timestamp: `${timeTodayFormat}`}
-                            localStorage.setItem(`buoy_${e.target.childNodes[0].data}`, JSON.stringify(buoyData));
-                        }).catch(function(error) {
-                            return console.error('Error:', error);
-                        });
-    
-                        fetch(`https://erddap.marine.ie/erddap/tabledap/GFS-WeatherTimeSeries.json?time%2CstationID%2CWindSpeed%2CWindDirection&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${stationGfs}`
-                        ).then(function(response) {
-                            return response.json();
-                        }).then(function(data) {
-                            var gfsData = { data: data, timestamp: `${timeTodayFormat}`}
-                            localStorage.setItem(`gfs_${e.target.childNodes[0].data}`, JSON.stringify(gfsData));
-                        }).catch(function(error) {
-                            return console.error('Error:', error);
-                        });
-    
-                        fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-TidePrediction.json?time%2CstationID%2CWater_Level_ODM&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${station}`
-                        ).then(function(response) {
-                            return response.json();
-                        }).then(function(data) {
-                            var tideData = { data: data, timestamp: `${timeTodayFormat}`}
-                            localStorage.setItem(`tide_${e.target.childNodes[0].data}`, JSON.stringify(tideData));
-                        }).catch(function(error) {
-                            return console.error('Error:', error);
-                        });
-                    }
-                } else {
-                    fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${buoy}`
-                        ).then(function(response) {
-                            return response.json();
-                        }).then(function(data) {
-                            var buoyData = { data: data, timestamp: `${timeTodayFormat}`}
-                            localStorage.setItem(`buoy_${e.target.childNodes[0].data}`, JSON.stringify(buoyData));
-                        }).catch(function(error) {
-                            return console.error('Error:', error);
-                        });
-    
-                        fetch(`https://erddap.marine.ie/erddap/tabledap/GFS-WeatherTimeSeries.json?time%2CstationID%2CWindSpeed%2CWindDirection&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${stationGfs}`
-                        ).then(function(response) {
-                            return response.json();
-                        }).then(function(data) {
-                            var gfsData = { data: data, timestamp: `${timeTodayFormat}`}
-                            localStorage.setItem(`gfs_${e.target.childNodes[0].data}`, JSON.stringify(gfsData));
-                        }).catch(function(error) {
-                            return console.error('Error:', error);
-                        });
-    
-                        fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-TidePrediction.json?time%2CstationID%2CWater_Level_ODM&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${station}`
-                        ).then(function(response) {
-                            return response.json();
-                        }).then(function(data) {
-                            var tideData = { data: data, timestamp: `${timeTodayFormat}`}
-                            localStorage.setItem(`tide_${e.target.childNodes[0].data}`, JSON.stringify(tideData));
-                        }).catch(function(error) {
-                            return console.error('Error:', error);
-                        });
-                }                
-            });
+                // D3.js DATA definition
 
-            forecastData.then(function() {
-                // D3.js DATA
-                var tidePrediction = data.table.rows[0][2];
-
+                var tidePrediction = tidesData.table.rows;
+                console.log(tidePrediction);
                 var tidesTime = [];
                 var tidesValue = [];
                 var tidesTimeValue = {};
-
+    
                 var delta = 10;
-                // console.log(data.table.rows.length);
-                // console.log(delta);
-
-                // for (i = 0; i < data.table.rows.length; i = i + delta) {
-                //     tidesTime.push(data.table.rows[i][0]);
-                // }
-
+    
                 for (i = 0; i < 240; i = i + delta) {
-                    tidesTime.push(data.table.rows[i][0]);
+                    tidesTime.push(tidePrediction[i][0]);
                 }
-
-                // for (i = 0; i < data.table.rows.length; i = i + delta) {
-                //     tidesValue.push(data.table.rows[i][2]);
-                // }
-
+    
                 for (i = 0; i < 240; i = i + delta) {
-                    tidesValue.push(data.table.rows[i][2]);
+                    tidesValue.push(tidePrediction[i][2]);
                 }
-
+    
                 tidesTime.forEach(function (time, i) {
                     return tidesTimeValue[time] = tidesValue[i];
                 });
-
+    
                 // UTC time to Hour and Minutes
-
+    
                 var time = new Date(tidesTime[10]);
                 var timeHM = time.getUTCHours() + ':' + time.getUTCMinutes();
-
+    
                 var dataApi = [];
-
+    
                 for (i = 0; i < 240; i = i + delta) {
                     dataApi.push (
                         {
-                            // date: data.table.rows[i][0],
-                            date: (new Date(data.table.rows[i][0])).getUTCHours(),
-                            value: data.table.rows[i][2]
+                            // date: tidePrediction[i][0],
+                            date: (new Date(tidePrediction[i][0])).getUTCHours(),
+                            value: tidePrediction[i][2]
                         });
                 };
-            });
 
+                // forecast.innerHTML = 
+                //     `<div class="row text-center">
+                //         <div class="col-xs-12">
+                //             <h1>${e.target.childNodes[0].data}</h1>
+                //         </div>
+                //         <div class="col-xs-12">
+                //             <div class="col-xs-12">
+                //                 <h2>MORNING</h2>
+                //             </div>
+                //             <div class="col-xs-12">
+                //                 <div class="col-xs-4">
+                //                     <h2>${morningAverage.waveHeight}</h2>
+                //                 </div>
+                //                 <div class="col-xs-4">
+                //                     <h3>WAVE</h3><h3>m | s</h3>
+                //                 </div>
+                //                 <div class="col-xs-4">
+                //                     <h2>${morningAverage.wavePeriod}</h2>
+                //                 </div>
+                //             </div>
+                //             <div class="col-xs-12">
+                //                 <div class="col-xs-4"> 
+                //                     <h2>${windType(morningAverage.windDirection)}</h2>
+                //                 </div>
+                //                 <div class="col-xs-4">
+                //                     <h3>WIND</h3><h3>shore | m/s</h3>
+                //                 </div>
+                //                 <div class="col-xs-4">
+                //                     <h2>${morningAverage.windSpeed}</h2>
+                //                 </div>
+                //             </div>
+                //             <div class="col-xs-12">
+                //                 <div class="col-xs-4">
+                //                     <h2>${morningAverage.airTemperature}</h2>
+                //                 </div>
+                //                 <div class="col-xs-4">
+                //                     <h3>&#8451</h3><h3>air | water</h3><
+                //                 /div>
+                //                 <div class="col-xs-4">
+                //                     <h2>${morningAverage.waterTemperature}</h2>
+                //                 </div>
+                //             </div>
+                //         </div>
             
+                //     <div class="col-xs-12">
+                //         <div class="col-xs-12"><h2>MIDDAY</h2></div>
+                //         <div class="col-xs-12">
+                //             <div class="col-xs-4"><h2>${middayAverage.waveHeight}</h2></div>
+                //             <div class="col-xs-4"><h3>WAVE</h3><h3>m | s</h3></div>
+                //             <div class="col-xs-4"><h2>${middayAverage.wavePeriod}</h2></div>
+                //         </div><div class="col-xs-12">
+                //             <div class="col-xs-4"><h2>${windType(middayAverage.windDirection)}</h2></div>
+                //             <div class="col-xs-4"><h3>WIND</h3><h3>shore | m/s</h3></div>
+                //             <div class="col-xs-4"><h2>${middayAverage.windSpeed}</h2></div>
+                //         </div><div class="col-xs-12">
+                //             <div class="col-xs-4"><h2>${middayAverage.airTemperature}</h2></div>
+                //             <div class="col-xs-4"><h3>&#8451</h3><h3>air | water</h3></div>
+                //             <div class="col-xs-4"><h2>${middayAverage.waterTemperature}</h2></div>
+                //         </div>
+                //     </div>
             
+                //     <div class="col-xs-12">
+                //         <div class="col-xs-12"><h2>AFTERNOON</h2></div>
+                //         <div class="col-xs-12">
+                //             <div class="col-xs-4"><h2>${afternoonAverage.waveHeight}</h2></div>
+                //             <div class="col-xs-4"><h3>WAVE</h3><h3>m | s</h3></div>
+                //             <div class="col-xs-4"><h2>${afternoonAverage.wavePeriod}</h2></div>
+                //         </div><div class="col-xs-12">
+                //             <div class="col-xs-4"><h2>${windType(afternoonAverage.windDirection)}</h2></div>
+                //             <div class="col-xs-4"><h3>WIND</h3><h3>shore | m/s</h3></div>
+                //             <div class="col-xs-4"><h2>${afternoonAverage.windSpeed}</h2></div>
+                //         </div><div class="col-xs-12">
+                //             <div class="col-xs-4"><h2>${afternoonAverage.airTemperature}</h2></div>
+                //             <div class="col-xs-4"><h3>&#8451</h3><h3>air | water</h3></div>
+                //             <div class="col-xs-4"><h2>${afternoonAverage.waterTemperature}</h2></div>
+                //         </div>
+                //     </div>
 
-            
+                //         <div class="col-xs-12" id="tides"></div>
+                //     </div>`
+        
+                // LINE CHART creation
 
+                /* implementation heavily influenced by http://bl.ocks.org/1166403 */
+                
+                // define dimensions of graph
+                var m = [10, 10, 10, 10]; // margins
+                var w = 350 - m[1] - m[3]; // width
+                var h = 150 - m[0] - m[2]; // height
+                
+                // create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
+                // var data = [-3, -6, -2, 0, 5, 2, 0, -3, -8, -9, -2, 5, 9, 13];
+                var data = tidesValue;
+
+                // X scale will fit all values from data[] within pixels 0-w
+                var x = d3.scaleLinear().domain([0, tidesValue.length]).range([0, w]);
+                // Y scale will fit values from 0-10 within pixels h-0 (Note the inverted domain for the y-scale: bigger is up!)
+                var y = d3.scaleLinear().domain([d3.min(tidesValue), d3.max(tidesValue)]).range([h, 0]);
+                    // automatically determining max range can work something like this
+                    // var y = d3.scale.linear().domain([0, d3.max(data)]).range([h, 0]);
+
+                // create a line function that can convert data[] into x and y points
+                var line = d3.line()
+                // assign the X function to plot our line as we wish
+                .x(function(d,i) { 
+                    // verbose logging to show what's actually being done
+                    // console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
+                    // return the X coordinate where we want to plot this datapoint
+                    return x(i); 
+                })
+                .y(function(d) { 
+                    // verbose logging to show what's actually being done
+                    // console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + " using our yScale.");
+                    // return the Y coordinate where we want to plot this datapoint
+                    return y(d); 
+                })
+                .curve(d3.curveBasis)
+
+                // Add an SVG element with the desired dimensions and margin.
+                var graph = d3.select("#tides").append("svg:svg")
+                    .attr("width", w + m[1] + m[3])
+                    .attr("height", h + m[0] + m[2])
+                    .append("svg:g")
+                    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+                // create yAxis
+                var xAxis = d3.axisBottom().scale(x).ticks(4).tickSize(-h);
+                // Add the x-axis.
+                graph.append("svg:g")
+                    .attr("class", "x axis")
+                    .attr("transform", "translate(0," + h + ")")
+                    .call(xAxis);
+
+                // // create left yAxis
+                // var yAxisLeft = d3.axisLeft().scale(y);
+                // // Add the y-axis to the left
+                // graph.append("svg:g")
+                //       .attr("class", "y axis")
+                //       .attr("transform", "translate(-10,0)")
+                //       .call(yAxisLeft);
+                
+                // Add the line by appending an svg:path element with the data line we created above
+                // do this AFTER the axes above so that the line is above the tick-lines
+                graph.append("svg:path").attr("d", line(data));
+
+                graph.append("line")
+                //   .attr("x1",-6)
+                    .attr("y1",y(0))//so that the line passes through the y 0
+                    .attr("x2",w)
+                    .attr("y2",y(0))//so that the line passes through the y 0
+                    .style("stroke", "black")
+                    .style("opacity", ".5");
+
+            };
+
+            forecastData();
 
             // Back button
             function backToHome(e) {
@@ -495,105 +591,9 @@ function stepTwo(e) {
             };
 
             var go2BackTo = go2Back.addEventListener('click', backToHome);
-            
-        } else {
-            console.log('Sth wrong dude');
-        }
-    }
-}
-
-
-
-                    
-
-//         // LINE CHART
-
-//                 /* implementation heavily influenced by http://bl.ocks.org/1166403 */
-                
-//                 // define dimensions of graph
-//                 var m = [10, 10, 10, 10]; // margins
-//                 var w = 350 - m[1] - m[3]; // width
-//                 var h = 150 - m[0] - m[2]; // height
-                
-//                 // create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
-//                 // var data = [-3, -6, -2, 0, 5, 2, 0, -3, -8, -9, -2, 5, 9, 13];
-//                 var data = tidesValue;
-
-//                 // X scale will fit all values from data[] within pixels 0-w
-//                 var x = d3.scaleLinear().domain([0, tidesValue.length]).range([0, w]);
-//                 // Y scale will fit values from 0-10 within pixels h-0 (Note the inverted domain for the y-scale: bigger is up!)
-//                 var y = d3.scaleLinear().domain([d3.min(tidesValue), d3.max(tidesValue)]).range([h, 0]);
-//                     // automatically determining max range can work something like this
-//                     // var y = d3.scale.linear().domain([0, d3.max(data)]).range([h, 0]);
-
-//                 // create a line function that can convert data[] into x and y points
-//                 var line = d3.line()
-//                     // assign the X function to plot our line as we wish
-//                     .x(function(d,i) { 
-//                         // verbose logging to show what's actually being done
-//                         // console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
-//                         // return the X coordinate where we want to plot this datapoint
-//                         return x(i); 
-//                     })
-//                     .y(function(d) { 
-//                         // verbose logging to show what's actually being done
-//                         // console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + " using our yScale.");
-//                         // return the Y coordinate where we want to plot this datapoint
-//                         return y(d); 
-//                     })
-//                     .curve(d3.curveBasis)
-
-//                     // Add an SVG element with the desired dimensions and margin.
-//                     var graph = d3.select("#tides").append("svg:svg")
-//                         .attr("width", w + m[1] + m[3])
-//                         .attr("height", h + m[0] + m[2])
-//                         .append("svg:g")
-//                         .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
-
-//                     // create yAxis
-//                     var xAxis = d3.axisBottom().scale(x).ticks(4).tickSize(-h);
-//                     // Add the x-axis.
-//                     graph.append("svg:g")
-//                         .attr("class", "x axis")
-//                         .attr("transform", "translate(0," + h + ")")
-//                         .call(xAxis);
-
-
-//                     // // create left yAxis
-//                     // var yAxisLeft = d3.axisLeft().scale(y);
-//                     // // Add the y-axis to the left
-//                     // graph.append("svg:g")
-//                     //       .attr("class", "y axis")
-//                     //       .attr("transform", "translate(-10,0)")
-//                     //       .call(yAxisLeft);
-                    
-//                     // Add the line by appending an svg:path element with the data line we created above
-//                     // do this AFTER the axes above so that the line is above the tick-lines
-//                     graph.append("svg:path").attr("d", line(data));
-
-//                     graph.append("line")
-//                     //   .attr("x1",-6)
-//                         .attr("y1",y(0))//so that the line passes through the y 0
-//                         .attr("x2",w)
-//                         .attr("y2",y(0))//so that the line passes through the y 0
-//                         .style("stroke", "black")
-//                         .style("opacity", ".5");
-
-            //     } else if (this.readyState == 4 && this.status == 402) {
-            //     document.getElementById('tides').innerHTML = 'Data request exceeded! Please come back tomorrow';
-            //     }  
-            //     };
-
-            // xhr.onerror = function() {
-            // console.log('Request error');
-            // };
-
-            // xhr.send();
-        
-        
-
-
-
+        };    
+    };
+};
 
 
 //             // Local Storage and API JSON Data Manipulation
@@ -764,66 +764,7 @@ function stepTwo(e) {
 //             console.log('Tides Station ID: ' + searchStation(e.target.childNodes[0].data, surfSpots));
 //             console.log('wind direction StormGlass: ' + morningAverage.windDirection + ' Function ' + windType(morningAverage.windDirection) + ' Point: ' + searchPoint(e.target.childNodes[0].data, surfSpots));
         
-//             forecast.innerHTML = 
-//             '<div class="row text-center">' +
-//                 '<div class="col-xs-12">' + '<h1>' + e.target.childNodes[0].data + '</h1>' + '</div>' +
-                
-//                 '<div class="col-xs-12">' +
-//                     '<div class="col-xs-12">' + '<h2>' + 'MORNING' + '</h2>' + '</div>' +
-//                     '<div class="col-xs-12">' + 
-//                         '<div class="col-xs-4">' + '<h2>' + morningAverage.waveHeight + '</h2>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h3>' + 'WAVE' + '</h3>' + '<h3>' + 'm | s' + '</h3>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h2>' + morningAverage.wavePeriod + '</h2>' + '</div>' +
-//                     '</div>' + '<div class="col-xs-12">' + 
-//                         '<div class="col-xs-4">' + '<h2>' + windType(morningAverage.windDirection) + '</h2>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h3>' + 'WIND' + '</h3>' + '<h3>' + 'shore | m/s' + '</h3>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h2>' + morningAverage.windSpeed + '</h2>' + '</div>' +
-//                     '</div>' + '<div class="col-xs-12">' +
-//                         '<div class="col-xs-4">' + '<h2>' + morningAverage.airTemperature + '</h2>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h3>' + '&#8451' + '</h3>' + '<h3>' + 'air | water' + '</h3>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h2>' + morningAverage.waterTemperature + '</h2>' + '</div>' +
-//                     '</div>' +
-//                 '</div>' +
-        
-//                 '<div class="col-xs-12">' +
-//                     '<div class="col-xs-12">' + '<h2>' + 'MIDDAY' + '</h2>' + '</div>' +
-//                     '<div class="col-xs-12">' + 
-//                         '<div class="col-xs-4">' + '<h2>' + middayAverage.waveHeight + '</h2>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h3>' + 'WAVE' + '</h3>' + '<h3>' + 'm | s' + '</h3>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h2>' + middayAverage.wavePeriod + '</h2>' + '</div>' +
-//                     '</div>' + '<div class="col-xs-12">' + 
-//                         '<div class="col-xs-4">' + '<h2>' + windType(middayAverage.windDirection) + '</h2>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h3>' + 'WIND' + '</h3>' + '<h3>' + 'shore | m/s' + '</h3>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h2>' + middayAverage.windSpeed + '</h2>' + '</div>' +
-//                     '</div>' + '<div class="col-xs-12">' +
-//                         '<div class="col-xs-4">' + '<h2>' + middayAverage.airTemperature + '</h2>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h3>' + '&#8451' + '</h3>' + '<h3>' + 'air | water' + '</h3>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h2>' + middayAverage.waterTemperature + '</h2>' + '</div>' +
-//                     '</div>' +
-//                 '</div>' +
-        
-//                 '<div class="col-xs-12">' +
-//                     '<div class="col-xs-12">' + '<h2>' + 'AFTERNOON' + '</h2>' + '</div>' +
-//                     '<div class="col-xs-12">' + 
-//                         '<div class="col-xs-4">' + '<h2>' + afternoonAverage.waveHeight + '</h2>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h3>' + 'WAVE' + '</h3>' + '<h3>' + 'm | s' + '</h3>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h2>' + afternoonAverage.wavePeriod + '</h2>' + '</div>' +
-//                     '</div>' + '<div class="col-xs-12">' + 
-//                         '<div class="col-xs-4">' + '<h2>' + windType(afternoonAverage.windDirection) + '</h2>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h3>' + 'WIND' + '</h3>' + '<h3>' + 'shore | m/s' + '</h3>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h2>' + afternoonAverage.windSpeed + '</h2>' + '</div>' +
-//                     '</div>' + '<div class="col-xs-12">' +
-//                         '<div class="col-xs-4">' + '<h2>' + afternoonAverage.airTemperature + '</h2>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h3>' + '&#8451' + '</h3>' + '<h3>' + 'air | water' + '</h3>' + '</div>' +
-//                         '<div class="col-xs-4">' + '<h2>' + afternoonAverage.waterTemperature + '</h2>' + '</div>' +
-//                     '</div>' +
-//                 '</div>' +
-        
-//                 '<div class="col-xs-12" id="tides">' +
-//                 '</div>' +
-        
-//                 '</div>' +
-//             '</div>';
+            
 
 //                     // OUTPUT 1 - As per API requested time
 //                     /*
@@ -881,4 +822,3 @@ function stepTwo(e) {
 //                         */                                                        
 //         } 
 //     }
-
