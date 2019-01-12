@@ -620,7 +620,7 @@ function stepTwo(e) {
                                     <div class="col-xs-4">
                                         <div class="desc">
                                             <p><strong>WAVE</strong></p>
-                                            <p><small>METERS | SECONDS</small></p>
+                                            <p><small>m | s</small></p>
                                         </div>
                                     </div>
                                     <div class="col-xs-4 values">
@@ -637,7 +637,7 @@ function stepTwo(e) {
                                     <div class="col-xs-4">
                                         <div class="desc">
                                             <p><strong>WIND</strong></p>
-                                            <p><small>SHORE | M/S</small></p>
+                                            <p><small>shore | m/s</small></p>
                                         </div>
                                     </div>
                                     <div class="col-xs-4 values">
@@ -656,7 +656,7 @@ function stepTwo(e) {
                             <div class="container-fluid time-day"> 
                                 <div class="row text-center">
                                     <div class="col-xs-12 text-center">
-                                        <h2>MIDDAY</h2>
+                                        <h2>AFTERNOON</h2>
                                     </div>
                                 </div>
                             </div>
@@ -669,7 +669,7 @@ function stepTwo(e) {
                                     <div class="col-xs-4">
                                         <div class="desc">
                                             <p><strong>WAVE</strong></p>
-                                            <p><small>METERS | SECONDS</small></p>
+                                            <p><small>m | s</small></p>
                                         </div>
                                     </div>
                                     <div class="col-xs-4 values">
@@ -686,7 +686,7 @@ function stepTwo(e) {
                                     <div class="col-xs-4">
                                         <div class="desc">
                                             <p><strong>WIND</strong></p>
-                                            <p><small>SHORE | M/S</small></p>
+                                            <p><small>shore | m/s</small></p>
                                         </div>
                                     </div>
                                     <div class="col-xs-4 values">
@@ -698,46 +698,49 @@ function stepTwo(e) {
                     </div>
                 </div>
         
-                <div class="col-xs-12" id="tides"></div>
+                <div class="container-fluid">  
+                    <div class="row card text-center">
+                        <div class="col-xs-12 day">
+                            <div class="col-xs-12" id="tides"></div>
+                        </div>
+                    </div>
+                </div>
                 
             </div>`
         
             // LINE CHART creation
-
-            /* implementation heavily influenced by http://bl.ocks.org/1166403 */
-            
-            // define dimensions of graph
-            var m = [10, 10, 10, 10]; // margins
-            var w = 350 - m[1] - m[3]; // width
-            var h = 150 - m[0] - m[2]; // height
-            
-            // create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
-            // var data = [-3, -6, -2, 0, 5, 2, 0, -3, -8, -9, -2, 5, 9, 13];
+            // implementation heavily influenced by http://bl.ocks.org/1166403        
+            // Create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
             var data = tidesValue;
+
+            // Defining dimensions of graph
+            var m = [50, 10, 50, 10]; // margins
+            var w = 400 - m[1] - m[3]; // width height: 250px; width: 75vw;
+            var h = 250 - m[0] - m[2]; // height
 
             // X scale will fit all values from data[] within pixels 0-w
             var x = d3.scaleLinear().domain([0, tidesValue.length]).range([0, w]);
             // Y scale will fit values from 0-10 within pixels h-0 (Note the inverted domain for the y-scale: bigger is up!)
             var y = d3.scaleLinear().domain([d3.min(tidesValue), d3.max(tidesValue)]).range([h, 0]);
-                // automatically determining max range can work something like this
-                // var y = d3.scale.linear().domain([0, d3.max(data)]).range([h, 0]);
+            // automatically determining max range can work something like this
+            // var y = d3.scale.linear().domain([0, d3.max(data)]).range([h, 0]);
 
             // create a line function that can convert data[] into x and y points
             var line = d3.line()
             // assign the X function to plot our line as we wish
-            .x(function(d,i) { 
+                .x(function(d,i) { 
                 // verbose logging to show what's actually being done
                 // console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
                 // return the X coordinate where we want to plot this datapoint
                 return x(i); 
-            })
-            .y(function(d) { 
+                })
+                .y(function(d) { 
                 // verbose logging to show what's actually being done
                 // console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + " using our yScale.");
                 // return the Y coordinate where we want to plot this datapoint
                 return y(d); 
-            })
-            .curve(d3.curveBasis)
+                })
+                .curve(d3.curveBasis)
 
             // Add an SVG element with the desired dimensions and margin.
             var graph = d3.select("#tides").append("svg:svg")
@@ -771,7 +774,7 @@ function stepTwo(e) {
                 .attr("y1",y(0))//so that the line passes through the y 0
                 .attr("x2",w)
                 .attr("y2",y(0))//so that the line passes through the y 0
-                .style("stroke", "black")
+                .style("stroke", "#3E4EA4")
                 .style("opacity", ".5");
 
             };

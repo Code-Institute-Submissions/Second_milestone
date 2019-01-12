@@ -206,10 +206,12 @@ body {
 
 .title {
     padding-bottom: 10vh;
+    color: white;
 }
 
 .card > .col-xs-12 {
     float: none;
+    color: #3E4EA4;
 } 
 
 .day {
@@ -276,19 +278,19 @@ body {
 /* 3D Line Chart style */
 
 path {
-    stroke: white;
+    stroke: #3E4EA4;
     stroke-width: 2;
     fill: none;
 }
 
 .axis {
   shape-rendering: crispEdges;
-  color: black;
+  color: #3E4EA4;
 }
 
 .x.axis line, .y.axis line {
-  stroke: white;
-  opacity: 0.1;
+  stroke: #3E4EA4;
+  opacity: 0.2;
 }
 
 .x.axis path, .y.axis path {
