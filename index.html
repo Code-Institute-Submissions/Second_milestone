@@ -18,27 +18,16 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar" id="bar01"></span>
-                <span class="icon-bar" id="bar02"></span>
-                <span class="icon-bar" id="bar03"></span>
-            </button>
-            <a class="navbar-brand hidden" id="goback" href="#">BACK</a>
-            <a class="navbar-brand hidden" id="go2back" href="#">BACK</a>
+            <h1 class="navbar-brand hidden" id="goback">BACK</h1>
+            <h1 class="navbar-brand hidden" id="go2back">BACK</h1>
         </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li><a href="#">NORTH</a></li>
-                <li><a href="#">EAST</a></li>
-                <li><a href="#">SOUTH</a></li>
-                <li><a href="#">WEST</a></li>
-            </ul>
+        <div class="navbar-header navbar-right">
+            <h1 class="navbar-brand" id="menu">MENU</h1>
         </div>
     </div>
 </nav>
 
-<div class="container-fluid">
+<div class="container-fluid map">
     <div class="row">
         <div class="col-xs-12 display" id="map"></div>
     </div>
@@ -67,6 +56,22 @@
 </div>
 
 <div class="container-fluid hidden" id="forecast">
+</div>
+
+<div id="menuList" class="hidden">
+    <div class="container-fluid text-center">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Surfin</h1>
+                <ul class="list-unstyled">
+                    <li><h2>NORTH</h2></li>
+                    <li><h2>EAST</h2></li>
+                    <li><h2>WEST</h2></li>
+                    <li><h2>SOUTH</h2></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="js/script.js"></script>

@@ -3,15 +3,25 @@
 body {
     background-color: #3E4EA4;
     font-family: 'Roboto', sans-serif;
-    padding-top: 70px;
+    /* padding-top: 70px; */
 }
 
 /* Navigation */
+.navbar {
+    height: 70px;
+    margin-bottom: 0;
+    width: 90vw;
+    margin: 0 5vw;
+}
 
 .navbar-default {
     background-color: #3E4EA4;
     color: #FD6591;
     border: none;
+}
+
+.navbar-brand {
+    padding: 10px 15px;
 }
 
 .navbar-default .navbar-brand {
@@ -38,7 +48,33 @@ body {
     background-color: #FD6591;
 }
 
+.navbar-header {
+    display: inline-block;
+    height: 50px;
+}
+
+.navbar-right {
+    float: right;
+}
+
+/* Menu */
+
+#menuList {
+    position: fixed;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color: #3E4EA4;
+    top: 70px;
+    left: 0;
+    margin: 0 auto;
+}
+
 /* Google Map Style */
+
+.map {
+    padding-top: 70px;
+}
 
 .display {
     min-height: 60vh;
