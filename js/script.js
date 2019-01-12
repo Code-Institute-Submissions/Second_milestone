@@ -406,7 +406,7 @@ function stepTwo(e) {
                         totalWaveHeight += hour[2];
                         totalWavePeriod += hour[3];
                         });
-                
+                    
                     var average = new Object();
                     average['waveHeight'] = Math.round(totalWaveHeight / time.length);
                     average['wavePeriod'] = Math.round(totalWavePeriod / time.length);
@@ -428,13 +428,20 @@ function stepTwo(e) {
                     return average;
                 }
                 
-                var waveMorningAverage = wave(waveAfternoon);
+                console.log(waveMorning);
+                console.log(waveMidday);
+                console.log(waveAfternoon);
+                console.log(windMorning);
+                console.log(windMidday);
+                console.log(windAfternoon);
+
+                var waveMorningAverage = wave(waveMorning);
                 var waveMiddayAverage = wave(waveMidday);
-                var waveAfternoonAverage = wave(waveMorning);
-                var windMorningAverage = wind(windAfternoon);
+                var waveAfternoonAverage = wave(waveAfternoon);
+                var windMorningAverage = wind(windMorning);
                 var windMiddayAverage = wind(windMidday);
-                var windAfternoonAverage = wind(windMorning);
-                
+                var windAfternoonAverage = wind(windAfternoon);
+
                 console.log(waveMorningAverage);
                 console.log(waveMiddayAverage);
                 console.log(waveAfternoonAverage);
@@ -534,98 +541,166 @@ function stepTwo(e) {
                     });
             };
 
-            forecast.innerHTML = 
-                `<div class="row text-center">
-                    <div class="col-xs-12">
-                        <h1>${selection}</h1>
-                    </div>
-                    
-                    <div class="col-xs-12">
-                        <div class="col-xs-12">
-                            <h2>MORNING</h2>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="col-xs-4">
-                                <h2>${waveMorningAverage.waveHeight}</h2>
-                            </div>
-                            <div class="col-xs-4">
-                                <h3>WAVE</h3><h3>m | s</h3>
-                            </div>
-                            <div class="col-xs-4">
-                                <h2>${waveMorningAverage.wavePeriod}</h2>
-                            </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="col-xs-4"> 
-                                <h2>${windType(windMorningAverage.windDirection)}</h2>
-                            </div>
-                            <div class="col-xs-4">
-                                <h3>WIND</h3><h3>shore | m/s</h3>
-                            </div>
-                            <div class="col-xs-4">
-                                <h2>${windMorningAverage.windSpeed}</h2>
-                            </div>
-                        </div>
-                    </div>
+            forecast.innerHTML = `
+            <div class="container-fluid">
 
-                    <div class="col-xs-12">
-                        <div class="col-xs-12">
-                            <h2>MIDDAY</h2>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="col-xs-4">
-                                <h2>${waveMiddayAverage.waveHeight}</h2>
-                            </div>
-                            <div class="col-xs-4">
-                                <h3>WAVE</h3><h3>m | s</h3>
-                            </div>
-                            <div class="col-xs-4">
-                                <h2>${waveMiddayAverage.wavePeriod}</h2>
-                            </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="col-xs-4"> 
-                                <h2>${windType(windMiddayAverage.windDirection)}</h2>
-                            </div>
-                            <div class="col-xs-4">
-                                <h3>WIND</h3><h3>shore | m/s</h3>
-                            </div>
-                            <div class="col-xs-4">
-                                <h2>${windMiddayAverage.windSpeed}</h2>
-                            </div>
-                        </div>
+                <div class="container-fluid">
+                  <div class="row text-center">
+                    <div class="col-xs-12 title">
+                        <h1>${selection.toUpperCase()}</h1>
                     </div>
+                  </div>
+                </div>
 
-                    <div class="col-xs-12">
-                        <div class="col-xs-12">
-                            <h2>AFTERNOON</h2>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="col-xs-4">
-                                <h2>${waveAfternoonAverage.waveHeight}</h2>
+                <div class="container-fluid">  
+                    <div class="row card ">
+                        <div class="col-xs-12 day">
+                            <div class="container-fluid time-day"> 
+                                <div class="row text-center">
+                                    <div class="col-xs-12 text-center">
+                                        <h2>MORNING</h2>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-xs-4">
-                                <h3>WAVE</h3><h3>m | s</h3>
+
+                            <div class="container-fluid details">
+                                <div class="row text-center">
+                                    <div class="col-xs-4 values">
+                                        <p>${waveMorningAverage.waveHeight = waveMorningAverage.waveHeight || '-'}</p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="desc">
+                                            <p><strong>WAVE</strong></p>
+                                            <p><small>m | s</small></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 values">
+                                        <p>${waveMorningAverage.wavePeriod = waveMorningAverage.wavePeriod || '-'}</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-xs-4">
-                                <h2>${waveAfternoonAverage.wavePeriod}</h2>
-                            </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="col-xs-4"> 
-                                <h2>${windType(windAfternoonAverage.windDirection)}</h2>
-                            </div>
-                            <div class="col-xs-4">
-                                <h3>WIND</h3><h3>shore | m/s</h3>
-                            </div>
-                            <div class="col-xs-4">
-                                <h2>${windAfternoonAverage.windSpeed}</h2>
+
+                            <div class="container-fluid details">
+                                <div class="row text-center">
+                                    <div class="col-xs-4 string"> 
+                                        <p>${windType(windMorningAverage.windDirection)}</p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="desc">
+                                            <p><strong>WIND</strong></p>
+                                            <p><small>shore | m/s</small></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 values">
+                                        <p>${windMorningAverage.windSpeed}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="container-fluid">  
+                    <div class="row card ">
+                        <div class="col-xs-12 day">
+
+                            <div class="container-fluid time-day"> 
+                                <div class="row text-center">
+                                    <div class="col-xs-12 text-center">
+                                        <h2>MIDDAY</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container-fluid details">
+                                <div class="row text-center">
+                                    <div class="col-xs-4 values">
+                                        <p>${waveMiddayAverage.waveHeight = waveMiddayAverage.waveHeight || '-'}</p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="desc">
+                                            <p><strong>WAVE</strong></p>
+                                            <p><small>METERS | SECONDS</small></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 values">
+                                        <p>${waveMiddayAverage.wavePeriod = waveMiddayAverage.wavePeriod || '-'}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container-fluid details">
+                                <div class="row text-center">
+                                    <div class="col-xs-4 string"> 
+                                        <p>${windType(windMiddayAverage.windDirection)}</p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="desc">
+                                            <p><strong>WIND</strong></p>
+                                            <p><small>SHORE | M/S</small></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 values">
+                                        <p>${windMiddayAverage.windSpeed}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid">  
+                    <div class="row card ">
+                        <div class="col-xs-12 day">
+
+                            <div class="container-fluid time-day"> 
+                                <div class="row text-center">
+                                    <div class="col-xs-12 text-center">
+                                        <h2>MIDDAY</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container-fluid details">
+                                <div class="row text-center">
+                                    <div class="col-xs-4 values">
+                                        <p>${waveAfternoonAverage.waveHeight = waveAfternoonAverage.waveHeight || '-'}</p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="desc">
+                                            <p><strong>WAVE</strong></p>
+                                            <p><small>METERS | SECONDS</small></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 values">
+                                        <p>${waveAfternoonAverage.wavePeriod = waveAfternoonAverage.wavePeriod || '-'}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container-fluid details">
+                                <div class="row text-center">
+                                    <div class="col-xs-4 string"> 
+                                        <p>${windType(windAfternoonAverage.windDirection)}</p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="desc">
+                                            <p><strong>WIND</strong></p>
+                                            <p><small>SHORE | M/S</small></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 values">
+                                        <p>${windAfternoonAverage.windSpeed}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         
-                    <div class="col-xs-12" id="tides"></div>
-                </div>`
+                <div class="col-xs-12" id="tides"></div>
+                
+            </div>`
         
             // LINE CHART creation
 
