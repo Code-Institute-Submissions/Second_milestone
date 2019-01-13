@@ -167,10 +167,14 @@ function initMap() {
     function populateInfoWindow(marker, infowindow) {
         if (infowindow.marker != marker) {
             infowindow.marker = marker;
-            infowindow.setContent(
-                `<div id="infoWindow">${marker.title}</div>
-                <div><button class="btn btn-default mapButton" type="submit">TODAY</button></div>
-                <div><button class="btn btn-default mapButton" type="submit">NEXT 3 DAY</button></div>`
+            infowindow.setContent(`
+                <div class="container-fluid">
+                    <div class="row text-center">
+                        <div class="col-xs-12" id="infoWindow text-center">${marker.title}</div>    
+                        <div class="col-xs-12"><button class="btn btn-default mapButton" type="submit">TODAY</button></div>
+                        <div class="col-xs-12"><button class="btn btn-default mapButton" type="submit">NEXT 3 DAY</button></div>
+                    </div>
+                </div>`
                 );
             infowindow.open(map, marker);
             infowindow.addListener('closeclick', function() {
@@ -188,13 +192,12 @@ var directions = document.getElementById('directions');
 var surfingSpots = document.getElementById('surfingSpots');
 var forecast = document.getElementById('forecast');
 var menuList = document.getElementById('menuList');
-console.log(menuList);
 
 var goBack = document.getElementById('goback');
 var go2Back = document.getElementById('go2back');
 
 var menu = document.getElementById('menu').addEventListener('click', menuReveal);
-console.log(menu);
+
 var btnN = document.getElementById('btn-n').addEventListener('click', stepOne);
 var btnE = document.getElementById('btn-e').addEventListener('click', stepOne);
 var btnW = document.getElementById('btn-w').addEventListener('click', stepOne);
@@ -712,24 +715,6 @@ function stepTwo(e) {
             // Create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
             var data = tidesValue;
 
-
-            // function check(wind, point) {
-            //     var direction;
-            //     var windArray = [[0, 180], [90, 270], [45, 225], [135, 315]];
-
-            //     if (wind - point === 0) {
-            //         return 'OFF';
-            //     }
-
-            //     windArray.forEach(function (index) {
-            //         if (index.includes(wind) && index.includes(point)) {
-            //             return direction = true;
-            //         }
-            //     });
-
-            //     return direction ? 'ON' : 'CROSS';
-            // }
-
             // Defining dimensions of graph
             function screenSize() {
                 return xsmall.matches ? 200 :
@@ -792,14 +777,6 @@ function stepTwo(e) {
                 .attr("class", "x axis")
                 .attr("transform", "translate(0," + h + ")")
                 .call(xAxis);
-
-            // // create left yAxis
-            // var yAxisLeft = d3.axisLeft().scale(y);
-            // // Add the y-axis to the left
-            // graph.append("svg:g")
-            //       .attr("class", "y axis")
-            //       .attr("transform", "translate(-10,0)")
-            //       .call(yAxisLeft);
             
             // Add the line by appending an svg:path element with the data line we created above
             // do this AFTER the axes above so that the line is above the tick-lines
@@ -853,4 +830,7 @@ function stepTwo(e) {
 
 function menuReveal(e) {
     (e.target.id = 'menu') ? menuList.classList.toggle('hidden') : null;
+    console.log(e.target.innerHTML);
+    menuList.classList.contains('hidden') ? e.target.innerHTML = 'MENU' : e.target.innerHTML = 'X';
 }
+
