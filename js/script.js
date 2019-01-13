@@ -373,7 +373,7 @@ function stepTwo(e) {
             console.log(timeTo);
 
             async function forecastData() {
-                var buoyApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${buoy}`);
+                var buoyApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=2019-01-10T00%3A00%3A00Z&time%3C=2019-01-12T00%3A00%3A00Z&stationID=${buoy}`);
                 var buoyData = await buoyApi.json();
                 console.log(buoyData.table);
 
@@ -700,8 +700,7 @@ function stepTwo(e) {
         
                 <div class="container-fluid">  
                     <div class="row card text-center">
-                        <div class="col-xs-12 day">
-                            <div class="col-xs-12" id="tides"></div>
+                        <div class="col-xs-12 day" id="tides">
                         </div>
                     </div>
                 </div>
@@ -713,9 +712,46 @@ function stepTwo(e) {
             // Create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
             var data = tidesValue;
 
+
+            // function check(wind, point) {
+            //     var direction;
+            //     var windArray = [[0, 180], [90, 270], [45, 225], [135, 315]];
+
+            //     if (wind - point === 0) {
+            //         return 'OFF';
+            //     }
+
+            //     windArray.forEach(function (index) {
+            //         if (index.includes(wind) && index.includes(point)) {
+            //             return direction = true;
+            //         }
+            //     });
+
+            //     return direction ? 'ON' : 'CROSS';
+            // }
+
             // Defining dimensions of graph
-            var m = [50, 10, 50, 10]; // margins
-            var w = 400 - m[1] - m[3]; // width height: 250px; width: 75vw;
+            function screenSize() {
+                return xsmall.matches ? 200 :
+                        small.matches ? 250 :
+                        medium.matches ? 300 :
+                        large.matches ? 500 :
+                        xlarge.matches ? 600 :
+                        xxlarge.matches ? 800 :
+                        null;
+            }
+
+            var xsmall = window.matchMedia('(max-width: 350px)');   // 350-     200 
+            var small = window.matchMedia('(max-width: 500px)');    // 350-500  250 OK
+            var medium = window.matchMedia('(max-width: 650px)');   // 500-650  300 OK
+            var large = window.matchMedia('(max-width: 800px)');    // 650-800  500 OK
+            var xlarge = window.matchMedia('(max-width: 1200px)');  // 800-1200 600 OK
+            var xxlarge = window.matchMedia('(min-width: 1201px)'); // 1200+    800    OK
+
+            console.log(screenSize());
+
+            var m = [50, 25, 50, 25]; // margins
+            var w = screenSize() - m[1] - m[3]; // width height: 250px; width: 75vw;
             var h = 250 - m[0] - m[2]; // height
 
             // X scale will fit all values from data[] within pixels 0-w
@@ -776,6 +812,22 @@ function stepTwo(e) {
                 .attr("y2",y(0))//so that the line passes through the y 0
                 .style("stroke", "#3E4EA4")
                 .style("opacity", ".5");
+
+            graph.append("text")
+                .attr("class", "label")
+                .attr("text-anchor", "middle")
+                .attr("y", -6)
+                .attr("x", -(h / 2))
+                .attr("transform", "rotate(-90)")
+                .text("LOW - HIGH");
+
+            graph.append("text")
+                .attr("class", "label")
+                .attr("text-anchor", "middle")
+                .attr("y", h + 25)
+                .attr("x", (w / 2))
+                // .attr("transform", "rotate(-90)")
+                .text("TIME OF DAY (24H)");
 
             };
 
