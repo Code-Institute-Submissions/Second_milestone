@@ -63,7 +63,7 @@ body {
     float: right;
 }
 
-.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+.navbar-default .navbar-brand:active, .navbar-default .navbar-brand:hover {
     color: white;
     outline: none;
 }
@@ -73,17 +73,49 @@ body {
 #menuList {
     position: fixed;
     display: flex;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     background-color: #3E4EA4;
     color: white;
-    top: 70px;
+    top: 0;
     left: 0;
     margin: 0 auto;
+    padding-top: 5vh;
+    z-index: 9999;
+    overflow: hidden;
 }
 
 #menuList h1 {
-    color: #FD6591
+    padding-bottom: 2vh;
+    color: #FD6591;
+}
+
+#menuList li:active,  #menuList li:hover {
+    color: #FD6591;
+}
+
+#close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-top: 4vh;
+    padding-right: calc(5vw + 20px);
+    font-size: 18px;
+}
+
+#close:active, #close:hover {
+    color: #FD6591;
+    outline: none;
+}
+
+#about {
+    color: #FD6591;
+    font-size: 14px;
+    width: 50vw;
+    text-align: center;
+    padding-top: 4vh;
+    padding-bottom: 2vh;
+    margin: 0 auto;
 }
 
 /* Google Map Style */
@@ -96,7 +128,7 @@ body {
 
 .display {
     min-height: 60vh;
-    margin-bottom: 10vh;
+    margin-bottom: 70px;
     border-radius: 10px;
     -webkit-box-shadow: 0px 20px 20px -5px rgba(0,0,0,0.25);
     -moz-box-shadow: 0px 20px 20px -5px rgba(0,0,0,0.25);
@@ -239,7 +271,7 @@ body {
 }
 
 .title {
-    padding-bottom: 10vh;
+    padding-bottom: 70px;
     color: white;
 }
 
@@ -344,4 +376,12 @@ path {
 .label {
     fill: #3E4EA4;
     font-size: 12px;
+}
+
+/* Footer */
+
+footer p {
+    color: #FD6591;
+    padding-top: 40px;
+    padding-bottom: 30px; 
 }

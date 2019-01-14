@@ -192,16 +192,25 @@ var directions = document.getElementById('directions');
 var surfingSpots = document.getElementById('surfingSpots');
 var forecast = document.getElementById('forecast');
 var menuList = document.getElementById('menuList');
+var menuNav = document.getElementById('menu');
+var menuClose = document.getElementById('close');
 
 var goBack = document.getElementById('goback');
 var go2Back = document.getElementById('go2back');
 
 var menu = document.getElementById('menu').addEventListener('click', menuReveal);
+var close = document.getElementById('close').addEventListener('click', menuHide);
+var content = document.getElementsByClassName('content');
 
 var btnN = document.getElementById('btn-n').addEventListener('click', stepOne);
 var btnE = document.getElementById('btn-e').addEventListener('click', stepOne);
 var btnW = document.getElementById('btn-w').addEventListener('click', stepOne);
 var btnS = document.getElementById('btn-s').addEventListener('click', stepOne);
+
+var menuN = document.getElementById('menu-n').addEventListener('click', menuLink);
+var menuE = document.getElementById('menu-e').addEventListener('click', menuLink);
+var menuW = document.getElementById('menu-w').addEventListener('click', menuLink);
+var menuS = document.getElementById('menu-s').addEventListener('click', menuLink);
 
 function surfTitle(spot) {
     var result = '';
@@ -236,6 +245,16 @@ function mapZoom(nameKey, myArray) {
 };
 
 // Step One: Selection of Surf Spots directions
+
+function backToHome(e) {
+    if (e.target.id = 'goback') {
+        directions.classList.remove('hidden');
+        surfingSpots.classList.add('hidden');
+        goBack.classList.add('hidden');
+        map.setCenter({ lat: 53.326116, lng: -7.946834 });
+        map.setZoom(6);
+    }
+};
 
 function stepOne(e) {
     if (surfingSpots.classList.contains('hidden')) {
@@ -830,7 +849,65 @@ function stepTwo(e) {
 
 function menuReveal(e) {
     (e.target.id = 'menu') ? menuList.classList.toggle('hidden') : null;
-    console.log(e.target.innerHTML);
-    menuList.classList.contains('hidden') ? e.target.innerHTML = 'MENU' : e.target.innerHTML = 'X';
 }
 
+function menuHide(e) {
+    (e.target.id = 'close') ? menuList.classList.toggle('hidden') : null;
+}
+
+function menuLink(e) {
+    var selection = e.target.parentElement.classList[0];
+    if (surfingSpots.classList.contains('hidden') && forecast.classList.contains('hidden')) {
+        menuList.classList.add('hidden');
+        menuNav.innerHTML = 'MENU'
+        directions.classList.add('hidden');
+        surfingSpots.classList.remove('hidden');
+        goBack.classList.remove('hidden');
+        
+        function backToHome(e) {
+            if (e.target.id = 'goback') {
+                directions.classList.remove('hidden');
+                surfingSpots.classList.add('hidden');
+                goBack.classList.add('hidden');
+                map.setCenter({ lat: 53.326116, lng: -7.946834 });
+                map.setZoom(6);
+            }
+        };
+
+        var goBackTo = goBack.addEventListener('click', backToHome);
+
+        listSpots(selection, mapLocation);
+        map.setCenter(mapCenter(selection, mapLocation));
+        map.setZoom(mapZoom(selection, mapLocation));
+    } else if (surfingSpots.classList.contains('hidden') && directions.classList.contains('hidden')) {
+        menuList.classList.add('hidden');
+        menuNav.innerHTML = 'MENU'
+        forecast.classList.add('hidden');
+        surfingSpots.classList.remove('hidden');
+        goBack.classList.remove('hidden');
+        go2Back.classList.add('hidden');
+        
+        function backToHome(e) {
+            if (e.target.id = 'goback') {
+                directions.classList.remove('hidden');
+                surfingSpots.classList.add('hidden');
+                goBack.classList.add('hidden');
+                map.setCenter({ lat: 53.326116, lng: -7.946834 });
+                map.setZoom(6);
+            }
+        };
+
+        var goBackTo = goBack.addEventListener('click', backToHome);
+
+        listSpots(selection, mapLocation);
+        map.setCenter(mapCenter(selection, mapLocation));
+        map.setZoom(mapZoom(selection, mapLocation));
+    } else if (forecast.classList.contains('hidden') && directions.classList.contains('hidden')) {
+        menuList.classList.add('hidden');
+        menuNav.innerHTML = 'MENU'
+
+        listSpots(selection, mapLocation);
+        map.setCenter(mapCenter(selection, mapLocation));
+        map.setZoom(mapZoom(selection, mapLocation));
+    }
+};
