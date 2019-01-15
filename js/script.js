@@ -200,7 +200,8 @@ var go2Back = document.getElementById('go2back');
 
 var menu = document.getElementById('menu').addEventListener('click', menuReveal);
 var close = document.getElementById('close').addEventListener('click', menuHide);
-var content = document.getElementsByClassName('content');
+var about = document.getElementById('about');
+var aboutIn = document.getElementById('about-li').addEventListener('click', aboutReveal);
 
 var btnN = document.getElementById('btn-n').addEventListener('click', stepOne);
 var btnE = document.getElementById('btn-e').addEventListener('click', stepOne);
@@ -853,10 +854,16 @@ function menuReveal(e) {
 
 function menuHide(e) {
     (e.target.id = 'close') ? menuList.classList.toggle('hidden') : null;
+    about.classList.contains('hidden') ? null : about.classList.add('hidden');
+}
+
+function aboutReveal(e){
+    (e.target.innerHTML = 'ABOUT') ? about.classList.remove('hidden') : null;
 }
 
 function menuLink(e) {
     var selection = e.target.parentElement.classList[0];
+    console.log(selection);
     if (surfingSpots.classList.contains('hidden') && forecast.classList.contains('hidden')) {
         menuList.classList.add('hidden');
         menuNav.innerHTML = 'MENU'
