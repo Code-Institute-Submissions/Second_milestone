@@ -563,14 +563,24 @@ function stepTwo(e) {
                         value: tidePrediction[i][2]
                     });
             };
+            
+            var day = new Date();
+            console.log(day);
+            console.log(day.getDay() + 1);
+            var dayWeek = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+            var dayDisplay = dayWeek[day.getDay() + 1];
+            console.log(dayDisplay);
 
-            forecast.innerHTML = `
-            <div class="container-fluid">
+
+            forecast.innerHTML =`
+            <div class="container-fluid" id="todayFor">
 
                 <div class="container-fluid">
                   <div class="row text-center">
                     <div class="col-xs-12 title">
                         <h1>${selection.toUpperCase()}</h1>
+                        <h2>TODAY</h2>
+                        <p class="nextDays">+ 3 DAYS</p>
                     </div>
                   </div>
                 </div>
@@ -728,8 +738,191 @@ function stepTwo(e) {
                     </div>
                 </div>
                 
-            </div>`
+            </div>
+            
+            <div class="container-fluid hidden" id="tmrwFor">
+
+                <div class="container-fluid">
+                  <div class="row text-center">
+                    <div class="col-xs-12 title">
+                        <h1>${selection.toUpperCase()}</h1>
+                        <h2>+ 3 DAYS</h2>
+                        <p class="today">TODAY</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="container-fluid">  
+                    <div class="row card ">
+                        <div class="col-xs-12 day">
+                            <div class="container-fluid time-day"> 
+                                <div class="row text-center">
+                                    <div class="col-xs-12 text-center">
+                                        <h2>${dayWeek[day.getDay() + 1]}</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container-fluid details">
+                                <div class="row text-center">
+                                    <div class="col-xs-4 values">
+                                        <p>${waveMorningAverage.waveHeight = waveMorningAverage.waveHeight || '-'}</p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="desc">
+                                            <p><strong>WAVE</strong></p>
+                                            <p><small>m | s</small></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 values">
+                                        <p>${waveMorningAverage.wavePeriod = waveMorningAverage.wavePeriod || '-'}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container-fluid details">
+                                <div class="row text-center">
+                                    <div class="col-xs-4 string"> 
+                                        <p>${windType(windMorningAverage.windDirection)}</p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="desc">
+                                            <p><strong>WIND</strong></p>
+                                            <p><small>shore | m/s</small></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 values">
+                                        <p>${windMorningAverage.windSpeed}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid">  
+                    <div class="row card ">
+                        <div class="col-xs-12 day">
+
+                            <div class="container-fluid time-day"> 
+                                <div class="row text-center">
+                                    <div class="col-xs-12 text-center">
+                                    <h2>${dayWeek[day.getDay() + 2]}</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container-fluid details">
+                                <div class="row text-center">
+                                    <div class="col-xs-4 values">
+                                        <p>${waveMiddayAverage.waveHeight = waveMiddayAverage.waveHeight || '-'}</p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="desc">
+                                            <p><strong>WAVE</strong></p>
+                                            <p><small>m | s</small></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 values">
+                                        <p>${waveMiddayAverage.wavePeriod = waveMiddayAverage.wavePeriod || '-'}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container-fluid details">
+                                <div class="row text-center">
+                                    <div class="col-xs-4 string"> 
+                                        <p>${windType(windMiddayAverage.windDirection)}</p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="desc">
+                                            <p><strong>WIND</strong></p>
+                                            <p><small>shore | m/s</small></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 values">
+                                        <p>${windMiddayAverage.windSpeed}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid">  
+                    <div class="row card ">
+                        <div class="col-xs-12 day">
+
+                            <div class="container-fluid time-day"> 
+                                <div class="row text-center">
+                                    <div class="col-xs-12 text-center">
+                                    <h2>${dayWeek[day.getDay() + 3]}</h2>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container-fluid details">
+                                <div class="row text-center">
+                                    <div class="col-xs-4 values">
+                                        <p>${waveAfternoonAverage.waveHeight = waveAfternoonAverage.waveHeight || '-'}</p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="desc">
+                                            <p><strong>WAVE</strong></p>
+                                            <p><small>m | s</small></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 values">
+                                        <p>${waveAfternoonAverage.wavePeriod = waveAfternoonAverage.wavePeriod || '-'}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="container-fluid details">
+                                <div class="row text-center">
+                                    <div class="col-xs-4 string"> 
+                                        <p>${windType(windAfternoonAverage.windDirection)}</p>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="desc">
+                                            <p><strong>WIND</strong></p>
+                                            <p><small>shore | m/s</small></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 values">
+                                        <p>${windAfternoonAverage.windSpeed}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         
+                <div class="container-fluid">  
+                    <div class="row card text-center">
+                        <div class="col-xs-12 day" id="tides-extended">
+                        </div>
+                    </div>
+                </div>
+                
+            </div>`
+
+            var todayFor = document.getElementById('todayFor');
+            var tmrwFor = document.getElementById('tmrwFor');
+            console.log((document.getElementsByClassName('nextDays'))[0]);
+            var nextDays = (document.getElementsByClassName('nextDays'))[0].addEventListener('click', forecastToggle);
+            var today = (document.getElementsByClassName('today'))[0].addEventListener('click', forecastToggle);
+
+            function forecastToggle(e) {
+                if (e.target.classList.contains('nextDays')) {
+                    todayFor.classList.add('hidden');
+                    tmrwFor.classList.remove('hidden');
+                } else if (e.target.classList.contains('today')) {
+                    todayFor.classList.remove('hidden');
+                    tmrwFor.classList.add('hidden');
+                }
+            }       
+
             // LINE CHART creation
             // implementation heavily influenced by http://bl.ocks.org/1166403        
             // Create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)

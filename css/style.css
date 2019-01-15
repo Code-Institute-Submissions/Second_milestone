@@ -44,7 +44,7 @@ a:active, a:hover {
     color: #FD6591;
 }
 
-.navbar-default .navbar-toggle {
+/* .navbar-default .navbar-toggle {
     transition: all .1s ease-in-out;
 }
 
@@ -62,7 +62,7 @@ a:active, a:hover {
 
 .navbar-default .navbar-toggle .icon-bar {
     background-color: #FD6591;
-}
+} */
 
 .navbar-header {
     display: inline-block;
@@ -240,26 +240,6 @@ a:active, a:hover {
     font-size: 20px;
 }
 
-/* #btn-n {
-    border-style: none;
-    border-top-style: solid;
-}
-
-#btn-e {
-    border-style: none;
-    border-right-style: solid;
-}
-
-#btn-w {
-    border-style: none;
-    border-left-style: solid;
-}
-
-#btn-s {
-    border-style: none;
-    border-bottom-style: solid;
-} */
-
 /* style overwrite  */
 
 .mapButton {
@@ -292,6 +272,17 @@ a:active, a:hover {
 .title {
     padding-bottom: 70px;
     color: white;
+}
+
+.title p {
+    color: #FD6591;
+    border-bottom: 1px solid#FD6591;
+    display: inline;
+}
+
+.title p:active, .title p:hover {
+    color: white;
+    border: none;
 }
 
 .card > .col-xs-12 {
@@ -387,20 +378,9 @@ path {
     width: 70vw;
     display: flex;
     justify-content: center;
-    /* width: 80%;
-    padding-left: 5%;
-    padding-right: 5%; */
 }
 
 .label {
     fill: #3E4EA4;
     font-size: 12px;
-}
-
-/* Footer */
-
-footer p {
-    color: #FD6591;
-    padding-top: 40px;
-    padding-bottom: 30px; 
 }
