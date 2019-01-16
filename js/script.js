@@ -143,14 +143,18 @@ function initMap() {
     for (var i = 0; i < surfSpots.length; i++) {
         var position = surfSpots[i].location;
         var title = surfSpots[i].title;
+        var county = surfSpots[i].county;
+        var mapDir = surfSpots[i].map;
         var marker = new google.maps.Marker({
             map: map,
             position: position,
             title: title,
+            county: county,
+            mapDir: mapDir,
             animation: google.maps.Animation.DROP,
             id: i,
             icon: {
-                url: 'assets/Marker_custom.png'
+                url: 'assets/icon.svg'
               }
         });
         // Push marker to our array of markers
@@ -168,14 +172,9 @@ function initMap() {
         if (infowindow.marker != marker) {
             infowindow.marker = marker;
             infowindow.setContent(`
-                <div class="container-fluid">
-                    <div class="row text-center">
-                        <div class="col-xs-12" id="infoWindow text-center">${marker.title}</div>    
-                        <div class="col-xs-12"><button class="btn btn-default mapButton" type="submit">TODAY</button></div>
-                        <div class="col-xs-12"><button class="btn btn-default mapButton" type="submit">NEXT 3 DAY</button></div>
-                    </div>
-                </div>`
-                );
+            <p>${marker.title}</p>
+            <p>Co. ${marker.county}</p>
+            <p>${marker.mapDir} SPOT</p>`)
             infowindow.open(map, marker);
             infowindow.addListener('closeclick', function() {
                     infowindow.setMarker = null;
@@ -184,7 +183,6 @@ function initMap() {
         }
     }
 };
-
 
 // Set surf spots HTML
 

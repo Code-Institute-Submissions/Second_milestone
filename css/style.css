@@ -21,7 +21,6 @@ a:active, a:hover {
     min-height: 70px;
     margin-bottom: 0;
     width: 100vw;
-    /* margin: 0 10vw; */
 }
 
 .navbar .container-fluid {
@@ -43,26 +42,6 @@ a:active, a:hover {
 .navbar-default .navbar-brand {
     color: #FD6591;
 }
-
-/* .navbar-default .navbar-toggle {
-    transition: all .1s ease-in-out;
-}
-
-.navbar-default .navbar-toggle:focus > #bar02, .navbar-default .navbar-toggle:hover > #bar02 {
-    transform: translate(-10px);
-}
-
-.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
-    background-color: transparent;
-}
-
-.navbar-default .navbar-toggle {
-    border: none;
-}
-
-.navbar-default .navbar-toggle .icon-bar {
-    background-color: #FD6591;
-} */
 
 .navbar-header {
     display: inline-block;
@@ -155,20 +134,29 @@ a:active, a:hover {
 }
 
 .gm-style-iw {
-    /* width: 100px !important; */
-    height: 150px !important;
+    height: 100px !important;
 }
 
-#infoWindow {
-    max-width: 100px;
-    max-height: 100px;
-    font-size: 16px;
-    font-weight: 500;
-    font-family: 'Roboto', sans-serif;
-    text-transform: uppercase;
-    color: #3E4EA4;
+.gm-style-iw p {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    font-family: 'Roboto', sans-serif !important;
+    text-transform: uppercase !important;
+    color: #3E4EA4 !important;
+    margin: 0 auto !important;
+    text-align: left !important;
 }
 
+.gm-style-iw p:nth-child(1) {
+    color: #FD6591 !important;
+    font-size: 14px !important;
+    border-bottom: 2px solid #3E4EA4;
+}
+
+.gm-style-iw p:nth-child(3) {
+    /* font-size: 14px !important; */
+    border-bottom: 2px solid #3E4EA4;
+}
 
 /* Button Bootstrap overwrite */
 
@@ -185,7 +173,6 @@ a:active, a:hover {
 }
 
 .padding {
-    /* padding-top: 25px; */
     padding-bottom: 25px;
 }
 
@@ -238,16 +225,6 @@ a:active, a:hover {
     border-style: none;
     padding: 0;
     font-size: 20px;
-}
-
-/* style overwrite  */
-
-.mapButton {
-    color: #FD6591;
-    background-color: transparent;
-    border: none;
-    padding-bottom: 5px;
-    padding-top: 5px;
 }
 
 /* Forecast cards style */
