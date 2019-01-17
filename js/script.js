@@ -395,7 +395,8 @@ function stepTwo(e) {
             console.log(timeTo);
 
             async function forecastData() {
-                var buoyApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=2019-01-08T00%3A00%3A00Z&time%3C=2019-01-12T00%3A00%3A00Z&stationID=${buoy}`);
+                // var buoyApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${buoy}`);
+                var buoyApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&stationID=${buoy}`);
                 var buoyData = await buoyApi.json();
                 console.log(buoyData.table);
 
@@ -408,8 +409,9 @@ function stepTwo(e) {
                 console.log(tidesData.table);
 
                 // Buoy Data: Wave Height and Period
+                    // workaround issue with dataset at source - unable to select date restrains
+                var waveData = buoyData.table.rows.splice(-289, 193);
 
-                var waveData = buoyData.table.rows;
                 var waveAfternoon = waveData.splice(-163, 11);      // hours 15:00 - 20:00
                 var waveMidday = waveData.splice(-161, 9);          // hours 10:30 - 14:30
                 var waveMorning = waveData.splice(-163, 11);        // hours 05:00 - 10:00
@@ -417,13 +419,13 @@ function stepTwo(e) {
                 var waveDThree = waveData.splice(-56, 31);          // hours 05:00 - 20:00
                 var waveDTwo = waveData.splice(-73, 31);            // hours 05:00 - 20:00
 
-                // console.log(waveData);
-                // console.log(waveAfternoon);
-                // console.log(waveMidday);
-                // console.log(waveMorning);
-                // console.log(waveDFour);
-                // console.log(waveDThree);
-                // console.log(waveDTwo);
+                console.log(waveData);
+                console.log(waveAfternoon);
+                console.log(waveMidday);
+                console.log(waveMorning);
+                console.log(waveDFour);
+                console.log(waveDThree);
+                console.log(waveDTwo);
 
                 // GFS Data: Wind Speed and Direction
 
