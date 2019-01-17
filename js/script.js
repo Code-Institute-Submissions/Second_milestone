@@ -394,7 +394,7 @@ function stepTwo(e) {
             console.log(timeTo);
 
             async function forecastData() {
-                var buoyApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=2019-01-10T00%3A00%3A00Z&time%3C=2019-01-12T00%3A00%3A00Z&stationID=${buoy}`);
+                var buoyApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=2019-01-08T00%3A00%3A00Z&time%3C=2019-01-12T00%3A00%3A00Z&stationID=${buoy}`);
                 var buoyData = await buoyApi.json();
                 console.log(buoyData.table);
 
@@ -409,16 +409,41 @@ function stepTwo(e) {
                 // Buoy Data: Wave Height and Period
 
                 var waveData = buoyData.table.rows;
-                var waveAfternoon = waveData.splice(-19, 11);
-                var waveMidday = waveData.splice(-17, 9);
-                var waveMorning = waveData.splice(-19, 11);
+                var waveAfternoon = waveData.splice(-163, 11);      // hours 15:00 - 20:00
+                var waveMidday = waveData.splice(-161, 9);          // hours 10:30 - 14:30
+                var waveMorning = waveData.splice(-163, 11);        // hours 05:00 - 10:00
+                var waveDFour = waveData.splice(-39, 31);           // hours 05:00 - 20:00
+                var waveDThree = waveData.splice(-56, 31);          // hours 05:00 - 20:00
+                var waveDTwo = waveData.splice(-73, 31);            // hours 05:00 - 20:00
+
+                // console.log(waveData);
+                // console.log(waveAfternoon);
+                // console.log(waveMidday);
+                // console.log(waveMorning);
+                // console.log(waveDFour);
+                // console.log(waveDThree);
+                // console.log(waveDTwo);
+
                 // GFS Data: Wind Speed and Direction
 
                 var windData = gfsData.table.rows;
-                var windAfternoon = windData.splice(-28, 3);
-                var windMidday = windData.splice(-26, 1);
-                var windMorning = windData.splice(-27, 2);
+                var windAfternoon = windData.splice(-28, 3);    // hours 15:00, 18:00, 21:00
+                var windMidday = windData.splice(-26, 1);       // hours 12:00
+                var windMorning = windData.splice(-27, 2);      // hours 06:00, 09:00
+                var windDFour = windData.splice(-7, 6);         // hours 06:00 - 21:00
+                var windDThree = windData.splice(-9, 6);        // hours 06:00 - 21:00
+                var windDTwo = windData.splice(-11, 6);         // hours 06:00 - 21:00                                
 
+                // console.log(windData);
+                // console.log(windAfternoon);
+                // console.log(windMidday);
+                // console.log(windMorning);
+                // console.log(windDFour);
+                // console.log(windDThree);
+                // console.log(windDTwo);
+
+                // Calculating Average values for wave and wind values 
+                
                 function wave(time) {
                     var totalWaveHeight = 0;
                     var totalWavePeriod = 0;
@@ -449,26 +474,39 @@ function stepTwo(e) {
                     return average;
                 }
                 
-                console.log(waveMorning);
-                console.log(waveMidday);
-                console.log(waveAfternoon);
-                console.log(windMorning);
-                console.log(windMidday);
-                console.log(windAfternoon);
+                // console.log(waveMorning);
+                // console.log(waveMidday);
+                // console.log(waveAfternoon);
+                // console.log(windMorning);
+                // console.log(windMidday);
+                // console.log(windAfternoon);
 
                 var waveMorningAverage = wave(waveMorning);
                 var waveMiddayAverage = wave(waveMidday);
                 var waveAfternoonAverage = wave(waveAfternoon);
+                var waveDTwoAverage = wave(waveDTwo);
+                var waveDThreeAverage = wave(waveDThree);
+                var waveDFourAverage = wave(waveDFour);
+
                 var windMorningAverage = wind(windMorning);
                 var windMiddayAverage = wind(windMidday);
                 var windAfternoonAverage = wind(windAfternoon);
+                var windDTwoAverage = wind(windDTwo);
+                var windDThreeAverage = wind(windDThree);
+                var windDFourAverage = wind(windDFour);
 
-                console.log(waveMorningAverage);
-                console.log(waveMiddayAverage);
-                console.log(waveAfternoonAverage);
-                console.log(windMorningAverage);
-                console.log(windMiddayAverage);
-                console.log(windAfternoonAverage);
+                // console.log(waveMorningAverage);
+                // console.log(waveMiddayAverage);
+                // console.log(waveAfternoonAverage);
+                console.log(waveDTwoAverage);
+                console.log(waveDThreeAverage);
+                console.log(waveDFourAverage);
+                // console.log(windMorningAverage);
+                // console.log(windMiddayAverage);
+                // console.log(windAfternoonAverage);
+                console.log(windDTwoAverage);
+                console.log(windDThreeAverage);
+                console.log(windDFourAverage);
 
                 // var dayOneAverage = timeOfDay(dayOne);
                 // var dayTwoAverage = timeOfDay(dayTwo);
@@ -488,7 +526,7 @@ function stepTwo(e) {
                     : null;
             }
             
-            console.log(direction(windMorningAverage.windDirection)); 
+            // console.log(direction(windMorningAverage.windDirection)); 
  
             // Wind types that usues the wind direction and surf spots pointing direction to determin tyoe of wind for location
         
@@ -522,53 +560,102 @@ function stepTwo(e) {
                 return check();
             }
 
-            console.log(windType(windMorningAverage.windDirection));   
+            // console.log(windType(windMorningAverage.windDirection));   
                     
             // Tide Data: D3.js DATA definition
 
             var tidePrediction = tidesData.table.rows;
-            // console.log(tidePrediction);
+            var delta = 10;
+            
+                // One day forecast
             var tidesTime = [];
             var tidesValue = [];
             var tidesTimeValue = {};
 
-            var delta = 10;
-
             for (i = 0; i < 240; i = i + delta) {
                 tidesTime.push(tidePrediction[i][0]);
             }
+            
 
             for (i = 0; i < 240; i = i + delta) {
                 tidesValue.push(tidePrediction[i][2]);
             }
+            
+            // UTC time to Hour and Minutes
+
+            var time = new Date(tidesTime[10]);
+            // var timeHM = time.getUTCHours() + ':' + time.getUTCMinutes();
 
             tidesTime.forEach(function (time, i) {
                 return tidesTimeValue[time] = tidesValue[i];
             });
 
-            // UTC time to Hour and Minutes
-
-            var time = new Date(tidesTime[10]);
-            var timeHM = time.getUTCHours() + ':' + time.getUTCMinutes();
-
+            // console.log(tidesTime);
+            // console.log(tidesValue);
+            // console.log(tidesTimeValue);
+            
             var dataApi = [];
 
             for (i = 0; i < 240; i = i + delta) {
                 dataApi.push (
                     {
-                        // date: tidePrediction[i][0],
                         date: (new Date(tidePrediction[i][0])).getUTCHours(),
                         value: tidePrediction[i][2]
                     });
             };
-            
-            var day = new Date();
-            console.log(day);
-            console.log(day.getDay() + 1);
-            var dayWeek = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
-            var dayDisplay = dayWeek[day.getDay() + 1];
-            console.log(dayDisplay);
 
+            // console.log(dataApi);
+            
+                // Nest 3 days forecast
+            var tidesTimeEx = [];
+            var tidesValueEx = [];
+            var tidesTimeValueEx = {};
+            // console.log(tidePrediction);
+            for (i = 240; i < 960; i = i + delta) {
+                tidesTimeEx.push(tidePrediction[i][0]);
+            }
+            
+
+            for (i = 240; i < 960; i = i + delta) {
+                tidesValueEx.push(tidePrediction[i][2]);
+            }
+            
+            tidesTimeEx.forEach(function (time, i) {
+                return tidesTimeValueEx[time] = tidesValueEx[i];
+            });
+
+            // console.log(tidesTimeEx);
+            // console.log(tidesValueEx);
+            // console.log(tidesTimeValueEx);
+
+            var dataApiEx = [];
+
+            for (i = 240; i < 960; i = i + delta) {
+                dataApiEx.push (
+                    {
+                        date: (new Date(tidePrediction[i][0])).getUTCHours(),
+                        value: tidePrediction[i][2]
+                    });
+            };
+
+            // console.log(dataApiEx);
+
+            // Day format for data content display
+            var day = new Date();
+            var dayWeek = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+            var dayWeekShort = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+            var dayDisplay = dayWeek[day.getDay() + 1];
+
+            Date.prototype.addDays = function(days) {
+            // function addDays(days) {
+                var date = new Date(this.valueOf());
+                date.setDate(date.getDate() + days);
+                return date;
+            }
+            
+            var date = new Date();
+
+            // console.log(dayWeek[(date.addDays(3)).getDay()]);
 
             forecast.innerHTML =`
             <div class="container-fluid" id="todayFor">
@@ -756,7 +843,7 @@ function stepTwo(e) {
                             <div class="container-fluid time-day"> 
                                 <div class="row text-center">
                                     <div class="col-xs-12 text-center">
-                                        <h2>${dayWeek[day.getDay() + 1]}</h2>
+                                        <h2>${dayWeek[(date.addDays(1)).getDay()]}</h2>
                                     </div>
                                 </div>
                             </div>
@@ -764,7 +851,7 @@ function stepTwo(e) {
                             <div class="container-fluid details">
                                 <div class="row text-center">
                                     <div class="col-xs-4 values">
-                                        <p>${waveMorningAverage.waveHeight = waveMorningAverage.waveHeight || '-'}</p>
+                                        <p>${waveDTwoAverage.waveHeight = waveDTwoAverage.waveHeight || '-'}</p>
                                     </div>
                                     <div class="col-xs-4">
                                         <div class="desc">
@@ -773,7 +860,7 @@ function stepTwo(e) {
                                         </div>
                                     </div>
                                     <div class="col-xs-4 values">
-                                        <p>${waveMorningAverage.wavePeriod = waveMorningAverage.wavePeriod || '-'}</p>
+                                        <p>${waveDTwoAverage.wavePeriod = waveDTwoAverage.wavePeriod || '-'}</p>
                                     </div>
                                 </div>
                             </div>
@@ -781,7 +868,7 @@ function stepTwo(e) {
                             <div class="container-fluid details">
                                 <div class="row text-center">
                                     <div class="col-xs-4 string"> 
-                                        <p>${windType(windMorningAverage.windDirection)}</p>
+                                        <p>${windType(windDTwoAverage.windDirection)}</p>
                                     </div>
                                     <div class="col-xs-4">
                                         <div class="desc">
@@ -790,7 +877,7 @@ function stepTwo(e) {
                                         </div>
                                     </div>
                                     <div class="col-xs-4 values">
-                                        <p>${windMorningAverage.windSpeed}</p>
+                                        <p>${windDTwoAverage.windSpeed = windDTwoAverage.windSpeed || '-'}</p>
                                     </div>
                                 </div>
                             </div>
@@ -805,7 +892,7 @@ function stepTwo(e) {
                             <div class="container-fluid time-day"> 
                                 <div class="row text-center">
                                     <div class="col-xs-12 text-center">
-                                    <h2>${dayWeek[day.getDay() + 2]}</h2>
+                                    <h2>${dayWeek[(date.addDays(2)).getDay()]}</h2>
                                     </div>
                                 </div>
                             </div>
@@ -813,7 +900,7 @@ function stepTwo(e) {
                             <div class="container-fluid details">
                                 <div class="row text-center">
                                     <div class="col-xs-4 values">
-                                        <p>${waveMiddayAverage.waveHeight = waveMiddayAverage.waveHeight || '-'}</p>
+                                        <p>${waveDThreeAverage.waveHeight = waveDThreeAverage.waveHeight || '-'}</p>
                                     </div>
                                     <div class="col-xs-4">
                                         <div class="desc">
@@ -822,7 +909,7 @@ function stepTwo(e) {
                                         </div>
                                     </div>
                                     <div class="col-xs-4 values">
-                                        <p>${waveMiddayAverage.wavePeriod = waveMiddayAverage.wavePeriod || '-'}</p>
+                                        <p>${waveDThreeAverage.wavePeriod = waveDThreeAverage.wavePeriod || '-'}</p>
                                     </div>
                                 </div>
                             </div>
@@ -830,7 +917,7 @@ function stepTwo(e) {
                             <div class="container-fluid details">
                                 <div class="row text-center">
                                     <div class="col-xs-4 string"> 
-                                        <p>${windType(windMiddayAverage.windDirection)}</p>
+                                        <p>${windType(windDThreeAverage.windDirection)}</p>
                                     </div>
                                     <div class="col-xs-4">
                                         <div class="desc">
@@ -839,7 +926,7 @@ function stepTwo(e) {
                                         </div>
                                     </div>
                                     <div class="col-xs-4 values">
-                                        <p>${windMiddayAverage.windSpeed}</p>
+                                        <p>${windDThreeAverage.windSpeed = windDThreeAverage.windSpeed || '-'}</p>
                                     </div>
                                 </div>
                             </div>
@@ -854,7 +941,7 @@ function stepTwo(e) {
                             <div class="container-fluid time-day"> 
                                 <div class="row text-center">
                                     <div class="col-xs-12 text-center">
-                                    <h2>${dayWeek[day.getDay() + 3]}</h2>
+                                    <h2>${dayWeek[(date.addDays(3)).getDay()]}</h2>
                                     </div>
                                 </div>
                             </div>
@@ -862,7 +949,7 @@ function stepTwo(e) {
                             <div class="container-fluid details">
                                 <div class="row text-center">
                                     <div class="col-xs-4 values">
-                                        <p>${waveAfternoonAverage.waveHeight = waveAfternoonAverage.waveHeight || '-'}</p>
+                                        <p>${waveDFourAverage.waveHeight = waveDFourAverage.waveHeight || '-'}</p>
                                     </div>
                                     <div class="col-xs-4">
                                         <div class="desc">
@@ -871,7 +958,7 @@ function stepTwo(e) {
                                         </div>
                                     </div>
                                     <div class="col-xs-4 values">
-                                        <p>${waveAfternoonAverage.wavePeriod = waveAfternoonAverage.wavePeriod || '-'}</p>
+                                        <p>${waveDFourAverage.wavePeriod = waveDFourAverage.wavePeriod || '-'}</p>
                                     </div>
                                 </div>
                             </div>
@@ -879,7 +966,7 @@ function stepTwo(e) {
                             <div class="container-fluid details">
                                 <div class="row text-center">
                                     <div class="col-xs-4 string"> 
-                                        <p>${windType(windAfternoonAverage.windDirection)}</p>
+                                        <p>${windType(windDFourAverage.windDirection)}</p>
                                     </div>
                                     <div class="col-xs-4">
                                         <div class="desc">
@@ -888,7 +975,7 @@ function stepTwo(e) {
                                         </div>
                                     </div>
                                     <div class="col-xs-4 values">
-                                        <p>${windAfternoonAverage.windSpeed}</p>
+                                        <p>${windDFourAverage.windSpeed = windDFourAverage.windSpeed || '-'}</p>
                                     </div>
                                 </div>
                             </div>
@@ -907,7 +994,7 @@ function stepTwo(e) {
 
             var todayFor = document.getElementById('todayFor');
             var tmrwFor = document.getElementById('tmrwFor');
-            console.log((document.getElementsByClassName('nextDays'))[0]);
+            // console.log((document.getElementsByClassName('nextDays'))[0]);
             var nextDays = (document.getElementsByClassName('nextDays'))[0].addEventListener('click', forecastToggle);
             var today = (document.getElementsByClassName('today'))[0].addEventListener('click', forecastToggle);
 
@@ -921,10 +1008,11 @@ function stepTwo(e) {
                 }
             }       
 
-            // LINE CHART creation
+            // Day Tidal data - LINE CHART creation
             // implementation heavily influenced by http://bl.ocks.org/1166403        
             // Create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
             var data = tidesValue;
+            // console.log(data);
 
             // Defining dimensions of graph
             function screenSize() {
@@ -943,8 +1031,6 @@ function stepTwo(e) {
             var large = window.matchMedia('(max-width: 800px)');    // 650-800  500 OK
             var xlarge = window.matchMedia('(max-width: 1200px)');  // 800-1200 600 OK
             var xxlarge = window.matchMedia('(min-width: 1201px)'); // 1200+    800    OK
-
-            console.log(screenSize());
 
             var m = [50, 25, 50, 25]; // margins
             var w = screenSize() - m[1] - m[3]; // width height: 250px; width: 75vw;
@@ -982,7 +1068,9 @@ function stepTwo(e) {
                 .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
             // create yAxis
-            var xAxis = d3.axisBottom().scale(x).ticks(4).tickSize(-h);
+            var ticks = [0, 4, 8, 12, 16, 20, 24]
+            var tickLabels = [0, 4, 8, 12, 16, 20, 0];
+            var xAxis = d3.axisBottom().scale(x).tickValues(ticks).tickFormat(function(d, i){return tickLabels[i] }).tickSize(-h);
             // Add the x-axis.
             graph.append("svg:g")
                 .attr("class", "x axis")
@@ -1016,6 +1104,86 @@ function stepTwo(e) {
                 .attr("x", (w / 2))
                 // .attr("transform", "rotate(-90)")
                 .text("TIME OF DAY (24H)");
+            
+            // Extended next 3 days forecast - LINE CHART creation
+            // implementation heavily influenced by http://bl.ocks.org/1166403        
+            // Create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
+            var data = tidesValueEx;
+            // console.log(data);
+
+            var m = [50, 25, 50, 25]; // margins
+            var w = screenSize() - m[1] - m[3]; // width height: 250px; width: 75vw;
+            var h = 250 - m[0] - m[2]; // height
+
+            // X scale will fit all values from data[] within pixels 0-w
+            var x = d3.scaleLinear().domain([0, tidesValueEx.length]).range([0, w]);
+            // Y scale will fit values from 0-10 within pixels h-0 (Note the inverted domain for the y-scale: bigger is up!)
+            var y = d3.scaleLinear().domain([d3.min(tidesValueEx), d3.max(tidesValueEx)]).range([h, 0]);
+            // automatically determining max range can work something like this
+            // var y = d3.scale.linear().domain([0, d3.max(data)]).range([h, 0]);
+
+            // create a line function that can convert data[] into x and y points
+            var line = d3.line()
+            // assign the X function to plot our line as we wish
+                .x(function(d,i) { 
+                // verbose logging to show what's actually being done
+                // console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
+                // return the X coordinate where we want to plot this datapoint
+                return x(i); 
+                })
+                .y(function(d) { 
+                // verbose logging to show what's actually being done
+                // console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + " using our yScale.");
+                // return the Y coordinate where we want to plot this datapoint
+                return y(d); 
+                })
+                .curve(d3.curveBasis)
+
+            // Add an SVG element with the desired dimensions and margin.
+            var graph = d3.select("#tides-extended").append("svg:svg")
+                .attr("width", w + m[1] + m[3])
+                .attr("height", h + m[0] + m[2])
+                .append("svg:g")
+                .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+            // create yAxis
+            var ticks = [0, 12, 24, 36, 48, 60, 72]
+            var tickLabels = [(dayWeekShort[(date.addDays(1)).getDay()]), 12, (dayWeekShort[(date.addDays(2)).getDay()]), 12, (dayWeekShort[(date.addDays(3)).getDay()]), 12];
+            var xAxis = d3.axisBottom().scale(x).tickValues(ticks).tickFormat(function(d, i){return tickLabels[i] }).tickSize(-h);
+            // Add the x-axis.
+            graph.append("svg:g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + h + ")")
+                .call(xAxis);
+            
+            // Add the line by appending an svg:path element with the data line we created above
+            // do this AFTER the axes above so that the line is above the tick-lines
+            graph.append("svg:path").attr("d", line(data));
+
+            graph.append("line")
+            //   .attr("x1",-6)
+                .attr("y1",y(0))//so that the line passes through the y 0
+                .attr("x2",w)
+                .attr("y2",y(0))//so that the line passes through the y 0
+                .style("stroke", "#3E4EA4")
+                .style("opacity", ".5");
+
+            graph.append("text")
+                .attr("class", "label")
+                .attr("text-anchor", "middle")
+                .attr("y", -6)
+                .attr("x", -(h / 2))
+                .attr("transform", "rotate(-90)")
+                .text("LOW - HIGH");
+
+            graph.append("text")
+                .attr("class", "label")
+                .attr("text-anchor", "middle")
+                .attr("y", h + 25)
+                .attr("x", (w / 2))
+                // .attr("transform", "rotate(-90)")
+                .text("TIME OF DAY (12H)");
+
 
             };
 
@@ -1054,7 +1222,7 @@ function aboutReveal(e){
 
 function menuLink(e) {
     var selection = e.target.parentElement.classList[0];
-    console.log(selection);
+    // console.log(selection);
     if (surfingSpots.classList.contains('hidden') && forecast.classList.contains('hidden')) {
         menuList.classList.add('hidden');
         menuNav.innerHTML = 'MENU'
