@@ -350,6 +350,7 @@ var spotForecast = document.getElementById('surfingSpots').addEventListener('cli
 
 function stepTwo(e) {
     console.log(e.target.childNodes[0].data);
+    console.log(e);
     var selection = e.target.childNodes[0].data;
     if (e.target && e.target.matches('button.spot')) {
         // console.log('Button element clicked');
@@ -498,9 +499,9 @@ function stepTwo(e) {
                 // console.log(waveMorningAverage);
                 // console.log(waveMiddayAverage);
                 // console.log(waveAfternoonAverage);
-                console.log(waveDTwoAverage);
-                console.log(waveDThreeAverage);
-                console.log(waveDFourAverage);
+                // console.log(waveDTwoAverage);
+                // console.log(waveDThreeAverage);
+                // console.log(waveDFourAverage);
                 // console.log(windMorningAverage);
                 // console.log(windMiddayAverage);
                 // console.log(windAfternoonAverage);
@@ -525,15 +526,16 @@ function stepTwo(e) {
                     : (value >= 292.5 && value <337.5) ? 315
                     : null;
             }
-            
+            console.log(windMorningAverage);
             // console.log(direction(windMorningAverage.windDirection)); 
+            // console.log(surfSpots.point);
  
             // Wind types that usues the wind direction and surf spots pointing direction to determin tyoe of wind for location
-        
+                    
             function windType(data) {
-        
+
                 var wind = direction(data);
-                var point = surfSpots.point;
+                var point = searchPoint(selection, surfSpots);
         
                 // console.log('Wind & Surf Spot wind directions: ' + wind + ' ' + point);
         
@@ -541,26 +543,28 @@ function stepTwo(e) {
         
                 // console.log('An Array of wind & point direction values: ' + range);
                 
-                function check(wind, point) {
-                    var direction;
-                    var windArray = [[0, 180], [90, 270], [45, 225], [135, 315]];
-
-                    if (wind - point === 0) {
-                        return 'OFF';
+                function check() {
+                    if ((wind - point) === 0) {
+                      return 'OFF';
+                    } else if (
+                      (range[0] === 0) && (range[1] === 180) ||
+                      (range[0] === 180) && (range[1] === 0) ||
+                      (range[0] === 90) && (range[1] === 270) ||
+                      (range[0] === 270) && (range[1] === 90) ||
+                      (range[0] === 45) && (range[1] === 225) ||
+                      (range[0] === 225) && (range[1] === 45) ||
+                      (range[0] === 135) && (range[1] === 315) ||
+                      (range[0] === 315) && (range[1] === 135)) {
+                      return 'ON';
+                    } else {
+                      return 'CROSS';
                     }
-
-                    windArray.forEach(function (index) {
-                        if (index.includes(wind) && index.includes(point)) {
-                            return direction = true;
-                        }
-                    });
-
-                    return direction ? 'ON' : 'CROSS';
-                }
+                  }
+        
                 return check();
-            }
+            };
 
-            // console.log(windType(windMorningAverage.windDirection));   
+            console.log(windType(windMorningAverage.windDirection));   
                     
             // Tide Data: D3.js DATA definition
 
@@ -656,6 +660,7 @@ function stepTwo(e) {
             var date = new Date();
 
             // console.log(dayWeek[(date.addDays(3)).getDay()]);
+            console.log(windType(selection));
 
             forecast.innerHTML =`
             <div class="container-fluid" id="todayFor">
