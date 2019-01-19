@@ -46,6 +46,7 @@ a:active, a:hover {
 .navbar-header {
     display: inline-block;
     height: 70px;
+    /* margin-left: 15px !important; */
 }
 
 .navbar-right {
@@ -121,7 +122,7 @@ a:active, a:hover {
 .map {
     padding-top: 70px;
     width: 90vw;
-    margin: 0 5vw;
+    /* margin: 0 5vw; */
 }
 
 .display {
@@ -225,25 +226,8 @@ a:active, a:hover {
 
 /* Forecast cards style */
 
-.card {
-    display: flex;
-    /* float: none; */
-    justify-content: center;
-    margin: 0 auto;
-    margin-bottom: 40px;
-    height: 250px;
-    width: 75vw;
-    /* vertical-align: middle; */
-    border-radius: 10px;
-    background-color: #FD6591;
-    -webkit-box-shadow: 0px 20px 20px -5px rgba(0,0,0,0.25);
-    -moz-box-shadow: 0px 20px 20px -5px rgba(0,0,0,0.25);
-    box-shadow: 0px 20px 20px -5px rgba(0,0,0,0.25);
-    transform: scale(1.06);
-}
-
 .title {
-    padding-bottom: 70px;
+    padding-bottom: 50px;
     color: white;
 }
 
@@ -258,70 +242,70 @@ a:active, a:hover {
     border: none;
 }
 
-.card > .col-xs-12 {
-    float: none;
+.card {
+    border-radius: 10px;
+    background-color: #FD6591;
     color: #3E4EA4;
-} 
+    -webkit-box-shadow: 0px 20px 20px -5px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 20px 20px -5px rgba(0,0,0,0.25);
+    box-shadow: 0px 20px 20px -5px rgba(0,0,0,0.25);
+    margin: 5vw;
+    height: 250px;
+    width: calc(100% - 10vw);
+}
 
-.day {
-    height: 100%;
-    padding: 0px;
-    float: left;
+@media screen and (min-width: 992px) {
+  .card {
+    width: calc(50% - 10vw);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+    .card {
+    width: calc(33.33% - 10vw);
+  }
+
+  .card:last-of-type {
+    width: calc(100% - 10vw) !important;
+  }
 }
 
 .details {
     width: 100%;
-    height: 40%;
-    float: left;
-}
-
-.time-day {
-  height: 20%;
+    margin: 0 auto;
 }
 
 .desc {
-  font-size: 20px;
-  line-height: 6px;
-  padding-top: 20%;
+    font-size: 16px;
+    line-height: 20px;
+    padding-top: 30px;
+}
+
+.desc p {
+    margin-bottom: 0;
 }
 
 .desc small {
-  font-size: 55%;
-  line-height: 12px;
+    font-size: 55%;
+    line-height: 10px;
 }
 
 .values {
-  font-size: 72px;
-  line-height: 60px;
+    font-size: 52px;
+    line-height: 70px;
+}
+        
+.values p {
+    margin-bottom: 0;
+    margin-top: 10px;
 }
 
 .string {
-  font-size: 36px;
-  line-height: 60px;
-}
-
-@media screen and (max-width: 767px) {
-    
-    .desc {
-      font-size: 16px;
-      line-height: 10px;
-      padding-top: 20%;
-    }
-    
-    .desc small {
-      font-size: 55%;
-      line-height: 12px;
-    }
-    
-    .values {
-      font-size: 52px;
-      line-height: 70px;
-    }
-        
-    .string {
-      font-size: 18px;
-      line-height: 60px;
-    }
+    font-size: 24px;
+    line-height: 80px;
+    margin-top: 10px;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 /* 3D Line Chart style */
@@ -346,12 +330,12 @@ path {
   display: none;
 }
 
-#tides {
+/* #tides {
     position: relative;
     width: 70vw;
     display: flex;
     justify-content: center;
-}
+} */
 
 .label {
     fill: #3E4EA4;

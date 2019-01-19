@@ -395,8 +395,9 @@ function stepTwo(e) {
             console.log(timeTo);
 
             async function forecastData() {
-                // var buoyApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${buoy}`);
-                var buoyApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&stationID=${buoy}`);
+                var buoyApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${buoy}`);
+                // workaround
+                // var buoyApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&stationID=${buoy}`);
                 var buoyData = await buoyApi.json();
                 console.log(buoyData.table);
 
@@ -410,8 +411,9 @@ function stepTwo(e) {
 
                 // Buoy Data: Wave Height and Period
                     // workaround issue with dataset at source - unable to select date restrains
-                var waveData = buoyData.table.rows.splice(-289, 193);
+                // var waveData = buoyData.table.rows.splice(-289, 193);
 
+                var waveData = buoyData.table.rows;
                 var waveAfternoon = waveData.splice(-163, 11);      // hours 15:00 - 20:00
                 var waveMidday = waveData.splice(-161, 9);          // hours 10:30 - 14:30
                 var waveMorning = waveData.splice(-163, 11);        // hours 05:00 - 10:00
@@ -419,13 +421,13 @@ function stepTwo(e) {
                 var waveDThree = waveData.splice(-56, 31);          // hours 05:00 - 20:00
                 var waveDTwo = waveData.splice(-73, 31);            // hours 05:00 - 20:00
 
-                console.log(waveData);
-                console.log(waveAfternoon);
-                console.log(waveMidday);
-                console.log(waveMorning);
-                console.log(waveDFour);
-                console.log(waveDThree);
-                console.log(waveDTwo);
+                // console.log(waveData);
+                // console.log(waveAfternoon);
+                // console.log(waveMidday);
+                console.log(waveMorning[0][0]);
+                console.log(waveDTwo[0][0]);
+                console.log(waveDThree[0][0]);
+                console.log(waveDFour[0][0]);                
 
                 // GFS Data: Wind Speed and Direction
 
@@ -666,337 +668,220 @@ function stepTwo(e) {
 
             forecast.innerHTML =`
             <div class="container-fluid" id="todayFor">
-
-                <div class="container-fluid">
-                  <div class="row text-center">
-                    <div class="col-xs-12 title">
+                <div class="row no-gutter">
+                    <div class="col-xs-12 text-center title">
                         <h1>${selection.toUpperCase()}</h1>
                         <h2>TODAY</h2>
                         <p class="nextDays">+ 3 DAYS</p>
                     </div>
-                  </div>
-                </div>
 
-                <div class="container-fluid">  
-                    <div class="row card ">
-                        <div class="col-xs-12 day">
-                            <div class="container-fluid time-day"> 
-                                <div class="row text-center">
-                                    <div class="col-xs-12 text-center">
-                                        <h2>MORNING</h2>
-                                    </div>
+                    <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
+                        <h2>MORNING</h2>
+                        <div class="container-fluid">
+                            <div class="row no-gutter details">
+                                <div class="col-xs-4 text-center values">
+                                    <p>${waveMorningAverage.waveHeight = waveMorningAverage.waveHeight || '-'}</p>
                                 </div>
-                            </div>
-
-                            <div class="container-fluid details">
-                                <div class="row text-center">
-                                    <div class="col-xs-4 values">
-                                        <p>${waveMorningAverage.waveHeight = waveMorningAverage.waveHeight || '-'}</p>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <div class="desc">
-                                            <p><strong>WAVE</strong></p>
-                                            <p><small>m | s</small></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4 values">
-                                        <p>${waveMorningAverage.wavePeriod = waveMorningAverage.wavePeriod || '-'}</p>
-                                    </div>
+                                <div class="col-xs-4 text-center desc">
+                                    <p><strong>WAVE</strong></p>
+                                    <p><small>m | s</small></p>
                                 </div>
-                            </div>
-
-                            <div class="container-fluid details">
-                                <div class="row text-center">
-                                    <div class="col-xs-4 string"> 
-                                        <p>${windType(windMorningAverage.windDirection)}</p>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <div class="desc">
-                                            <p><strong>WIND</strong></p>
-                                            <p><small>shore | m/s</small></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4 values">
-                                        <p>${windMorningAverage.windSpeed}</p>
-                                    </div>
+                                <div class="col-xs-4 text-center values">
+                                    <p>${waveMorningAverage.wavePeriod = waveMorningAverage.wavePeriod || '-'}</p>
                                 </div>
-                            </div>
+                            </div>                    
+                            <div class="row no-gutter details">
+                                <div class="col-xs-4 text-center string">
+                                    <p>${windType(windMorningAverage.windDirection)}</p>
+                                </div>
+                                <div class="col-xs-4 text-center desc">
+                                    <p><strong>WIND</strong></p>
+                                    <p><small>shore | m/s</small></p>
+                                </div>
+                                <div class="col-xs-4 text-center values">
+                                    <p>${windMorningAverage.windSpeed}</p>
+                                </div>
+                            </div>                    
                         </div>
                     </div>
-                </div>
 
-                <div class="container-fluid">  
-                    <div class="row card ">
-                        <div class="col-xs-12 day">
-
-                            <div class="container-fluid time-day"> 
-                                <div class="row text-center">
-                                    <div class="col-xs-12 text-center">
-                                        <h2>MIDDAY</h2>
-                                    </div>
+                    <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
+                        <h2>MIDDAY</h2>
+                        <div class="container-fluid">
+                            <div class="row no-gutter details">
+                                <div class="col-xs-4 text-center values">
+                                    <p>${waveMiddayAverage.waveHeight = waveMiddayAverage.waveHeight || '-'}</p>
                                 </div>
-                            </div>
-
-                            <div class="container-fluid details">
-                                <div class="row text-center">
-                                    <div class="col-xs-4 values">
-                                        <p>${waveMiddayAverage.waveHeight = waveMiddayAverage.waveHeight || '-'}</p>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <div class="desc">
-                                            <p><strong>WAVE</strong></p>
-                                            <p><small>m | s</small></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4 values">
-                                        <p>${waveMiddayAverage.wavePeriod = waveMiddayAverage.wavePeriod || '-'}</p>
-                                    </div>
+                                <div class="col-xs-4 text-center desc">
+                                    <p><strong>WAVE</strong></p>
+                                    <p><small>m | s</small></p>
                                 </div>
-                            </div>
-
-                            <div class="container-fluid details">
-                                <div class="row text-center">
-                                    <div class="col-xs-4 string"> 
-                                        <p>${windType(windMiddayAverage.windDirection)}</p>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <div class="desc">
-                                            <p><strong>WIND</strong></p>
-                                            <p><small>shore | m/s</small></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4 values">
-                                        <p>${windMiddayAverage.windSpeed}</p>
-                                    </div>
+                                <div class="col-xs-4 text-center values">
+                                    <p>${waveMiddayAverage.wavePeriod = waveMiddayAverage.wavePeriod || '-'}</p>
                                 </div>
-                            </div>
+                            </div>                    
+                            <div class="row no-gutter details">
+                                <div class="col-xs-4 text-center string">
+                                    <p>${windType(windMiddayAverage.windDirection)}</p>
+                                </div>
+                                <div class="col-xs-4 text-center desc">
+                                    <p><strong>WIND</strong></p>
+                                    <p><small>shore | m/s</small></p>
+                                </div>
+                                <div class="col-xs-4 text-center values">
+                                    <p>${windMiddayAverage.windSpeed}</p>
+                                </div>
+                            </div>                    
                         </div>
                     </div>
-                </div>
 
-                <div class="container-fluid">  
-                    <div class="row card ">
-                        <div class="col-xs-12 day">
-
-                            <div class="container-fluid time-day"> 
-                                <div class="row text-center">
-                                    <div class="col-xs-12 text-center">
-                                        <h2>AFTERNOON</h2>
-                                    </div>
+                    <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
+                        <h2>AFTERNOON</h2>
+                        <div class="container-fluid">
+                            <div class="row no-gutter details">
+                                <div class="col-xs-4 text-center values">
+                                    <p>${waveAfternoonAverage.waveHeight = waveAfternoonAverage.waveHeight || '-'}</p>
                                 </div>
-                            </div>
-
-                            <div class="container-fluid details">
-                                <div class="row text-center">
-                                    <div class="col-xs-4 values">
-                                        <p>${waveAfternoonAverage.waveHeight = waveAfternoonAverage.waveHeight || '-'}</p>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <div class="desc">
-                                            <p><strong>WAVE</strong></p>
-                                            <p><small>m | s</small></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4 values">
-                                        <p>${waveAfternoonAverage.wavePeriod = waveAfternoonAverage.wavePeriod || '-'}</p>
-                                    </div>
+                                <div class="col-xs-4 text-center desc">
+                                    <p><strong>WAVE</strong></p>
+                                    <p><small>m | s</small></p>
                                 </div>
-                            </div>
-
-                            <div class="container-fluid details">
-                                <div class="row text-center">
-                                    <div class="col-xs-4 string"> 
-                                        <p>${windType(windAfternoonAverage.windDirection)}</p>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <div class="desc">
-                                            <p><strong>WIND</strong></p>
-                                            <p><small>shore | m/s</small></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4 values">
-                                        <p>${windAfternoonAverage.windSpeed}</p>
-                                    </div>
+                                <div class="col-xs-4 text-center values">
+                                    <p>${waveAfternoonAverage.wavePeriod = waveAfternoonAverage.wavePeriod || '-'}</p>
                                 </div>
-                            </div>
+                            </div>                    
+                            <div class="row no-gutter details">
+                                <div class="col-xs-4 text-center string">
+                                    <p>${windType(windAfternoonAverage.windDirection)}</p>
+                                </div>
+                                <div class="col-xs-4 text-center desc">
+                                    <p><strong>WIND</strong></p>
+                                    <p><small>shore | m/s</small></p>
+                                </div>
+                                <div class="col-xs-4 text-center values">
+                                    <p>${windAfternoonAverage.windSpeed}</p>
+                                </div>
+                            </div>                    
                         </div>
                     </div>
-                </div>
-        
-                <div class="container-fluid">  
-                    <div class="row card text-center">
-                        <div class="col-xs-12 day" id="tides">
+
+                    <div class="col-xs-12 col-md-6 text-center card day">
+                        <div id="tides">
                         </div>
                     </div>
+
                 </div>
-                
             </div>
-            
-            <div class="container-fluid hidden" id="tmrwFor">
 
-                <div class="container-fluid">
-                  <div class="row text-center">
-                    <div class="col-xs-12 title">
+
+
+
+
+
+            <div class="container-fluid hidden" id="tmrwFor">
+                <div class="row no-gutter">
+                    <div class="col-xs-12 text-center title">
                         <h1>${selection.toUpperCase()}</h1>
                         <h2>+ 3 DAYS</h2>
                         <p class="today">TODAY</p>
                     </div>
-                  </div>
-                </div>
 
-                <div class="container-fluid">  
-                    <div class="row card ">
-                        <div class="col-xs-12 day">
-                            <div class="container-fluid time-day"> 
-                                <div class="row text-center">
-                                    <div class="col-xs-12 text-center">
-                                        <h2>${dayWeek[(date.addDays(1)).getDay()]}</h2>
-                                    </div>
+                    <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
+                        <h2>${dayWeek[(date.addDays(1)).getDay()]}</h2>
+                        <div class="container-fluid">
+                            <div class="row no-gutter details">
+                                <div class="col-xs-4 text-center values">
+                                    <p>${waveDTwoAverage.waveHeight = waveDTwoAverage.waveHeight || '-'}</p>
                                 </div>
-                            </div>
-
-                            <div class="container-fluid details">
-                                <div class="row text-center">
-                                    <div class="col-xs-4 values">
-                                        <p>${waveDTwoAverage.waveHeight = waveDTwoAverage.waveHeight || '-'}</p>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <div class="desc">
-                                            <p><strong>WAVE</strong></p>
-                                            <p><small>m | s</small></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4 values">
-                                        <p>${waveDTwoAverage.wavePeriod = waveDTwoAverage.wavePeriod || '-'}</p>
-                                    </div>
+                                <div class="col-xs-4 text-center desc">
+                                    <p><strong>WAVE</strong></p>
+                                    <p><small>m | s</small></p>
                                 </div>
-                            </div>
-
-                            <div class="container-fluid details">
-                                <div class="row text-center">
-                                    <div class="col-xs-4 string"> 
-                                        <p>${windType(windDTwoAverage.windDirection)}</p>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <div class="desc">
-                                            <p><strong>WIND</strong></p>
-                                            <p><small>shore | m/s</small></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4 values">
-                                        <p>${windDTwoAverage.windSpeed = windDTwoAverage.windSpeed || '-'}</p>
-                                    </div>
+                                <div class="col-xs-4 text-center values">
+                                    <p>${waveDTwoAverage.wavePeriod = waveDTwoAverage.wavePeriod || '-'}</p>
                                 </div>
-                            </div>
+                            </div>                    
+                            <div class="row no-gutter details">
+                                <div class="col-xs-4 text-center string">
+                                    <p>${windType(windDTwoAverage.windDirection)}</p>
+                                </div>
+                                <div class="col-xs-4 text-center desc">
+                                    <p><strong>WIND</strong></p>
+                                    <p><small>shore | m/s</small></p>
+                                </div>
+                                <div class="col-xs-4 text-center values">
+                                    <p>${windDTwoAverage.windSpeed = windDTwoAverage.windSpeed || '-'}</p>
+                                </div>
+                            </div>                    
                         </div>
                     </div>
-                </div>
 
-                <div class="container-fluid">  
-                    <div class="row card ">
-                        <div class="col-xs-12 day">
-
-                            <div class="container-fluid time-day"> 
-                                <div class="row text-center">
-                                    <div class="col-xs-12 text-center">
-                                    <h2>${dayWeek[(date.addDays(2)).getDay()]}</h2>
-                                    </div>
+                    <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
+                        <h2>${dayWeek[(date.addDays(2)).getDay()]}</h2>
+                        <div class="container-fluid">
+                            <div class="row no-gutter details">
+                                <div class="col-xs-4 text-center values">
+                                    <p>${waveDThreeAverage.waveHeight = waveDThreeAverage.waveHeight || '-'}</p>
                                 </div>
-                            </div>
-
-                            <div class="container-fluid details">
-                                <div class="row text-center">
-                                    <div class="col-xs-4 values">
-                                        <p>${waveDThreeAverage.waveHeight = waveDThreeAverage.waveHeight || '-'}</p>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <div class="desc">
-                                            <p><strong>WAVE</strong></p>
-                                            <p><small>m | s</small></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4 values">
-                                        <p>${waveDThreeAverage.wavePeriod = waveDThreeAverage.wavePeriod || '-'}</p>
-                                    </div>
+                                <div class="col-xs-4 text-center desc">
+                                    <p><strong>WAVE</strong></p>
+                                    <p><small>m | s</small></p>
                                 </div>
-                            </div>
-
-                            <div class="container-fluid details">
-                                <div class="row text-center">
-                                    <div class="col-xs-4 string"> 
-                                        <p>${windType(windDThreeAverage.windDirection)}</p>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <div class="desc">
-                                            <p><strong>WIND</strong></p>
-                                            <p><small>shore | m/s</small></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4 values">
-                                        <p>${windDThreeAverage.windSpeed = windDThreeAverage.windSpeed || '-'}</p>
-                                    </div>
+                                <div class="col-xs-4 text-center values">
+                                    <p>${waveDThreeAverage.wavePeriod = waveDThreeAverage.wavePeriod || '-'}</p>
                                 </div>
-                            </div>
+                            </div>                    
+                            <div class="row no-gutter details">
+                                <div class="col-xs-4 text-center string">
+                                    <p>${windType(windDThreeAverage.windDirection)}</p>
+                                </div>
+                                <div class="col-xs-4 text-center desc">
+                                    <p><strong>WIND</strong></p>
+                                    <p><small>shore | m/s</small></p>
+                                </div>
+                                <div class="col-xs-4 text-center values">
+                                    <p>${windDThreeAverage.windSpeed = windDThreeAverage.windSpeed || '-'}</p>
+                                </div>
+                            </div>                    
                         </div>
                     </div>
-                </div>
 
-                <div class="container-fluid">  
-                    <div class="row card ">
-                        <div class="col-xs-12 day">
-
-                            <div class="container-fluid time-day"> 
-                                <div class="row text-center">
-                                    <div class="col-xs-12 text-center">
-                                    <h2>${dayWeek[(date.addDays(3)).getDay()]}</h2>
-                                    </div>
+                    <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
+                        <h2>${dayWeek[(date.addDays(3)).getDay()]}</h2>
+                        <div class="container-fluid">
+                            <div class="row no-gutter details">
+                                <div class="col-xs-4 text-center values">
+                                    <p>${waveDFourAverage.waveHeight = waveDFourAverage.waveHeight || '-'}</p>
                                 </div>
-                            </div>
-
-                            <div class="container-fluid details">
-                                <div class="row text-center">
-                                    <div class="col-xs-4 values">
-                                        <p>${waveDFourAverage.waveHeight = waveDFourAverage.waveHeight || '-'}</p>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <div class="desc">
-                                            <p><strong>WAVE</strong></p>
-                                            <p><small>m | s</small></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4 values">
-                                        <p>${waveDFourAverage.wavePeriod = waveDFourAverage.wavePeriod || '-'}</p>
-                                    </div>
+                                <div class="col-xs-4 text-center desc">
+                                    <p><strong>WAVE</strong></p>
+                                    <p><small>m | s</small></p>
                                 </div>
-                            </div>
-
-                            <div class="container-fluid details">
-                                <div class="row text-center">
-                                    <div class="col-xs-4 string"> 
-                                        <p>${windType(windDFourAverage.windDirection)}</p>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <div class="desc">
-                                            <p><strong>WIND</strong></p>
-                                            <p><small>shore | m/s</small></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4 values">
-                                        <p>${windDFourAverage.windSpeed = windDFourAverage.windSpeed || '-'}</p>
-                                    </div>
+                                <div class="col-xs-4 text-center values">
+                                    <p>${waveDFourAverage.wavePeriod = waveDFourAverage.wavePeriod || '-'}</p>
                                 </div>
-                            </div>
+                            </div>                    
+                            <div class="row no-gutter details">
+                                <div class="col-xs-4 text-center string">
+                                    <p>${windType(windDFourAverage.windDirection)}</p>
+                                </div>
+                                <div class="col-xs-4 text-center desc">
+                                    <p><strong>WIND</strong></p>
+                                    <p><small>shore | m/s</small></p>
+                                </div>
+                                <div class="col-xs-4 text-center values">
+                                    <p>${windDFourAverage.windSpeed = windDFourAverage.windSpeed || '-'}</p>
+                                </div>
+                            </div>                    
                         </div>
                     </div>
-                </div>
-        
-                <div class="container-fluid">  
-                    <div class="row card text-center">
-                        <div class="col-xs-12 day" id="tides-extended">
+
+                    <div class="col-xs-12 col-md-6 text-center card day">
+                        <div id="tides-extended">
                         </div>
                     </div>
+
                 </div>
-                
             </div>`
 
             var todayFor = document.getElementById('todayFor');
@@ -1023,21 +908,24 @@ function stepTwo(e) {
 
             // Defining dimensions of graph
             function screenSize() {
-                return xsmall.matches ? 200 :
-                        small.matches ? 250 :
-                        medium.matches ? 300 :
-                        large.matches ? 500 :
-                        xlarge.matches ? 600 :
-                        xxlarge.matches ? 800 :
+                return xxsmall.matches ? 200 :
+                        xsmall.matches ? 250 :
+                        small.matches ? 350 :
+                        medium.matches ? 500 :
+                        large.matches ? 600 :
+                        xlarge.matches ? 350 :
+                        xxlarge.matches ? 1000 :
                         null;
             }
 
-            var xsmall = window.matchMedia('(max-width: 350px)');   // 350-     200 
-            var small = window.matchMedia('(max-width: 500px)');    // 350-500  250 OK
-            var medium = window.matchMedia('(max-width: 650px)');   // 500-650  300 OK
-            var large = window.matchMedia('(max-width: 800px)');    // 650-800  500 OK
-            var xlarge = window.matchMedia('(max-width: 1200px)');  // 800-1200 600 OK
-            var xxlarge = window.matchMedia('(min-width: 1201px)'); // 1200+    800    OK
+            var xxsmall = window.matchMedia('(max-width: 350px)');   // 350-     200 
+            var xsmall = window.matchMedia('(max-width: 500px)');    // 350-500  250 OK
+            var small = window.matchMedia('(max-width: 650px)');   // 500-650  300 OK
+            var medium = window.matchMedia('(max-width: 800px)');    // 650-800  500 OK
+            var large = window.matchMedia('(max-width: 991px)');  // 800-991 600 OK
+            var xlarge = window.matchMedia('(max-width: 1199px)'); // 992-1199 300 OK
+            var xxlarge = window.matchMedia('(min-width: 1200px)');
+            // 1200+    800    OK
 
             var m = [50, 25, 50, 25]; // margins
             var w = screenSize() - m[1] - m[3]; // width height: 250px; width: 75vw;
