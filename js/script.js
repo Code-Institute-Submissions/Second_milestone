@@ -252,6 +252,7 @@ function backToHome(e) {
         goBack.classList.add('hidden');
         map.setCenter({ lat: 53.326116, lng: -7.946834 });
         map.setZoom(6);
+        window.scrollTo(0, 0);
     }
 };
 
@@ -268,6 +269,7 @@ function stepOne(e) {
                 goBack.classList.add('hidden');
                 map.setCenter({ lat: 53.326116, lng: -7.946834 });
                 map.setZoom(6);
+                window.scrollTo(0, 0);
             }
         };
 
@@ -276,6 +278,7 @@ function stepOne(e) {
         listSpots(e.target.classList[4], mapLocation);
         map.setCenter(mapCenter(e.target.classList[4], mapLocation));
         map.setZoom(mapZoom(e.target.classList[4], mapLocation));
+        window.scrollTo(0, 0);
         
         if (e.target.id === 'btn-n') {
             go2Back.classList.add('north');
@@ -363,6 +366,8 @@ function stepTwo(e) {
             map.setCenter(searchLocation(selection, surfSpots));
             map.setZoom(12);
 
+            window.scrollTo(0, 0);
+
             // Fetch API from Marine Institute of Ireland
 
             var timeToday = new Date();
@@ -384,7 +389,7 @@ function stepTwo(e) {
                 var day = addZero(tmr.getDate());
                 var time = year + '-' + month + '-' + day;
                 return time; 
-            }
+            };
 
             var timeFrom = timeTodayFormat + 'T00%3A00%3A00Z';
             var timeTo = timeConverter(timeTomorrow) + 'T00%3A00%3A00Z';
@@ -699,7 +704,7 @@ function stepTwo(e) {
                                     <p><small>shore | m/s</small></p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
-                                    <p>${windMorningAverage.windSpeed}</p>
+                                    <p>${windMorningAverage.windSpeed = windMorningAverage.windSpeed || '-'}</p>
                                 </div>
                             </div>                    
                         </div>
@@ -729,7 +734,7 @@ function stepTwo(e) {
                                     <p><small>shore | m/s</small></p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
-                                    <p>${windMiddayAverage.windSpeed}</p>
+                                    <p>${windMiddayAverage.windSpeed = windMiddayAverage.windSpeed || '-'}</p>
                                 </div>
                             </div>                    
                         </div>
@@ -759,7 +764,7 @@ function stepTwo(e) {
                                     <p><small>shore | m/s</small></p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
-                                    <p>${windAfternoonAverage.windSpeed}</p>
+                                    <p>${windAfternoonAverage.windSpeed = windAfternoonAverage.windSpeed || '-'}</p>
                                 </div>
                             </div>                    
                         </div>
@@ -1086,6 +1091,7 @@ function stepTwo(e) {
 
             // Back button
             function backToHome(e) {
+                console.log(e.target.id);
                 if (e.target.id = 'go2back') {
                     forecast.classList.add('hidden');
                     surfingSpots.classList.remove('hidden');
@@ -1094,6 +1100,8 @@ function stepTwo(e) {
                     
                     map.setCenter(mapCenter(e.target.classList[1], mapLocation));
                     map.setZoom(mapZoom(e.target.classList[1], mapLocation));
+
+                    window.scrollTo(0, 0);
                 }
             };
 
@@ -1132,6 +1140,7 @@ function menuLink(e) {
                 goBack.classList.add('hidden');
                 map.setCenter({ lat: 53.326116, lng: -7.946834 });
                 map.setZoom(6);
+                window.scrollTo(0, 0);
             }
         };
 
@@ -1140,6 +1149,7 @@ function menuLink(e) {
         listSpots(selection, mapLocation);
         map.setCenter(mapCenter(selection, mapLocation));
         map.setZoom(mapZoom(selection, mapLocation));
+        window.scrollTo(0, 0);
     } else if (surfingSpots.classList.contains('hidden') && directions.classList.contains('hidden')) {
         menuList.classList.add('hidden');
         menuNav.innerHTML = 'MENU'
@@ -1155,6 +1165,7 @@ function menuLink(e) {
                 goBack.classList.add('hidden');
                 map.setCenter({ lat: 53.326116, lng: -7.946834 });
                 map.setZoom(6);
+                window.scrollTo(0, 0);
             }
         };
 
@@ -1163,6 +1174,7 @@ function menuLink(e) {
         listSpots(selection, mapLocation);
         map.setCenter(mapCenter(selection, mapLocation));
         map.setZoom(mapZoom(selection, mapLocation));
+        window.scrollTo(0, 0);
     } else if (forecast.classList.contains('hidden') && directions.classList.contains('hidden')) {
         menuList.classList.add('hidden');
         menuNav.innerHTML = 'MENU'
@@ -1170,5 +1182,6 @@ function menuLink(e) {
         listSpots(selection, mapLocation);
         map.setCenter(mapCenter(selection, mapLocation));
         map.setZoom(mapZoom(selection, mapLocation));
+        window.scrollTo(0, 0);
     }
 };

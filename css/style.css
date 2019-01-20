@@ -46,16 +46,22 @@ a:active, a:hover {
 .navbar-header {
     display: inline-block;
     height: 70px;
-    /* margin-left: 15px !important; */
 }
 
 .navbar-right {
     float: right;
+    text-align: right;
 }
 
 .navbar-default .navbar-brand:active, .navbar-default .navbar-brand:hover {
     color: white;
     outline: none;
+}
+
+@media (min-width: 768px) {
+    .navbar>.container-fluid .navbar-brand {
+        margin-left: 0;
+    }
 }
 
 /* Menu */
@@ -329,13 +335,6 @@ path {
 .x.axis path, .y.axis path {
   display: none;
 }
-
-/* #tides {
-    position: relative;
-    width: 70vw;
-    display: flex;
-    justify-content: center;
-} */
 
 .label {
     fill: #3E4EA4;
