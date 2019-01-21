@@ -110,14 +110,15 @@ a:active, a:hover {
 
 #about {
     position: absolute;
+    text-align: justify;
     top: 0;
     color: #FD6591;
     background-color: #3E4EA4;
     font-size: 16px;
     height: 100vh;
-    padding-left: 25vw;
-    padding-right: 25vw; 
-    padding-top: 25vh;
+    padding-left: 10vw;
+    padding-right: 10vw; 
+    padding-top: 15vh;
     padding-bottom: 2vh;
     margin: 0 auto;
     z-index: 9998;
@@ -125,6 +126,33 @@ a:active, a:hover {
 
 #about > p:nth-child(2) {
     margin-bottom: 0;
+}
+
+#about > p:nth-child(5) {
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    #about {
+        padding-left: 15vw;
+        padding-right: 15vw; 
+        font-size: 18px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    #about {
+        padding-top: 20vh;
+        padding-left: 25vw;
+        padding-right: 25vw; 
+        font-size: 20px;
+    }
+}
+  
+@media screen and (min-width: 1200px) {
+    #about {
+        font-size: 24px; 
+    }
 }
 
 /* Google Map Style */
