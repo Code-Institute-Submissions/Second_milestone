@@ -670,6 +670,9 @@ function stepTwo(e) {
 
             // console.log(dayWeek[(date.addDays(3)).getDay()]);
             console.log(windType(selection));
+            console.log(waveMorningAverage.waveHeight = waveMorningAverage.waveHeight || '-');
+            console.log(windMorningAverage.windSpeed = windMorningAverage.windSpeed || '-');
+            console.log(windType(windMorningAverage.windDirection));
 
             forecast.innerHTML =`
             <div class="container-fluid" id="todayFor">

@@ -123,12 +123,15 @@ a:active, a:hover {
     z-index: 9998;
 }
 
+#about > p:nth-child(2) {
+    margin-bottom: 0;
+}
+
 /* Google Map Style */
 
 .map {
     padding-top: 70px;
     width: 90vw;
-    /* margin: 0 5vw; */
 }
 
 .display {
@@ -273,6 +276,11 @@ a:active, a:hover {
 
   .card:last-of-type {
     width: calc(100% - 10vw) !important;
+  }
+
+  .col-xs-4 {
+      padding-right: 0;
+      padding-left: 0;
   }
 }
 
