@@ -291,6 +291,11 @@ a:active, a:hover {
     width: calc(100% - 10vw);
 }
 
+.card .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 @media screen and (min-width: 992px) {
   .card {
     width: calc(50% - 10vw);
@@ -329,6 +334,7 @@ a:active, a:hover {
 
 .desc small {
     font-size: 55%;
+    font-weight: 500;
     line-height: 10px;
 }
 

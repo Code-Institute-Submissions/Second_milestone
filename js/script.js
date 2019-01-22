@@ -211,6 +211,8 @@ var menuE = document.getElementById('menu-e').addEventListener('click', menuLink
 var menuW = document.getElementById('menu-w').addEventListener('click', menuLink);
 var menuS = document.getElementById('menu-s').addEventListener('click', menuLink);
 
+// 
+
 function surfTitle(spot) {
     var result = '';
     for (var i = 0; i < spot.length; i++) {
@@ -244,17 +246,6 @@ function mapZoom(nameKey, myArray) {
 };
 
 // Step One: Selection of Surf Spots directions
-
-function backToHome(e) {
-    if (e.target.id = 'goback') {
-        directions.classList.remove('hidden');
-        surfingSpots.classList.add('hidden');
-        goBack.classList.add('hidden');
-        map.setCenter({ lat: 53.326116, lng: -7.946834 });
-        map.setZoom(6);
-        window.scrollTo(0, 0);
-    }
-};
 
 function stepOne(e) {
     if (surfingSpots.classList.contains('hidden')) {
