@@ -682,8 +682,9 @@ function stepTwo(e) {
                                     <p>${waveMorningAverage.waveHeight = waveMorningAverage.waveHeight || '-'}</p>
                                 </div>
                                 <div class="col-xs-4 text-center desc">
-                                    <p><strong>WAVE</strong></p>
-                                    <p><small>m | s</small></p>
+                                    <h3>WAVE</h3>
+                                    <p>&#8592 HEIGHT (m)</p>
+                                    <p>PERIOD (s) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${waveMorningAverage.wavePeriod = waveMorningAverage.wavePeriod || '-'}</p>
@@ -694,8 +695,9 @@ function stepTwo(e) {
                                     <p>${windType(windMorningAverage.windDirection)}</p>
                                 </div>
                                 <div class="col-xs-4 text-center desc">
-                                    <p><strong>WIND</strong></p>
-                                    <p><small>shore | m/s</small></p>
+                                    <h3>WIND</h3>
+                                    <p>&#8592 TYPE</p>
+                                    <p>SPEED (m/s) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${windMorningAverage.windSpeed = windMorningAverage.windSpeed || '-'}</p>
@@ -712,8 +714,9 @@ function stepTwo(e) {
                                     <p>${waveMiddayAverage.waveHeight = waveMiddayAverage.waveHeight || '-'}</p>
                                 </div>
                                 <div class="col-xs-4 text-center desc">
-                                    <p><strong>WAVE</strong></p>
-                                    <p><small>m | s</small></p>
+                                    <h3>WAVE</h3>
+                                    <p>&#8592 HEIGHT (m)</p>
+                                    <p>PERIOD (s) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${waveMiddayAverage.wavePeriod = waveMiddayAverage.wavePeriod || '-'}</p>
@@ -724,8 +727,9 @@ function stepTwo(e) {
                                     <p>${windType(windMiddayAverage.windDirection)}</p>
                                 </div>
                                 <div class="col-xs-4 text-center desc">
-                                    <p><strong>WIND</strong></p>
-                                    <p><small>shore | m/s</small></p>
+                                    <h3>WIND</h3>
+                                    <p>&#8592 TYPE</p>
+                                    <p>SPEED (m/s) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${windMiddayAverage.windSpeed = windMiddayAverage.windSpeed || '-'}</p>
@@ -742,8 +746,9 @@ function stepTwo(e) {
                                     <p>${waveAfternoonAverage.waveHeight = waveAfternoonAverage.waveHeight || '-'}</p>
                                 </div>
                                 <div class="col-xs-4 text-center desc">
-                                    <p><strong>WAVE</strong></p>
-                                    <p><small>m | s</small></p>
+                                    <h3>WAVE</h3>
+                                    <p>&#8592 HEIGHT (m)</p>
+                                    <p>PERIOD (s) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${waveAfternoonAverage.wavePeriod = waveAfternoonAverage.wavePeriod || '-'}</p>
@@ -754,8 +759,9 @@ function stepTwo(e) {
                                     <p>${windType(windAfternoonAverage.windDirection)}</p>
                                 </div>
                                 <div class="col-xs-4 text-center desc">
-                                    <p><strong>WIND</strong></p>
-                                    <p><small>shore | m/s</small></p>
+                                    <h3>WIND</h3>
+                                    <p>&#8592 TYPE</p>
+                                    <p>SPEED (m/s) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${windAfternoonAverage.windSpeed = windAfternoonAverage.windSpeed || '-'}</p>
@@ -793,8 +799,9 @@ function stepTwo(e) {
                                     <p>${waveDTwoAverage.waveHeight = waveDTwoAverage.waveHeight || '-'}</p>
                                 </div>
                                 <div class="col-xs-4 text-center desc">
-                                    <p><strong>WAVE</strong></p>
-                                    <p><small>m | s</small></p>
+                                    <h3>WAVE</h3>
+                                    <p>&#8592 HEIGHT (m)</p>
+                                    <p>PERIOD (s) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${waveDTwoAverage.wavePeriod = waveDTwoAverage.wavePeriod || '-'}</p>
@@ -805,8 +812,9 @@ function stepTwo(e) {
                                     <p>${windType(windDTwoAverage.windDirection)}</p>
                                 </div>
                                 <div class="col-xs-4 text-center desc">
-                                    <p><strong>WIND</strong></p>
-                                    <p><small>shore | m/s</small></p>
+                                    <h3>WIND</h3>
+                                    <p>&#8592 TYPE</p>
+                                    <p>SPEED (m/s) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${windDTwoAverage.windSpeed = windDTwoAverage.windSpeed || '-'}</p>
@@ -823,8 +831,9 @@ function stepTwo(e) {
                                     <p>${waveDThreeAverage.waveHeight = waveDThreeAverage.waveHeight || '-'}</p>
                                 </div>
                                 <div class="col-xs-4 text-center desc">
-                                    <p><strong>WAVE</strong></p>
-                                    <p><small>m | s</small></p>
+                                    <h3>WAVE</h3>
+                                    <p>&#8592 HEIGHT (m)</p>
+                                    <p>PERIOD (s) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${waveDThreeAverage.wavePeriod = waveDThreeAverage.wavePeriod || '-'}</p>
@@ -835,8 +844,9 @@ function stepTwo(e) {
                                     <p>${windType(windDThreeAverage.windDirection)}</p>
                                 </div>
                                 <div class="col-xs-4 text-center desc">
-                                    <p><strong>WIND</strong></p>
-                                    <p><small>shore | m/s</small></p>
+                                    <h3>WIND</h3>
+                                    <p>&#8592 TYPE</p>
+                                    <p>SPEED (m/s) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${windDThreeAverage.windSpeed = windDThreeAverage.windSpeed || '-'}</p>
@@ -853,8 +863,9 @@ function stepTwo(e) {
                                     <p>${waveDFourAverage.waveHeight = waveDFourAverage.waveHeight || '-'}</p>
                                 </div>
                                 <div class="col-xs-4 text-center desc">
-                                    <p><strong>WAVE</strong></p>
-                                    <p><small>m | s</small></p>
+                                    <h3>WAVE</h3>
+                                    <p>&#8592 HEIGHT (m)</p>
+                                    <p>PERIOD (s) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${waveDFourAverage.wavePeriod = waveDFourAverage.wavePeriod || '-'}</p>
@@ -865,8 +876,9 @@ function stepTwo(e) {
                                     <p>${windType(windDFourAverage.windDirection)}</p>
                                 </div>
                                 <div class="col-xs-4 text-center desc">
-                                    <p><strong>WIND</strong></p>
-                                    <p><small>shore | m/s</small></p>
+                                    <h3>WIND</h3>
+                                    <p>&#8592 TYPE</p>
+                                    <p>SPEED (m/s) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${windDFourAverage.windSpeed = windDFourAverage.windSpeed || '-'}</p>

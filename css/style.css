@@ -291,15 +291,63 @@ a:active, a:hover {
     width: calc(100% - 10vw);
 }
 
+.details {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.desc {
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+}
+
+.desc h3 {
+    font-size: 18px;
+    line-height: 12px;
+    margin-bottom: 2px;
+}
+
+.desc p {
+    font-size: 10px;
+    margin-bottom: 0;
+}
+
+.values {
+    font-size: 56px;
+    line-height: 70px;
+}
+        
+.values p {
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.string {
+    font-size: 24px;
+    line-height: 80px;
+    margin-top: 10px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .card .container-fluid {
     padding-left: 0;
     padding-right: 0;
 }
 
 @media screen and (min-width: 992px) {
-  .card {
-    width: calc(50% - 10vw);
-  }
+    .card {
+        width: calc(50% - 10vw);
+    }
+    .desc h3 {
+        font-size: 18px;
+        line-height: 16px;
+        margin-bottom: 4px;
+    }
+    .desc p {
+        font-size: 12px;
+        margin-bottom: 0;
+    }
 }
 
 @media screen and (min-width: 1200px) {
@@ -315,45 +363,17 @@ a:active, a:hover {
       padding-right: 0;
       padding-left: 0;
   }
-}
 
-.details {
-    width: 100%;
-    margin: 0 auto;
-}
-
-.desc {
-    font-size: 16px;
-    line-height: 20px;
-    padding-top: 30px;
-}
+.desc h3 {
+        font-size: 18px;
+        line-height: 12px;
+        margin-bottom: 2px;
+    }
 
 .desc p {
+    font-size: 10px;
     margin-bottom: 0;
 }
-
-.desc small {
-    font-size: 55%;
-    font-weight: 500;
-    line-height: 10px;
-}
-
-.values {
-    font-size: 52px;
-    line-height: 70px;
-}
-        
-.values p {
-    margin-bottom: 0;
-    margin-top: 10px;
-}
-
-.string {
-    font-size: 24px;
-    line-height: 80px;
-    margin-top: 10px;
-    padding-left: 0;
-    padding-right: 0;
 }
 
 /* 3D Line Chart style */
