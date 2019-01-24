@@ -364,16 +364,16 @@ a:active, a:hover {
       padding-left: 0;
   }
 
-.desc h3 {
+    .desc h3 {
         font-size: 18px;
         line-height: 12px;
         margin-bottom: 2px;
     }
 
-.desc p {
-    font-size: 10px;
-    margin-bottom: 0;
-}
+    .desc p {
+        font-size: 10px;
+        margin-bottom: 0;
+    }
 }
 
 /* 3D Line Chart style */
