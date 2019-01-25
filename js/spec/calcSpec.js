@@ -1,8 +1,43 @@
-describe('List of surf Spots', function() {
-    it('Location should be equal to direction', function() {
-        expect(mapLocation[0].id).toEqual('north');
+// function surfTitle(spot) {
+//     var result = '';
+//     for (var i = 0; i < spot.length; i++) {
+//         result += `<div class="col-xs-12 padding"><button class="btn btn-default spot" type="submit">${spot[i]}</button></div>`;
+//     }
+//     return result;
+// };
+
+
+// mapLocation.listOfSpots
+
+describe('List of surf spots button generator', function() {
+    var result = '';
+    var spot = mapLocation[0].listOfSpots;
+    for (var i = 0; i < spot.length; i++) {
+        result += `<div class="col-xs-12 padding"><button class="btn btn-default spot" type="submit">${spot[i]}</button></div>`;
+    }
+    it('should generate inner HTML with surf spot title', function() {
+        expect(result).toBe('<div class="col-xs-12 padding"><button class="btn btn-default spot" type="submit">Portrush</button></div><div class="col-xs-12 padding"><button class="btn btn-default spot" type="submit">Magheroarty</button></div><div class="col-xs-12 padding"><button class="btn btn-default spot" type="submit">Falcarragh</button></div>');
+        expect(result).toBeTruthy();
     });
 });
+
+// describe('display list of surfing spots', function() {
+//     describe('selecting direction "north"', function() {
+//         it('button "north" should')
+//         it('should return 3 surf spots' function() {
+//             expect()
+//         })
+//     })
+// })
+
+
+
+
+// describe('List of surf Spots', function() {
+//     it('Location should be equal to direction', function() {
+//         expect(mapLocation[0].id).toEqual('north');
+//     });
+// });
 
 
 // myArray[i].listOfSpots
