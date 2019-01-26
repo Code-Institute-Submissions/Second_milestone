@@ -6,7 +6,7 @@ describe('Selecting one of four Cardinal directions', function() {
         it('the mapLocation array spot id match selected direction', function() {
             expect(listSpots(nameKey, myArray)).toBe(result);
         });
-        it('the mapLocation array spot id does not match unselected directions', function() {
+        it('the mapLocation array spot id does not match direction which wasnt selected', function() {
             var nameKey = 'north';
             expect(listSpots(nameKey, myArray)).not.toBe(result);
         });
@@ -67,20 +67,47 @@ describe('Simplify wind Cardinal directions', function() {
     });
 });
 
-// function check() {
-//     if ((wind - point) === 0) {
-//       return 'OFF';
-//     } else if (
-//       (range[0] === 0) && (range[1] === 180) ||
-//       (range[0] === 180) && (range[1] === 0) ||
-//       (range[0] === 90) && (range[1] === 270) ||
-//       (range[0] === 270) && (range[1] === 90) ||
-//       (range[0] === 45) && (range[1] === 225) ||
-//       (range[0] === 225) && (range[1] === 45) ||
-//       (range[0] === 135) && (range[1] === 315) ||
-//       (range[0] === 315) && (range[1] === 135)) {
-//       return 'ON';
-//     } else {
-//       return 'CROSS';
-//     }
-//   }
+describe('Set wind type from two parameters', function() {
+    describe('Wind and point have same values', function() {
+        it('should return OFF', function() {
+            wind = 180;
+            point = 180;        
+            range = [wind, point];
+            expect(check()).toBe('OFF');
+        });
+        it('should not return other string', function() {
+            wind = 90;
+            point = 90;        
+            range = [wind, point];
+            expect(check()).not.toBe('CROSS');
+        });
+    });
+    describe('Wind and point have values that matches particular range', function() {
+        it('should return ON', function() {
+            wind = 45;
+            point = 225;
+            range = [wind, point];
+            expect(check()).toBe('ON');
+        });
+        it('should not return other string', function() {
+            wind = 0;
+            point = 180;
+            range = [wind, point];
+            expect(check()).not.toBe('OFF');
+        });
+    });
+    describe('Wind and point have values that matches particular range', function() {
+        it('should return CROSS', function() {
+            wind = 45;
+            point = 180;
+            range = [wind, point];
+            expect(check()).toBe('CROSS');
+        });
+        it('should not return other string', function() {
+            wind = 45;
+            point = 315;
+            range = [wind, point];
+            expect(check()).not.toBe('ON');
+        });
+    });
+});

@@ -83,6 +83,10 @@ function direction(value) {
         : "Error!";
 }
 
+var wind ='';
+var point = '';
+var range = [wind, point];
+
 function check() {
     if ((wind - point) === 0) {
       return 'OFF';

@@ -169,7 +169,7 @@ function initMap() {
     function populateInfoWindow(marker, infowindow) {
         if (infowindow.marker != marker) {
             infowindow.marker = marker;
-            infowindow.setContent(`
+            infowindow.setContent(`<div>
             <p>${marker.title}</p>
             <p>Co. ${marker.county}</p>
             <p>${marker.mapDir} SPOT</p>`);
@@ -578,18 +578,13 @@ function stepTwo(e) {
 
             for (var i = 0; i < 240; i = i + delta) {
                 tidesTime.push(tidePrediction[i][0]);
-            }
-            
-
-            for (var i = 0; i < 240; i = i + delta) {
                 tidesValue.push(tidePrediction[i][2]);
             }
-            
+
             // UTC time to Hour and Minutes
-
             var time = new Date(tidesTime[10]);
-            // var timeHM = time.getUTCHours() + ':' + time.getUTCMinutes();
 
+            // var timeHM = time.getUTCHours() + ':' + time.getUTCMinutes();
             tidesTime.forEach(function (time, i) {
                 return tidesTimeValue[time] = tidesValue[i];
             });
@@ -617,10 +612,6 @@ function stepTwo(e) {
             // console.log(tidePrediction);
             for (var i = 240; i < 960; i = i + delta) {
                 tidesTimeEx.push(tidePrediction[i][0]);
-            }
-            
-
-            for (var i = 240; i < 960; i = i + delta) {
                 tidesValueEx.push(tidePrediction[i][2]);
             }
             
