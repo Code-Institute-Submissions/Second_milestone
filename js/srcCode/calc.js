@@ -1,24 +1,6 @@
 var surfSpots = [
-    {
-        title: 'Portrush', 
-        county: 'Antrim', 
-        location: {lat: 55.170241, lng: -6.731873}, 
-        point: 0, 
-        map: 'north', 
-        station: '%22Malin_Head%22', 
-        stationGfs: '%22Malin_Head%22', 
-        buoy: '%22M4%22'
-    },
-    {
-        title: 'Magheroarty', 
-        county: 'Donegal', 
-        location: {lat: 55.162985, lng: -8.143272}, 
-        point: 0, 
-        map: 'north', 
-        station: '%22Aranmore%22', 
-        stationGfs: '%22Malin_Head%22', 
-        buoy: '%22M4%22'
-    },
+    {title: 'Portrush', county: 'Antrim', location: {lat: 55.170241, lng: -6.731873}, point: 0, map: 'north', station: '%22Malin_Head%22', stationGfs: '%22Malin_Head%22', buoy: '%22M4%22'},
+    {title: 'Magheroarty', county: 'Donegal', location: {lat: 55.162985, lng: -8.143272}, point: 0, map: 'north', station: '%22Aranmore%22', stationGfs: '%22Malin_Head%22', buoy: '%22M4%22'},
     {title: 'Falcarragh', county: 'Donegal', location: {lat: 55.16073, lng: -8.085937}, point: 0, map: 'north', station: '%22Aranmore%22', stationGfs: '%22Malin_Head%22', buoy: '%22M4%22'},
     {title: 'Rossnowlagh', county: 'Donegal', location: {lat: 54.555689, lng: -8.210135}, point: 270, map: 'west', station: '%22Killybegs%22', stationGfs: '%22Achill%22', buoy: '%22M4%22'},
     {title: 'Bundoran', county: 'Donegal', location: {lat: 54.492515, lng: -8.268799}, point: 315, map: 'west', station: '%22Killybegs%22', stationGfs: '%22Achill%22', buoy: '%22M4%22'},
@@ -41,31 +23,80 @@ var surfSpots = [
 
 var mapLocation = [
     {
-        'id': 'north',
-        'listOfSpots': [surfSpots[0].title, surfSpots[1].title, surfSpots[2].title],
-        'setCenter': { lat : 55.307211, lng : -7.373801 },
-        'setZoom': 8
+        id: 'north',
+        listOfSpots: [surfSpots[0].title, surfSpots[1].title, surfSpots[2].title],
+        setCenter: { lat : 55.307211, lng : -7.373801 },
+        setZoom: 8
     },
     {
-        'id': 'west',
-        'listOfSpots': [surfSpots[3].title, surfSpots[4].title, surfSpots[5].title, surfSpots[6].title, surfSpots[7].title, surfSpots[8].title, surfSpots[9].title, surfSpots[10].title, surfSpots[11].title, surfSpots[12].title],
-        'setCenter': { lat : 53.365468, lng : -9.814509 },
-        'setZoom': 6.8
+        id: 'west',
+        listOfSpots: [surfSpots[3].title, surfSpots[4].title, surfSpots[5].title, surfSpots[6].title, surfSpots[7].title, surfSpots[8].title, surfSpots[9].title, surfSpots[10].title, surfSpots[11].title, surfSpots[12].title],
+        setCenter: { lat : 53.365468, lng : -9.814509 },
+        setZoom: 6.8
     },
     {
-        'id': 'south',
-        'listOfSpots': [surfSpots[13].title, surfSpots[14].title, surfSpots[15].title, surfSpots[16].title, surfSpots[17].title],
-        'setCenter': { lat : 51.789279, lng : -8.285663 },
-        'setZoom': 7
+        id: 'south',
+        listOfSpots: [surfSpots[13].title, surfSpots[14].title, surfSpots[15].title, surfSpots[16].title, surfSpots[17].title],
+        setCenter: { lat : 51.789279, lng : -8.285663 },
+        setZoom: 7
     },
     {
-        'id': 'east',
-        'listOfSpots': [surfSpots[18].title, surfSpots[19].title],
-        'setCenter': { lat : 53.148223, lng : -6.077892 },
-        'setZoom': 9
+        id: 'east',
+        listOfSpots: [surfSpots[18].title, surfSpots[19].title],
+        setCenter: { lat : 53.148223, lng : -6.077892 },
+        setZoom: 9
     },
 ];
 
-// var input = [1,2,3];
-// var output = [10, 20, 30];
+function surfTitle(spot) {
+    var result = '';
+    for (var i = 0; i < spot.length; i++) {
+        result += `<div class="col-xs-12 padding"><button class="btn btn-default spot" type="submit">${spot[i]}</button></div>`;
+    }
+    return result;
+};
 
+var surfingSpots = '';
+
+function listSpots(nameKey, myArray) {
+    for (var i=0; i < myArray.length; i++) {
+        if (myArray[i].id === nameKey) {
+            surfingSpots = `<div class="row text-center"><div class="col-xs-12 button">${surfTitle(myArray[i].listOfSpots)}</div></div>`;
+            return surfingSpots;
+        }
+    }
+}
+
+function addZero(n) {
+    return n < 10 ? '0' + n : '' + n;
+}
+
+function direction(value) {
+    return ((value >= 0 && value < 22.5) || value >=337.5) ? 0
+        : (value >= 22.5 && value < 67.5) ? 45
+        : (value >= 67.5 && value < 112.5) ? 90
+        : (value >= 112.5 && value < 157.5) ? 135
+        : (value >= 157.5 && value < 202.5) ? 180
+        : (value >= 202.5 && value < 247.5) ? 225
+        : (value >= 247.5 && value < 292.5) ? 270
+        : (value >= 292.5) ? 315
+        : "Error!";
+}
+
+function check() {
+    if ((wind - point) === 0) {
+      return 'OFF';
+    } else if (
+      (range[0] === 0) && (range[1] === 180) ||
+      (range[0] === 180) && (range[1] === 0) ||
+      (range[0] === 90) && (range[1] === 270) ||
+      (range[0] === 270) && (range[1] === 90) ||
+      (range[0] === 45) && (range[1] === 225) ||
+      (range[0] === 225) && (range[1] === 45) ||
+      (range[0] === 135) && (range[1] === 315) ||
+      (range[0] === 315) && (range[1] === 135)) {
+      return 'ON';
+    } else {
+      return 'CROSS';
+    }
+  }

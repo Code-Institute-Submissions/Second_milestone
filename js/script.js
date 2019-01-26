@@ -1,4 +1,4 @@
-// Surfing locations definition
+// Surfing Spots dataset definition
 
 var surfSpots = [
     {
@@ -41,32 +41,32 @@ var surfSpots = [
     {title: 'Whiterock', county: 'Dublin', location: {lat: 53.265934, lng: -6.106232}, point: 135, map: 'east', station: '%22Dublin_Port%22', stationGfs: '%22Dublin%22', buoy: '%22M2%22'}
 ]; 
 
-// Surfing direction definition
+// Surfing Spots Cardinal direction definition
 
 var mapLocation = [
     {
-        'id': 'north',
-        'listOfSpots': [surfSpots[0].title, surfSpots[1].title, surfSpots[2].title],
-        'setCenter': { lat : 55.307211, lng : -7.373801 },
-        'setZoom': 8
+        id: 'north',
+        listOfSpots: [surfSpots[0].title, surfSpots[1].title, surfSpots[2].title],
+        setCenter: { lat : 55.307211, lng : -7.373801 },
+        setZoom: 8
     },
     {
-        'id': 'west',
-        'listOfSpots': [surfSpots[3].title, surfSpots[4].title, surfSpots[5].title, surfSpots[6].title, surfSpots[7].title, surfSpots[8].title, surfSpots[9].title, surfSpots[10].title, surfSpots[11].title, surfSpots[12].title],
-        'setCenter': { lat : 53.365468, lng : -9.814509 },
-        'setZoom': 6.8
+        id: 'west',
+        listOfSpots: [surfSpots[3].title, surfSpots[4].title, surfSpots[5].title, surfSpots[6].title, surfSpots[7].title, surfSpots[8].title, surfSpots[9].title, surfSpots[10].title, surfSpots[11].title, surfSpots[12].title],
+        setCenter: { lat : 53.365468, lng : -9.814509 },
+        setZoom: 6.8
     },
     {
-        'id': 'south',
-        'listOfSpots': [surfSpots[13].title, surfSpots[14].title, surfSpots[15].title, surfSpots[16].title, surfSpots[17].title],
-        'setCenter': { lat : 51.789279, lng : -8.285663 },
-        'setZoom': 7
+        id: 'south',
+        listOfSpots: [surfSpots[13].title, surfSpots[14].title, surfSpots[15].title, surfSpots[16].title, surfSpots[17].title],
+        setCenter: { lat : 51.789279, lng : -8.285663 },
+        setZoom: 7
     },
     {
-        'id': 'east',
-        'listOfSpots': [surfSpots[18].title, surfSpots[19].title],
-        'setCenter': { lat : 53.148223, lng : -6.077892 },
-        'setZoom': 9
+        id: 'east',
+        listOfSpots: [surfSpots[18].title, surfSpots[19].title],
+        setCenter: { lat : 53.148223, lng : -6.077892 },
+        setZoom: 9
     },
 ];
 
@@ -157,9 +157,7 @@ function initMap() {
                 url: 'assets/icon.svg'
               }
         });
-        // Push marker to our array of markers
         markers.push(marker);
-        // Create an onclick event to open an infoWindow at each marker
         marker.addListener('click', function() {
             populateInfoWindow(this, infoWindow);
         });
@@ -174,7 +172,7 @@ function initMap() {
             infowindow.setContent(`
             <p>${marker.title}</p>
             <p>Co. ${marker.county}</p>
-            <p>${marker.mapDir} SPOT</p>`)
+            <p>${marker.mapDir} SPOT</p>`);
             infowindow.open(map, marker);
             infowindow.addListener('closeclick', function() {
                     infowindow.setMarker = null;
@@ -182,9 +180,7 @@ function initMap() {
             );
         }
     }
-};
-
-// Set surf spots HTML
+}
 
 var directions = document.getElementById('directions');
 var surfingSpots = document.getElementById('surfingSpots');
@@ -211,7 +207,7 @@ var menuE = document.getElementById('menu-e').addEventListener('click', menuLink
 var menuW = document.getElementById('menu-w').addEventListener('click', menuLink);
 var menuS = document.getElementById('menu-s').addEventListener('click', menuLink);
 
-// 
+// innerHTML for all surf spot titles per selected Cardinal direction
 
 function surfTitle(spot) {
     var result = '';
@@ -219,31 +215,35 @@ function surfTitle(spot) {
         result += `<div class="col-xs-12 padding"><button class="btn btn-default spot" type="submit">${spot[i]}</button></div>`;
     }
     return result;
-};
+}
+
+// innerHTML for surf spot cardinal direction that matches the nameKey e.g. 'north'
 
 function listSpots(nameKey, myArray) {
-    for (var i=0; i < myArray.length; i++) {
+    for (var i = 0; i < myArray.length; i++) {
         if (myArray[i].id === nameKey) {
             surfingSpots.innerHTML = `<div class="row text-center"><div class="col-xs-12 button">${surfTitle(myArray[i].listOfSpots)}</div></div>`;
         }
     }
 }
 
+// return Google map location and zoom for given parameters
+
 function mapCenter(nameKey, myArray) {
-    for (var i=0; i < myArray.length; i++) {
+    for (var i = 0; i < myArray.length; i++) {
         if (myArray[i].id === nameKey) {
             return myArray[i].setCenter;
         }
     }
-};
+}
 
 function mapZoom(nameKey, myArray) {
-    for (var i=0; i < myArray.length; i++) {
+    for (var i = 0; i < myArray.length; i++) {
         if (myArray[i].id === nameKey) {
             return myArray[i].setZoom;
         }
     }
-};
+}
 
 // Step One: Selection of Surf Spots directions
 
@@ -254,7 +254,7 @@ function stepOne(e) {
         goBack.classList.remove('hidden');
         
         function backToHome(e) {
-            if (e.target.id = 'goback') {
+            if (e.target.id == 'goback') {
                 directions.classList.remove('hidden');
                 surfingSpots.classList.add('hidden');
                 goBack.classList.add('hidden');
@@ -262,7 +262,7 @@ function stepOne(e) {
                 map.setZoom(6);
                 window.scrollTo(0, 0);
             }
-        };
+        }
 
         var goBackTo = goBack.addEventListener('click', backToHome);
 
@@ -283,62 +283,62 @@ function stepOne(e) {
         } else if (e.target.id === 'btn-e') {
             go2Back.classList.add('east');
             go2Back.classList.remove('west', 'north', 'south');
-        };
+        }
     }
-};
+}
 
 // Surf Forecast per Surf Spot
 // Function to match the surf spot name with selection in order to get the lat and lng values
 
 function searchLocation(nameKey, myArray) {
-    for (var i=0; i < myArray.length; i++) {
+    for (var i = 0; i < myArray.length; i++) {
         if (myArray[i].title === nameKey) {
             return myArray[i].location;
         }
     }
-};
+}
 
 // Function to match surf spots direction with forecast wind direction in order to determine the type of the wind
 
 function searchPoint(nameKey, myArray) {
-    for (var i=0; i < myArray.length; i++) {
+    for (var i = 0; i < myArray.length; i++) {
         if (myArray[i].title === nameKey) {
             return myArray[i].point;
         }
     }
-};
+}
 
 function searchStation(nameKey, myArray) {
-    for (var i=0; i < myArray.length; i++) {
+    for (var i = 0; i < myArray.length; i++) {
         if (myArray[i].title === nameKey) {
             return myArray[i].station;
         }
     }
-};
+}
 
 function searchStationGfs(nameKey, myArray) {
-    for (var i=0; i < myArray.length; i++) {
+    for (var i = 0; i < myArray.length; i++) {
         if (myArray[i].title === nameKey) {
             return myArray[i].stationGfs;
         }
     }
-};
+}
 
 function searchBuoy(nameKey, myArray) {
-    for (var i=0; i < myArray.length; i++) {
+    for (var i = 0; i < myArray.length; i++) {
         if (myArray[i].title === nameKey) {
             return myArray[i].buoy;
         }
     }
-};
+}
 
 function storageKey(nameKey, myArray) {
-    for (var i=0; i < myArray.length; i++) {
+    for (var i = 0; i < myArray.length; i++) {
         if (myArray[i].title === nameKey) {
             return myArray[i].title;
         }
     }
-};
+}
 
 var spotForecast = document.getElementById('surfingSpots').addEventListener('click', stepTwo);
 
@@ -366,7 +366,7 @@ function stepTwo(e) {
             // Adding second digit for day and month < 10
             function addZero(n) {
                 return n < 10 ? '0' + n : '' + n;
-            };
+            }
             
             var timeTodayFormat = timeToday.getFullYear() + '-' + addZero(timeToday.getMonth() + 1) + '-' + addZero(timeToday.getDate());
 
@@ -380,7 +380,7 @@ function stepTwo(e) {
                 var day = addZero(tmr.getDate());
                 var time = year + '-' + month + '-' + day;
                 return time; 
-            };
+            }
 
             var timeFrom = timeTodayFormat + 'T00%3A00%3A00Z';
             var timeTo = timeConverter(timeTomorrow) + 'T00%3A00%3A00Z';
@@ -522,9 +522,9 @@ function stepTwo(e) {
                     : (value >= 112.5 && value < 157.5) ? 135
                     : (value >= 157.5 && value < 202.5) ? 180
                     : (value >= 202.5 && value < 247.5) ? 225
-                    : (value >= 247.5 && value <292.5) ? 270
-                    : (value >= 292.5 && value <337.5) ? 315
-                    : null;
+                    : (value >= 247.5 && value < 292.5) ? 270
+                    : (value >= 292.5) ? 315
+                    : "Error!";
             }
             console.log(windMorningAverage);
             // console.log(direction(windMorningAverage.windDirection)); 
@@ -562,7 +562,7 @@ function stepTwo(e) {
                   }
         
                 return check();
-            };
+            }
 
             console.log(windType(windMorningAverage.windDirection));   
                     
@@ -576,12 +576,12 @@ function stepTwo(e) {
             var tidesValue = [];
             var tidesTimeValue = {};
 
-            for (i = 0; i < 240; i = i + delta) {
+            for (var i = 0; i < 240; i = i + delta) {
                 tidesTime.push(tidePrediction[i][0]);
             }
             
 
-            for (i = 0; i < 240; i = i + delta) {
+            for (var i = 0; i < 240; i = i + delta) {
                 tidesValue.push(tidePrediction[i][2]);
             }
             
@@ -600,13 +600,13 @@ function stepTwo(e) {
             
             var dataApi = [];
 
-            for (i = 0; i < 240; i = i + delta) {
+            for (var i = 0; i < 240; i = i + delta) {
                 dataApi.push (
                     {
                         date: (new Date(tidePrediction[i][0])).getUTCHours(),
                         value: tidePrediction[i][2]
                     });
-            };
+            }
 
             // console.log(dataApi);
             
@@ -615,12 +615,12 @@ function stepTwo(e) {
             var tidesValueEx = [];
             var tidesTimeValueEx = {};
             // console.log(tidePrediction);
-            for (i = 240; i < 960; i = i + delta) {
+            for (var i = 240; i < 960; i = i + delta) {
                 tidesTimeEx.push(tidePrediction[i][0]);
             }
             
 
-            for (i = 240; i < 960; i = i + delta) {
+            for (var i = 240; i < 960; i = i + delta) {
                 tidesValueEx.push(tidePrediction[i][2]);
             }
             
@@ -634,13 +634,13 @@ function stepTwo(e) {
 
             var dataApiEx = [];
 
-            for (i = 240; i < 960; i = i + delta) {
+            for (var i = 240; i < 960; i = i + delta) {
                 dataApiEx.push (
                     {
                         date: (new Date(tidePrediction[i][0])).getUTCHours(),
                         value: tidePrediction[i][2]
                     });
-            };
+            }
 
             // console.log(dataApiEx);
 
@@ -777,11 +777,6 @@ function stepTwo(e) {
 
                 </div>
             </div>
-
-
-
-
-
 
             <div class="container-fluid hidden" id="tmrwFor">
                 <div class="row no-gutter">
@@ -1098,7 +1093,7 @@ function stepTwo(e) {
             // Back button
             function backToHome(e) {
                 console.log(e.target.id);
-                if (e.target.id = 'go2back') {
+                if (e.target.id == 'go2back') {
                     forecast.classList.add('hidden');
                     surfingSpots.classList.remove('hidden');
                     go2Back.classList.add('hidden');
@@ -1140,7 +1135,7 @@ function menuLink(e) {
         goBack.classList.remove('hidden');
         
         function backToHome(e) {
-            if (e.target.id = 'goback') {
+            if (e.target.id == 'goback') {
                 directions.classList.remove('hidden');
                 surfingSpots.classList.add('hidden');
                 goBack.classList.add('hidden');
@@ -1165,7 +1160,7 @@ function menuLink(e) {
         go2Back.classList.add('hidden');
         
         function backToHome(e) {
-            if (e.target.id = 'goback') {
+            if (e.target.id == 'goback') {
                 directions.classList.remove('hidden');
                 surfingSpots.classList.add('hidden');
                 goBack.classList.add('hidden');
