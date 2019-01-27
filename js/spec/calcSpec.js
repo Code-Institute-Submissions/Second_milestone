@@ -111,3 +111,56 @@ describe('Set wind type from two parameters', function() {
         });
     });
 });
+
+describe('Convert date to display days of the week', function() {
+    describe('Todays day display correct day of the week', function() {
+        it('should return todays day of the week', function() {
+            expect(dayWeek[date.addDays(0).getDay()]).toBeTruthy();
+        });
+        it('should return day of the week matching the array of days', function() {
+            expect(dayWeek).toContain(dayWeek[date.addDays(0).getDay()]);
+        });
+    });
+    describe('Four days from todays day should display correct day of the week', function() {
+        it('should return fourth day of the week from todays day', function() {
+            expect(dayWeek[date.addDays(4).getDay()]).toBeTruthy();
+        });
+        it('should return day of the week matching the array of days', function() {
+            expect(dayWeek).toContain(dayWeek[date.addDays(4).getDay()]);
+        });
+    });
+    describe('Seven days from todays day should display the same day of the week', function() {
+        it('should return the same day of the week', function() {
+            expect(dayWeek[date.addDays(7).getDay()]).toBeTruthy();
+        });
+        it('returned day of the week should match the array of days', function() {
+            expect(dayWeek).toContain(dayWeek[date.addDays(7).getDay()]);
+        });
+    });   
+});
+
+describe('Calculate average wind values for defined data', function() {
+    describe('Sum all values for selected data type', function() {
+        it('should return an average value of wind direction', function() {
+            expect(average.windDirection).toBe(334);
+        });
+        it('should return an average value of wind speed', function() {
+            expect(average.windSpeed).toBe(70);
+        });
+    });
+});
+
+// function wind(time) {
+//     var totalWindDirection = 0;
+//     var totalWindSpeed = 0;
+
+//     time.forEach(function(hour) {
+//         totalWindDirection += hour[3];
+//         totalWindSpeed += hour[2];
+//         });
+
+//     var average = new Object();
+//     average['windDirection'] = Math.round(totalWindDirection / time.length);
+//     average['windSpeed'] = Math.round((totalWindSpeed * 1.851999999984) / time.length);
+//     return average;
+// }

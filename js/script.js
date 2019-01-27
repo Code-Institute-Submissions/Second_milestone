@@ -130,9 +130,9 @@ function initMap() {
         mapTypeControl: false
     });
 
-    google.maps.event.addListener(map, 'click', function(event) {
-        placeMarker(event.latLng);
-    });
+    // google.maps.event.addListener(map, 'click', function(event) {
+    //     placeMarker(event.latLng);
+    // });
 
     var markers = [];
     
@@ -471,14 +471,14 @@ function stepTwo(e) {
                 
                     var average = new Object();
                     average['windDirection'] = Math.round(totalWindDirection / time.length);
-                    average['windSpeed'] = Math.round((totalWindSpeed * 0.5144444) / time.length);
+                    average['windSpeed'] = Math.round((totalWindSpeed * 1.851999999984) / time.length);
                     return average;
                 }
                 
                 // console.log(waveMorning);
                 // console.log(waveMidday);
                 // console.log(waveAfternoon);
-                // console.log(windMorning);
+                console.log(windMorning);
                 // console.log(windMidday);
                 // console.log(windAfternoon);
 
@@ -688,7 +688,7 @@ function stepTwo(e) {
                                 <div class="col-xs-4 text-center desc">
                                     <h3>WIND</h3>
                                     <p>&#8592 TYPE</p>
-                                    <p>SPEED (m/s) &#8594</p>
+                                    <p>SPEED (kph) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${windMorningAverage.windSpeed = windMorningAverage.windSpeed || '-'}</p>
@@ -720,7 +720,7 @@ function stepTwo(e) {
                                 <div class="col-xs-4 text-center desc">
                                     <h3>WIND</h3>
                                     <p>&#8592 TYPE</p>
-                                    <p>SPEED (m/s) &#8594</p>
+                                    <p>SPEED (kph) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${windMiddayAverage.windSpeed = windMiddayAverage.windSpeed || '-'}</p>
@@ -752,7 +752,7 @@ function stepTwo(e) {
                                 <div class="col-xs-4 text-center desc">
                                     <h3>WIND</h3>
                                     <p>&#8592 TYPE</p>
-                                    <p>SPEED (m/s) &#8594</p>
+                                    <p>SPEED (kph) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${windAfternoonAverage.windSpeed = windAfternoonAverage.windSpeed || '-'}</p>
@@ -800,7 +800,7 @@ function stepTwo(e) {
                                 <div class="col-xs-4 text-center desc">
                                     <h3>WIND</h3>
                                     <p>&#8592 TYPE</p>
-                                    <p>SPEED (m/s) &#8594</p>
+                                    <p>SPEED (kph) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${windDTwoAverage.windSpeed = windDTwoAverage.windSpeed || '-'}</p>
@@ -832,7 +832,7 @@ function stepTwo(e) {
                                 <div class="col-xs-4 text-center desc">
                                     <h3>WIND</h3>
                                     <p>&#8592 TYPE</p>
-                                    <p>SPEED (m/s) &#8594</p>
+                                    <p>SPEED (kph) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${windDThreeAverage.windSpeed = windDThreeAverage.windSpeed || '-'}</p>
@@ -864,7 +864,7 @@ function stepTwo(e) {
                                 <div class="col-xs-4 text-center desc">
                                     <h3>WIND</h3>
                                     <p>&#8592 TYPE</p>
-                                    <p>SPEED (m/s) &#8594</p>
+                                    <p>SPEED (kph) &#8594</p>
                                 </div>
                                 <div class="col-xs-4 text-center values">
                                     <p>${windDFourAverage.windSpeed = windDFourAverage.windSpeed || '-'}</p>

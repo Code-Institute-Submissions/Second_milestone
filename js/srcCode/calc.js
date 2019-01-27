@@ -104,3 +104,35 @@ function check() {
       return 'CROSS';
     }
   }
+
+// Day format for data content display
+var day = new Date();
+var dayWeek = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+var dayDisplay = dayWeek[day.getDay() + 1];
+
+Date.prototype.addDays = function(days) {
+// function addDays(days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+}
+var date = new Date();
+
+// Average
+
+var data = [
+    ["2019-01-27T06:00:00Z", "Malin_Head", 39.81442568773671, 335.5327186116288],
+    ["2019-01-27T09:00:00Z", "Malin_Head", 35.59143345640917, 333.0645075514584]
+];
+
+var totalWindDirection = 0;
+var totalWindSpeed = 0;
+
+data.forEach(function(hour) {
+    totalWindDirection += hour[3];
+    totalWindSpeed += hour[2];
+    });
+
+var average = new Object();
+average['windDirection'] = Math.round(totalWindDirection / data.length);
+average['windSpeed'] = Math.round((totalWindSpeed * 1.851999999984) / data.length);
