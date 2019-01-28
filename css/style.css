@@ -155,7 +155,7 @@ a:active, a:hover {
     }
 }
 
-/* Google Map Style */
+/* Google Maps Style */
 
 .map {
     padding-top: 70px;
@@ -188,11 +188,10 @@ a:active, a:hover {
 }
 
 .gm-style-iw p:nth-child(3) {
-    /* font-size: 14px !important; */
     border-bottom: 2px solid #3E4EA4;
 }
 
-/* Button Bootstrap overwrite */
+/* Bootstrap button overwrite */
 
 .row button {
     font-weight: 500;
@@ -255,7 +254,6 @@ a:active, a:hover {
 
 .btn {
     border: 4px;
-    /* border-style: solid; */
     border-style: none;
     padding: 0;
     font-size: 20px;

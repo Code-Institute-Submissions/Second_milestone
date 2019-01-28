@@ -44,79 +44,49 @@ var surfSpots = [
 // Surfing Spots Cardinal direction definition
 
 var mapLocation = [
-    {
-        id: 'north',
+    {   id: 'north',
         listOfSpots: [surfSpots[0].title, surfSpots[1].title, surfSpots[2].title],
         setCenter: { lat : 55.307211, lng : -7.373801 },
-        setZoom: 8
-    },
-    {
-        id: 'west',
+        setZoom: 8 },
+    {   id: 'west',
         listOfSpots: [surfSpots[3].title, surfSpots[4].title, surfSpots[5].title, surfSpots[6].title, surfSpots[7].title, surfSpots[8].title, surfSpots[9].title, surfSpots[10].title, surfSpots[11].title, surfSpots[12].title],
         setCenter: { lat : 53.365468, lng : -9.814509 },
-        setZoom: 6.8
-    },
-    {
-        id: 'south',
+        setZoom: 6.8 },
+    {   id: 'south',
         listOfSpots: [surfSpots[13].title, surfSpots[14].title, surfSpots[15].title, surfSpots[16].title, surfSpots[17].title],
         setCenter: { lat : 51.789279, lng : -8.285663 },
-        setZoom: 7
-    },
-    {
-        id: 'east',
+        setZoom: 7 },
+    {   id: 'east',
         listOfSpots: [surfSpots[18].title, surfSpots[19].title],
         setCenter: { lat : 53.148223, lng : -6.077892 },
-        setZoom: 9
-    },
+        setZoom: 9 },
 ];
 
 // Google Maps API
 
 var map;
 var styles = [
-    {featureType: 'landscape', elementType: 'all', stylers: [{ color: '#3E4EA4' }]},
-    {
-        featureType: 'poi',
+    {   featureType: 'landscape',
         elementType: 'all',
-        stylers: [
-            { visibility: 'off' }
-        ]
-    },
-    {
-        featureType: 'administrative',
+        stylers: [{ color: '#3E4EA4' }] },
+    {   featureType: 'poi',
+        elementType: 'all',
+        stylers: [{ visibility: 'off' }] },
+    {   featureType: 'administrative',
         elementType: 'labels.text.fill',
-        stylers: [
-            { color: '#ffffff' }
-        ]
-    },
-    {
-        featureType: 'administrative',
+        stylers: [{ color: '#ffffff' }] },
+    {   featureType: 'administrative',
         elementType: 'labels.text.stroke',
-        stylers: [
-            { visibility: 'off' }
-        ]
-    },
-    {
-        featureType: 'road',
+        stylers: [{ visibility: 'off' }] },
+    {   featureType: 'road',
         elementType: 'geometry',
-        stylers: [
-            { visibility: 'off' }
-        ]
-    },
-    {
-        featureType: 'road',
+        stylers: [{ visibility: 'off' }] },
+    {   featureType: 'road',
         elementType: 'labels',
-        stylers: [
-            { visibility: 'off' }
-        ]
-    },
-    {
-        featureType: 'water',
+        stylers: [{ visibility: 'off' }] },
+    {   featureType: 'water',
         elementType: 'all',
-        stylers: [
-            { color: '#FD6591' }
-        ]
-    }
+        stylers: [{ color: '#FD6591' }] }
 ];
 
 // Map initializing and markers definition
@@ -130,14 +100,8 @@ function initMap() {
         mapTypeControl: false
     });
 
-    // google.maps.event.addListener(map, 'click', function(event) {
-    //     placeMarker(event.latLng);
-    // });
-
     var markers = [];
-    
     var infoWindow = new google.maps.InfoWindow();
-
     var bounds = new google.maps.LatLngBounds();
 
     for (var i = 0; i < surfSpots.length; i++) {
@@ -153,9 +117,7 @@ function initMap() {
             mapDir: mapDir,
             animation: google.maps.Animation.DROP,
             id: i,
-            icon: {
-                url: 'assets/icon.svg'
-              }
+            icon: { url: 'assets/icon.svg' }
         });
         markers.push(marker);
         marker.addListener('click', function() {
@@ -207,7 +169,7 @@ var menuE = document.getElementById('menu-e').addEventListener('click', menuLink
 var menuW = document.getElementById('menu-w').addEventListener('click', menuLink);
 var menuS = document.getElementById('menu-s').addEventListener('click', menuLink);
 
-// innerHTML for all surf spot titles per selected Cardinal direction
+// Defining html for each cardinal direction and surf spot
 
 function surfTitle(spot) {
     var result = '';
@@ -217,8 +179,6 @@ function surfTitle(spot) {
     return result;
 }
 
-// innerHTML for surf spot cardinal direction that matches the nameKey e.g. 'north'
-
 function listSpots(nameKey, myArray) {
     for (var i = 0; i < myArray.length; i++) {
         if (myArray[i].id === nameKey) {
@@ -227,7 +187,7 @@ function listSpots(nameKey, myArray) {
     }
 }
 
-// return Google map location and zoom for given parameters
+// Defining Google map location and map zoom for given parameters
 
 function mapCenter(nameKey, myArray) {
     for (var i = 0; i < myArray.length; i++) {
@@ -245,7 +205,7 @@ function mapZoom(nameKey, myArray) {
     }
 }
 
-// Step One: Selection of Surf Spots directions
+// Generating list of surf spots based on the selected cardinal direction. This step leads to providing a tailored surfing forecast for specific spot. The back button is created to allow easy page navigation by returning to previous step
 
 function stepOne(e) {
     if (surfingSpots.classList.contains('hidden')) {
@@ -287,8 +247,7 @@ function stepOne(e) {
     }
 }
 
-// Surf Forecast per Surf Spot
-// Function to match the surf spot name with selection in order to get the lat and lng values
+// List of functions enabling quick access to values stored in surfSpots object
 
 function searchLocation(nameKey, myArray) {
     for (var i = 0; i < myArray.length; i++) {
@@ -297,8 +256,6 @@ function searchLocation(nameKey, myArray) {
         }
     }
 }
-
-// Function to match surf spots direction with forecast wind direction in order to determine the type of the wind
 
 function searchPoint(nameKey, myArray) {
     for (var i = 0; i < myArray.length; i++) {
@@ -342,12 +299,11 @@ function storageKey(nameKey, myArray) {
 
 var spotForecast = document.getElementById('surfingSpots').addEventListener('click', stepTwo);
 
+// Generating forecast for selected surf spots with data fetched from APIs. The back button is created to allow easy page navigation by returning to previous selection
+
 function stepTwo(e) {
-    console.log(e.target.childNodes[0].data);
-    console.log(e);
     var selection = e.target.childNodes[0].data;
     if (e.target && e.target.matches('button.spot')) {
-        // console.log('Button element clicked');
         if (forecast.classList.contains('hidden')) {
             surfingSpots.classList.add('hidden');
             forecast.classList.remove('hidden');
@@ -356,23 +312,17 @@ function stepTwo(e) {
 
             map.setCenter(searchLocation(selection, surfSpots));
             map.setZoom(12);
-
             window.scrollTo(0, 0);
 
-            // Fetch API from Marine Institute of Ireland
+            // date manipulation and conversion in order to fetch correct data from Marine Institute of Ireland API
 
             var timeToday = new Date();
-
-            // Adding second digit for day and month < 10
             function addZero(n) {
                 return n < 10 ? '0' + n : '' + n;
-            }
-            
+            }            
             var timeTodayFormat = timeToday.getFullYear() + '-' + addZero(timeToday.getMonth() + 1) + '-' + addZero(timeToday.getDate());
-
             var timeTomorrow = timeToday.setDate(timeToday.getDate() + 4);
 
-            // Unix time to local time conversion
             function timeConverter(t) {
                 var tmr = new Date(t);
                 var year = tmr.getFullYear();
@@ -387,27 +337,18 @@ function stepTwo(e) {
             var station = searchStation(selection, surfSpots);
             var stationGfs = searchStationGfs(selection, surfSpots);
             var buoy = searchBuoy(selection, surfSpots);
-            console.log(timeFrom);
-            console.log(timeTo);
 
             async function forecastData() {
                 var buoyApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${buoy}`);
-                // workaround
-                // var buoyApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&stationID=${buoy}`);
                 var buoyData = await buoyApi.json();
-                console.log(buoyData.table);
 
                 var gfsApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/GFS-WeatherTimeSeries.json?time%2CstationID%2CWindSpeed%2CWindDirection&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${stationGfs}`);
                 var gfsData = await gfsApi.json();
-                console.log(gfsData.table);
 
                 var tidesApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-TidePrediction.json?time%2CstationID%2CWater_Level_ODM&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${station}`);
                 var tidesData = await tidesApi.json();
-                console.log(tidesData.table);
 
-                // Buoy Data: Wave Height and Period
-                    // workaround issue with dataset at source - unable to select date restrains
-                // var waveData = buoyData.table.rows.splice(-289, 193);
+                // APIs data manipulation to get exact days and times for the wave and wind. The fetched wave data is provided in 30 min intervals, whereas wind in 3 hour intervals
 
                 var waveData = buoyData.table.rows;
                 var waveAfternoon = waveData.splice(-163, 11);      // hours 15:00 - 20:00
@@ -417,16 +358,6 @@ function stepTwo(e) {
                 var waveDThree = waveData.splice(-56, 31);          // hours 05:00 - 20:00
                 var waveDTwo = waveData.splice(-73, 31);            // hours 05:00 - 20:00
 
-                // console.log(waveData);
-                // console.log(waveAfternoon);
-                // console.log(waveMidday);
-                console.log(waveMorning[0][0]);
-                console.log(waveDTwo[0][0]);
-                console.log(waveDThree[0][0]);
-                console.log(waveDFour[0][0]);                
-
-                // GFS Data: Wind Speed and Direction
-
                 var windData = gfsData.table.rows;
                 var windAfternoon = windData.splice(-28, 3);    // hours 15:00, 18:00, 21:00
                 var windMidday = windData.splice(-26, 1);       // hours 12:00
@@ -435,15 +366,7 @@ function stepTwo(e) {
                 var windDThree = windData.splice(-9, 6);        // hours 06:00 - 21:00
                 var windDTwo = windData.splice(-11, 6);         // hours 06:00 - 21:00                                
 
-                // console.log(windData);
-                // console.log(windAfternoon);
-                // console.log(windMidday);
-                // console.log(windMorning);
-                // console.log(windDFour);
-                // console.log(windDThree);
-                // console.log(windDTwo);
-
-                // Calculating Average values for wave and wind values 
+                // Calculating Average values for wave and wind. The wind output is converted from knots to kph 
                 
                 function wave(time) {
                     var totalWaveHeight = 0;
@@ -474,14 +397,6 @@ function stepTwo(e) {
                     average['windSpeed'] = Math.round((totalWindSpeed * 1.851999999984) / time.length);
                     return average;
                 }
-                
-
-                // console.log(waveMorning);
-                // console.log(waveMidday);
-                // console.log(waveAfternoon);
-                // console.log(windMorning);
-                // console.log(windMidday);
-                // console.log(windAfternoon);
 
                 var waveMorningAverage = wave(waveMorning);
                 var waveMiddayAverage = wave(waveMidday);
@@ -497,594 +412,514 @@ function stepTwo(e) {
                 var windDThreeAverage = wind(windDThree);
                 var windDFourAverage = wind(windDFour);
 
-                // console.log(waveMorningAverage);
-                // console.log(waveMiddayAverage);
-                // console.log(waveAfternoonAverage);
-                // console.log(waveDTwoAverage);
-                // console.log(waveDThreeAverage);
-                // console.log(waveDFourAverage);
-                // console.log(windMorningAverage);
-                // console.log(windMiddayAverage);
-                // console.log(windAfternoonAverage);
-                // console.log(windDTwoAverage);
-                // console.log(windDThreeAverage);
-                // console.log(windDFourAverage);
-
-                // var dayOneAverage = timeOfDay(dayOne);
-                // var dayTwoAverage = timeOfDay(dayTwo);
-                // var dayThreeAverage = timeOfDay(dayThree);
-
-                // Function that return degrees that fall withing range of word directions:
+                // Wind data output conversion to display wind type instead of degrees for clear forecast display
         
-            function direction(value) {
-                return ((value >= 0 && value < 22.5) || value >=337.5) ? 0
-                    : (value >= 22.5 && value < 67.5) ? 45
-                    : (value >= 67.5 && value < 112.5) ? 90
-                    : (value >= 112.5 && value < 157.5) ? 135
-                    : (value >= 157.5 && value < 202.5) ? 180
-                    : (value >= 202.5 && value < 247.5) ? 225
-                    : (value >= 247.5 && value < 292.5) ? 270
-                    : (value >= 292.5) ? 315
-                    : "Error!";
-            }
-            // console.log(windMorningAverage);
-            // console.log(direction(windMorningAverage.windDirection)); 
-            // console.log(surfSpots.point);
- 
-            // Wind types that usues the wind direction and surf spots pointing direction to determin tyoe of wind for location
-                    
-            function windType(data) {
-
-                var wind = direction(data);
-                var point = searchPoint(selection, surfSpots);
-        
-                // console.log('Wind & Surf Spot wind directions: ' + wind + ' ' + point);
-        
-                var range = [wind, point];
-        
-                // console.log('An Array of wind & point direction values: ' + range);
-                
-                function check() {
-                    if ((wind - point) === 0) {
-                      return 'OFF';
-                    } else if (
-                      (range[0] === 0) && (range[1] === 180) ||
-                      (range[0] === 180) && (range[1] === 0) ||
-                      (range[0] === 90) && (range[1] === 270) ||
-                      (range[0] === 270) && (range[1] === 90) ||
-                      (range[0] === 45) && (range[1] === 225) ||
-                      (range[0] === 225) && (range[1] === 45) ||
-                      (range[0] === 135) && (range[1] === 315) ||
-                      (range[0] === 315) && (range[1] === 135)) {
-                      return 'ON';
-                    } else {
-                      return 'CROSS';
-                    }
-                  }
-        
-                return check();
-            }
-
-            console.log(windType(windMorningAverage.windDirection));   
-                    
-            // Tide Data: D3.js DATA definition
-
-            var tidePrediction = tidesData.table.rows;
-            var delta = 10;
-            
-                // One day forecast
-            var tidesTime = [];
-            var tidesValue = [];
-            var tidesTimeValue = {};
-
-            for (var i = 0; i < 240; i = i + delta) {
-                tidesTime.push(tidePrediction[i][0]);
-                tidesValue.push(tidePrediction[i][2]);
-            }
-
-            // UTC time to Hour and Minutes
-            var time = new Date(tidesTime[10]);
-
-            // var timeHM = time.getUTCHours() + ':' + time.getUTCMinutes();
-            tidesTime.forEach(function (time, i) {
-                return tidesTimeValue[time] = tidesValue[i];
-            });
-
-            // console.log(tidesTime);
-            // console.log(tidesValue);
-            // console.log(tidesTimeValue);
-            
-            var dataApi = [];
-
-            for (var i = 0; i < 240; i = i + delta) {
-                dataApi.push (
-                    {
-                        date: (new Date(tidePrediction[i][0])).getUTCHours(),
-                        value: tidePrediction[i][2]
-                    });
-            }
-
-            // console.log(dataApi);
-            
-                // Nest 3 days forecast
-            var tidesTimeEx = [];
-            var tidesValueEx = [];
-            var tidesTimeValueEx = {};
-            // console.log(tidePrediction);
-            for (var i = 240; i < 960; i = i + delta) {
-                tidesTimeEx.push(tidePrediction[i][0]);
-                tidesValueEx.push(tidePrediction[i][2]);
-            }
-            
-            tidesTimeEx.forEach(function (time, i) {
-                return tidesTimeValueEx[time] = tidesValueEx[i];
-            });
-
-            // console.log(tidesTimeEx);
-            // console.log(tidesValueEx);
-            // console.log(tidesTimeValueEx);
-
-            var dataApiEx = [];
-
-            for (var i = 240; i < 960; i = i + delta) {
-                dataApiEx.push (
-                    {
-                        date: (new Date(tidePrediction[i][0])).getUTCHours(),
-                        value: tidePrediction[i][2]
-                    });
-            }
-
-            // console.log(dataApiEx);
-
-            // Day format for data content display
-            var day = new Date();
-            var dayWeek = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
-            var dayWeekShort = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-            var dayDisplay = dayWeek[day.getDay() + 1];
-
-            Date.prototype.addDays = function(days) {
-            // function addDays(days) {
-                var date = new Date(this.valueOf());
-                date.setDate(date.getDate() + days);
-                return date;
-            }
-            
-            var date = new Date();
-
-            // console.log(dayWeek[(date.addDays(3)).getDay()]);
-            console.log(windType(selection));
-            console.log(waveMorningAverage.waveHeight = waveMorningAverage.waveHeight || '-');
-            console.log(windMorningAverage.windSpeed = windMorningAverage.windSpeed || '-');
-            console.log(windType(windMorningAverage.windDirection));
-
-            forecast.innerHTML =`
-            <div class="container-fluid" id="todayFor">
-                <div class="row no-gutter">
-                    <div class="col-xs-12 text-center title">
-                        <h1>${selection.toUpperCase()}</h1>
-                        <h2>TODAY</h2>
-                        <p class="nextDays">+ 3 DAYS</p>
-                    </div>
-
-                    <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
-                        <h2>MORNING</h2>
-                        <div class="container-fluid">
-                            <div class="row no-gutter details">
-                                <div class="col-xs-4 text-center values">
-                                    <p>${waveMorningAverage.waveHeight = waveMorningAverage.waveHeight || '-'}</p>
-                                </div>
-                                <div class="col-xs-4 text-center desc">
-                                    <h3>WAVE</h3>
-                                    <p>&#8592 HEIGHT (m)</p>
-                                    <p>PERIOD (s) &#8594</p>
-                                </div>
-                                <div class="col-xs-4 text-center values">
-                                    <p>${waveMorningAverage.wavePeriod = waveMorningAverage.wavePeriod || '-'}</p>
-                                </div>
-                            </div>                    
-                            <div class="row no-gutter details">
-                                <div class="col-xs-4 text-center string">
-                                    <p>${windType(windMorningAverage.windDirection)}</p>
-                                </div>
-                                <div class="col-xs-4 text-center desc">
-                                    <h3>WIND</h3>
-                                    <p>&#8592 TYPE</p>
-                                    <p>SPEED (kph) &#8594</p>
-                                </div>
-                                <div class="col-xs-4 text-center values">
-                                    <p>${windMorningAverage.windSpeed = windMorningAverage.windSpeed || '-'}</p>
-                                </div>
-                            </div>                    
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
-                        <h2>MIDDAY</h2>
-                        <div class="container-fluid">
-                            <div class="row no-gutter details">
-                                <div class="col-xs-4 text-center values">
-                                    <p>${waveMiddayAverage.waveHeight = waveMiddayAverage.waveHeight || '-'}</p>
-                                </div>
-                                <div class="col-xs-4 text-center desc">
-                                    <h3>WAVE</h3>
-                                    <p>&#8592 HEIGHT (m)</p>
-                                    <p>PERIOD (s) &#8594</p>
-                                </div>
-                                <div class="col-xs-4 text-center values">
-                                    <p>${waveMiddayAverage.wavePeriod = waveMiddayAverage.wavePeriod || '-'}</p>
-                                </div>
-                            </div>                    
-                            <div class="row no-gutter details">
-                                <div class="col-xs-4 text-center string">
-                                    <p>${windType(windMiddayAverage.windDirection)}</p>
-                                </div>
-                                <div class="col-xs-4 text-center desc">
-                                    <h3>WIND</h3>
-                                    <p>&#8592 TYPE</p>
-                                    <p>SPEED (kph) &#8594</p>
-                                </div>
-                                <div class="col-xs-4 text-center values">
-                                    <p>${windMiddayAverage.windSpeed = windMiddayAverage.windSpeed || '-'}</p>
-                                </div>
-                            </div>                    
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
-                        <h2>AFTERNOON</h2>
-                        <div class="container-fluid">
-                            <div class="row no-gutter details">
-                                <div class="col-xs-4 text-center values">
-                                    <p>${waveAfternoonAverage.waveHeight = waveAfternoonAverage.waveHeight || '-'}</p>
-                                </div>
-                                <div class="col-xs-4 text-center desc">
-                                    <h3>WAVE</h3>
-                                    <p>&#8592 HEIGHT (m)</p>
-                                    <p>PERIOD (s) &#8594</p>
-                                </div>
-                                <div class="col-xs-4 text-center values">
-                                    <p>${waveAfternoonAverage.wavePeriod = waveAfternoonAverage.wavePeriod || '-'}</p>
-                                </div>
-                            </div>                    
-                            <div class="row no-gutter details">
-                                <div class="col-xs-4 text-center string">
-                                    <p>${windType(windAfternoonAverage.windDirection)}</p>
-                                </div>
-                                <div class="col-xs-4 text-center desc">
-                                    <h3>WIND</h3>
-                                    <p>&#8592 TYPE</p>
-                                    <p>SPEED (kph) &#8594</p>
-                                </div>
-                                <div class="col-xs-4 text-center values">
-                                    <p>${windAfternoonAverage.windSpeed = windAfternoonAverage.windSpeed || '-'}</p>
-                                </div>
-                            </div>                    
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-6 text-center card day">
-                        <div id="tides">
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="container-fluid hidden" id="tmrwFor">
-                <div class="row no-gutter">
-                    <div class="col-xs-12 text-center title">
-                        <h1>${selection.toUpperCase()}</h1>
-                        <h2>+ 3 DAYS</h2>
-                        <p class="today">TODAY</p>
-                    </div>
-
-                    <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
-                        <h2>${dayWeek[(date.addDays(1)).getDay()]}</h2>
-                        <div class="container-fluid">
-                            <div class="row no-gutter details">
-                                <div class="col-xs-4 text-center values">
-                                    <p>${waveDTwoAverage.waveHeight = waveDTwoAverage.waveHeight || '-'}</p>
-                                </div>
-                                <div class="col-xs-4 text-center desc">
-                                    <h3>WAVE</h3>
-                                    <p>&#8592 HEIGHT (m)</p>
-                                    <p>PERIOD (s) &#8594</p>
-                                </div>
-                                <div class="col-xs-4 text-center values">
-                                    <p>${waveDTwoAverage.wavePeriod = waveDTwoAverage.wavePeriod || '-'}</p>
-                                </div>
-                            </div>                    
-                            <div class="row no-gutter details">
-                                <div class="col-xs-4 text-center string">
-                                    <p>${windType(windDTwoAverage.windDirection)}</p>
-                                </div>
-                                <div class="col-xs-4 text-center desc">
-                                    <h3>WIND</h3>
-                                    <p>&#8592 TYPE</p>
-                                    <p>SPEED (kph) &#8594</p>
-                                </div>
-                                <div class="col-xs-4 text-center values">
-                                    <p>${windDTwoAverage.windSpeed = windDTwoAverage.windSpeed || '-'}</p>
-                                </div>
-                            </div>                    
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
-                        <h2>${dayWeek[(date.addDays(2)).getDay()]}</h2>
-                        <div class="container-fluid">
-                            <div class="row no-gutter details">
-                                <div class="col-xs-4 text-center values">
-                                    <p>${waveDThreeAverage.waveHeight = waveDThreeAverage.waveHeight || '-'}</p>
-                                </div>
-                                <div class="col-xs-4 text-center desc">
-                                    <h3>WAVE</h3>
-                                    <p>&#8592 HEIGHT (m)</p>
-                                    <p>PERIOD (s) &#8594</p>
-                                </div>
-                                <div class="col-xs-4 text-center values">
-                                    <p>${waveDThreeAverage.wavePeriod = waveDThreeAverage.wavePeriod || '-'}</p>
-                                </div>
-                            </div>                    
-                            <div class="row no-gutter details">
-                                <div class="col-xs-4 text-center string">
-                                    <p>${windType(windDThreeAverage.windDirection)}</p>
-                                </div>
-                                <div class="col-xs-4 text-center desc">
-                                    <h3>WIND</h3>
-                                    <p>&#8592 TYPE</p>
-                                    <p>SPEED (kph) &#8594</p>
-                                </div>
-                                <div class="col-xs-4 text-center values">
-                                    <p>${windDThreeAverage.windSpeed = windDThreeAverage.windSpeed || '-'}</p>
-                                </div>
-                            </div>                    
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
-                        <h2>${dayWeek[(date.addDays(3)).getDay()]}</h2>
-                        <div class="container-fluid">
-                            <div class="row no-gutter details">
-                                <div class="col-xs-4 text-center values">
-                                    <p>${waveDFourAverage.waveHeight = waveDFourAverage.waveHeight || '-'}</p>
-                                </div>
-                                <div class="col-xs-4 text-center desc">
-                                    <h3>WAVE</h3>
-                                    <p>&#8592 HEIGHT (m)</p>
-                                    <p>PERIOD (s) &#8594</p>
-                                </div>
-                                <div class="col-xs-4 text-center values">
-                                    <p>${waveDFourAverage.wavePeriod = waveDFourAverage.wavePeriod || '-'}</p>
-                                </div>
-                            </div>                    
-                            <div class="row no-gutter details">
-                                <div class="col-xs-4 text-center string">
-                                    <p>${windType(windDFourAverage.windDirection)}</p>
-                                </div>
-                                <div class="col-xs-4 text-center desc">
-                                    <h3>WIND</h3>
-                                    <p>&#8592 TYPE</p>
-                                    <p>SPEED (kph) &#8594</p>
-                                </div>
-                                <div class="col-xs-4 text-center values">
-                                    <p>${windDFourAverage.windSpeed = windDFourAverage.windSpeed || '-'}</p>
-                                </div>
-                            </div>                    
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-md-6 text-center card day">
-                        <div id="tides-extended">
-                        </div>
-                    </div>
-
-                </div>
-            </div>`
-
-            var todayFor = document.getElementById('todayFor');
-            var tmrwFor = document.getElementById('tmrwFor');
-            // console.log((document.getElementsByClassName('nextDays'))[0]);
-            var nextDays = (document.getElementsByClassName('nextDays'))[0].addEventListener('click', forecastToggle);
-            var today = (document.getElementsByClassName('today'))[0].addEventListener('click', forecastToggle);
-
-            function forecastToggle(e) {
-                if (e.target.classList.contains('nextDays')) {
-                    todayFor.classList.add('hidden');
-                    tmrwFor.classList.remove('hidden');
-                } else if (e.target.classList.contains('today')) {
-                    todayFor.classList.remove('hidden');
-                    tmrwFor.classList.add('hidden');
+                function direction(value) {
+                    return ((value >= 0 && value < 22.5) || value >=337.5) ? 0
+                        : (value >= 22.5 && value < 67.5) ? 45
+                        : (value >= 67.5 && value < 112.5) ? 90
+                        : (value >= 112.5 && value < 157.5) ? 135
+                        : (value >= 157.5 && value < 202.5) ? 180
+                        : (value >= 202.5 && value < 247.5) ? 225
+                        : (value >= 247.5 && value < 292.5) ? 270
+                        : (value >= 292.5) ? 315
+                        : "Error!";
                 }
-            }       
+                     
+                function windType(data) {
+                    var wind = direction(data);
+                    var point = searchPoint(selection, surfSpots);
+                    var range = [wind, point];
 
-            // Day Tidal data - LINE CHART creation
-            // implementation heavily influenced by http://bl.ocks.org/1166403        
-            // Create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
-            var data = tidesValue;
-            // console.log(data);
+                    function check() {
+                        if ((wind - point) === 0) {
+                        return 'OFF';
+                        } else if (
+                        (range[0] === 0) && (range[1] === 180) ||
+                        (range[0] === 180) && (range[1] === 0) ||
+                        (range[0] === 90) && (range[1] === 270) ||
+                        (range[0] === 270) && (range[1] === 90) ||
+                        (range[0] === 45) && (range[1] === 225) ||
+                        (range[0] === 225) && (range[1] === 45) ||
+                        (range[0] === 135) && (range[1] === 315) ||
+                        (range[0] === 315) && (range[1] === 135)) {
+                        return 'ON';
+                        } else {
+                        return 'CROSS';
+                        }
+                    }            
+                    return check();
+                }
+    
+                // Tidal data manipulation in order to create D3.js chart. The data is provided in 6 min intervals, therefore a delta of 10 had to be set to get data every 1 hour instead
 
-            // Defining dimensions of graph
-            function screenSize() {
-                return xxsmall.matches ? 200 :
-                        xsmall.matches ? 250 :
-                        small.matches ? 350 :
-                        medium.matches ? 500 :
-                        large.matches ? 600 :
-                        xlarge.matches ? 350 :
-                        xxlarge.matches ? 1000 :
-                        null;
-            }
+                var tidePrediction = tidesData.table.rows;
+                var delta = 10;
+                
+                // One day forecast 
+                var tidesTime = [];
+                var tidesValue = [];
+                var tidesTimeValue = {};
 
-            var xxsmall = window.matchMedia('(max-width: 350px)');   // 350-     200 
-            var xsmall = window.matchMedia('(max-width: 500px)');    // 350-500  250 OK
-            var small = window.matchMedia('(max-width: 650px)');   // 500-650  300 OK
-            var medium = window.matchMedia('(max-width: 800px)');    // 650-800  500 OK
-            var large = window.matchMedia('(max-width: 991px)');  // 800-991 600 OK
-            var xlarge = window.matchMedia('(max-width: 1199px)'); // 992-1199 300 OK
-            var xxlarge = window.matchMedia('(min-width: 1200px)');
-            // 1200+    800    OK
+                for (var i = 0; i < 240; i = i + delta) {
+                    tidesTime.push(tidePrediction[i][0]);
+                    tidesValue.push(tidePrediction[i][2]);
+                }
 
-            var m = [50, 25, 50, 25]; // margins
-            var w = screenSize() - m[1] - m[3]; // width height: 250px; width: 75vw;
-            var h = 250 - m[0] - m[2]; // height
+                var time = new Date(tidesTime[10]);
 
-            // X scale will fit all values from data[] within pixels 0-w
-            var x = d3.scaleLinear().domain([0, tidesValue.length]).range([0, w]);
-            // Y scale will fit values from 0-10 within pixels h-0 (Note the inverted domain for the y-scale: bigger is up!)
-            var y = d3.scaleLinear().domain([d3.min(tidesValue), d3.max(tidesValue)]).range([h, 0]);
-            // automatically determining max range can work something like this
-            // var y = d3.scale.linear().domain([0, d3.max(data)]).range([h, 0]);
+                tidesTime.forEach(function (time, i) {
+                    return tidesTimeValue[time] = tidesValue[i];
+                });
 
-            // create a line function that can convert data[] into x and y points
-            var line = d3.line()
-            // assign the X function to plot our line as we wish
-                .x(function(d,i) { 
-                // verbose logging to show what's actually being done
-                // console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
-                // return the X coordinate where we want to plot this datapoint
-                return x(i); 
-                })
-                .y(function(d) { 
-                // verbose logging to show what's actually being done
-                // console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + " using our yScale.");
-                // return the Y coordinate where we want to plot this datapoint
-                return y(d); 
-                })
-                .curve(d3.curveBasis)
+                var dataApi = [];
 
-            // Add an SVG element with the desired dimensions and margin.
-            var graph = d3.select("#tides").append("svg:svg")
-                .attr("width", w + m[1] + m[3])
-                .attr("height", h + m[0] + m[2])
-                .append("svg:g")
-                .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+                for (var i = 0; i < 240; i = i + delta) {
+                    dataApi.push (
+                        {
+                            date: (new Date(tidePrediction[i][0])).getUTCHours(),
+                            value: tidePrediction[i][2]
+                        });
+                }
+                
+                // Nest 3 days forecast
+                var tidesTimeEx = [];
+                var tidesValueEx = [];
+                var tidesTimeValueEx = {};
 
-            // create yAxis
-            var ticks = [0, 4, 8, 12, 16, 20, 24]
-            var tickLabels = [0, 4, 8, 12, 16, 20, 0];
-            var xAxis = d3.axisBottom().scale(x).tickValues(ticks).tickFormat(function(d, i){return tickLabels[i] }).tickSize(-h);
-            // Add the x-axis.
-            graph.append("svg:g")
-                .attr("class", "x axis")
-                .attr("transform", "translate(0," + h + ")")
-                .call(xAxis);
-            
-            // Add the line by appending an svg:path element with the data line we created above
-            // do this AFTER the axes above so that the line is above the tick-lines
-            graph.append("svg:path").attr("d", line(data));
+                for (var i = 240; i < 960; i = i + delta) {
+                    tidesTimeEx.push(tidePrediction[i][0]);
+                    tidesValueEx.push(tidePrediction[i][2]);
+                }
+                
+                tidesTimeEx.forEach(function (time, i) {
+                    return tidesTimeValueEx[time] = tidesValueEx[i];
+                });
 
-            graph.append("line")
-            //   .attr("x1",-6)
-                .attr("y1",y(0))//so that the line passes through the y 0
-                .attr("x2",w)
-                .attr("y2",y(0))//so that the line passes through the y 0
-                .style("stroke", "#3E4EA4")
-                .style("opacity", ".5");
+                var dataApiEx = [];
 
-            graph.append("text")
-                .attr("class", "label")
-                .attr("text-anchor", "middle")
-                .attr("y", -6)
-                .attr("x", -(h / 2))
-                .attr("transform", "rotate(-90)")
-                .text("LOW - HIGH");
+                for (var i = 240; i < 960; i = i + delta) {
+                    dataApiEx.push (
+                        {
+                            date: (new Date(tidePrediction[i][0])).getUTCHours(),
+                            value: tidePrediction[i][2]
+                        });
+                }
 
-            graph.append("text")
-                .attr("class", "label")
-                .attr("text-anchor", "middle")
-                .attr("y", h + 25)
-                .attr("x", (w / 2))
-                // .attr("transform", "rotate(-90)")
-                .text("TIME OF DAY (24H)");
-            
-            // Extended next 3 days forecast - LINE CHART creation
-            // implementation heavily influenced by http://bl.ocks.org/1166403        
-            // Create a simple data array that we'll plot with a line (this array represents only the Y values, X will just be the index location)
-            var data = tidesValueEx;
-            // console.log(data);
+                // Day format chamge for data content display for better site readability
 
-            var m = [50, 25, 50, 25]; // margins
-            var w = screenSize() - m[1] - m[3]; // width height: 250px; width: 75vw;
-            var h = 250 - m[0] - m[2]; // height
+                var day = new Date();
+                var dayWeek = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+                var dayWeekShort = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+                var dayDisplay = dayWeek[day.getDay() + 1];
 
-            // X scale will fit all values from data[] within pixels 0-w
-            var x = d3.scaleLinear().domain([0, tidesValueEx.length]).range([0, w]);
-            // Y scale will fit values from 0-10 within pixels h-0 (Note the inverted domain for the y-scale: bigger is up!)
-            var y = d3.scaleLinear().domain([d3.min(tidesValueEx), d3.max(tidesValueEx)]).range([h, 0]);
-            // automatically determining max range can work something like this
-            // var y = d3.scale.linear().domain([0, d3.max(data)]).range([h, 0]);
+                Date.prototype.addDays = function(days) {
+                    var date = new Date(this.valueOf());
+                    date.setDate(date.getDate() + days);
+                    return date;
+                };
+                
+                var date = new Date();
 
-            // create a line function that can convert data[] into x and y points
-            var line = d3.line()
-            // assign the X function to plot our line as we wish
-                .x(function(d,i) { 
-                // verbose logging to show what's actually being done
-                // console.log('Plotting X value for data point: ' + d + ' using index: ' + i + ' to be at: ' + x(i) + ' using our xScale.');
-                // return the X coordinate where we want to plot this datapoint
-                return x(i); 
-                })
-                .y(function(d) { 
-                // verbose logging to show what's actually being done
-                // console.log('Plotting Y value for data point: ' + d + ' to be at: ' + y(d) + " using our yScale.");
-                // return the Y coordinate where we want to plot this datapoint
-                return y(d); 
-                })
-                .curve(d3.curveBasis)
+                // html output including the manipulated data values
 
-            // Add an SVG element with the desired dimensions and margin.
-            var graph = d3.select("#tides-extended").append("svg:svg")
-                .attr("width", w + m[1] + m[3])
-                .attr("height", h + m[0] + m[2])
-                .append("svg:g")
-                .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+                forecast.innerHTML =`
+                <div class="container-fluid" id="todayFor">
+                    <div class="row no-gutter">
+                        <div class="col-xs-12 text-center title">
+                            <h1>${selection.toUpperCase()}</h1>
+                            <h2>TODAY</h2>
+                            <p class="nextDays">+ 3 DAYS</p>
+                        </div>
 
-            // create yAxis
-            var ticks = [0, 12, 24, 36, 48, 60, 72]
-            var tickLabels = [(dayWeekShort[(date.addDays(1)).getDay()]), 12, (dayWeekShort[(date.addDays(2)).getDay()]), 12, (dayWeekShort[(date.addDays(3)).getDay()]), 12];
-            var xAxis = d3.axisBottom().scale(x).tickValues(ticks).tickFormat(function(d, i){return tickLabels[i] }).tickSize(-h);
-            // Add the x-axis.
-            graph.append("svg:g")
-                .attr("class", "x axis")
-                .attr("transform", "translate(0," + h + ")")
-                .call(xAxis);
-            
-            // Add the line by appending an svg:path element with the data line we created above
-            // do this AFTER the axes above so that the line is above the tick-lines
-            graph.append("svg:path").attr("d", line(data));
+                        <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
+                            <h2>MORNING</h2>
+                            <div class="container-fluid">
+                                <div class="row no-gutter details">
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${waveMorningAverage.waveHeight = waveMorningAverage.waveHeight || '-'}</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center desc">
+                                        <h3>WAVE</h3>
+                                        <p>&#8592 HEIGHT (m)</p>
+                                        <p>PERIOD (s) &#8594</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${waveMorningAverage.wavePeriod = waveMorningAverage.wavePeriod || '-'}</p>
+                                    </div>
+                                </div>                    
+                                <div class="row no-gutter details">
+                                    <div class="col-xs-4 text-center string">
+                                        <p>${windType(windMorningAverage.windDirection)}</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center desc">
+                                        <h3>WIND</h3>
+                                        <p>&#8592 TYPE</p>
+                                        <p>SPEED (kph) &#8594</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${windMorningAverage.windSpeed = windMorningAverage.windSpeed || '-'}</p>
+                                    </div>
+                                </div>                    
+                            </div>
+                        </div>
 
-            graph.append("line")
-            //   .attr("x1",-6)
-                .attr("y1",y(0))//so that the line passes through the y 0
-                .attr("x2",w)
-                .attr("y2",y(0))//so that the line passes through the y 0
-                .style("stroke", "#3E4EA4")
-                .style("opacity", ".5");
+                        <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
+                            <h2>MIDDAY</h2>
+                            <div class="container-fluid">
+                                <div class="row no-gutter details">
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${waveMiddayAverage.waveHeight = waveMiddayAverage.waveHeight || '-'}</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center desc">
+                                        <h3>WAVE</h3>
+                                        <p>&#8592 HEIGHT (m)</p>
+                                        <p>PERIOD (s) &#8594</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${waveMiddayAverage.wavePeriod = waveMiddayAverage.wavePeriod || '-'}</p>
+                                    </div>
+                                </div>                    
+                                <div class="row no-gutter details">
+                                    <div class="col-xs-4 text-center string">
+                                        <p>${windType(windMiddayAverage.windDirection)}</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center desc">
+                                        <h3>WIND</h3>
+                                        <p>&#8592 TYPE</p>
+                                        <p>SPEED (kph) &#8594</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${windMiddayAverage.windSpeed = windMiddayAverage.windSpeed || '-'}</p>
+                                    </div>
+                                </div>                    
+                            </div>
+                        </div>
 
-            graph.append("text")
-                .attr("class", "label")
-                .attr("text-anchor", "middle")
-                .attr("y", -6)
-                .attr("x", -(h / 2))
-                .attr("transform", "rotate(-90)")
-                .text("LOW - HIGH");
+                        <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
+                            <h2>AFTERNOON</h2>
+                            <div class="container-fluid">
+                                <div class="row no-gutter details">
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${waveAfternoonAverage.waveHeight = waveAfternoonAverage.waveHeight || '-'}</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center desc">
+                                        <h3>WAVE</h3>
+                                        <p>&#8592 HEIGHT (m)</p>
+                                        <p>PERIOD (s) &#8594</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${waveAfternoonAverage.wavePeriod = waveAfternoonAverage.wavePeriod || '-'}</p>
+                                    </div>
+                                </div>                    
+                                <div class="row no-gutter details">
+                                    <div class="col-xs-4 text-center string">
+                                        <p>${windType(windAfternoonAverage.windDirection)}</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center desc">
+                                        <h3>WIND</h3>
+                                        <p>&#8592 TYPE</p>
+                                        <p>SPEED (kph) &#8594</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${windAfternoonAverage.windSpeed = windAfternoonAverage.windSpeed || '-'}</p>
+                                    </div>
+                                </div>                    
+                            </div>
+                        </div>
 
-            graph.append("text")
-                .attr("class", "label")
-                .attr("text-anchor", "middle")
-                .attr("y", h + 25)
-                .attr("x", (w / 2))
-                // .attr("transform", "rotate(-90)")
-                .text("TIME OF DAY (12H)");
+                        <div class="col-xs-12 col-md-6 text-center card day">
+                            <div id="tides">
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
 
+                <div class="container-fluid hidden" id="tmrwFor">
+                    <div class="row no-gutter">
+                        <div class="col-xs-12 text-center title">
+                            <h1>${selection.toUpperCase()}</h1>
+                            <h2>+ 3 DAYS</h2>
+                            <p class="today">TODAY</p>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
+                            <h2>${dayWeek[(date.addDays(1)).getDay()]}</h2>
+                            <div class="container-fluid">
+                                <div class="row no-gutter details">
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${waveDTwoAverage.waveHeight = waveDTwoAverage.waveHeight || '-'}</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center desc">
+                                        <h3>WAVE</h3>
+                                        <p>&#8592 HEIGHT (m)</p>
+                                        <p>PERIOD (s) &#8594</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${waveDTwoAverage.wavePeriod = waveDTwoAverage.wavePeriod || '-'}</p>
+                                    </div>
+                                </div>                    
+                                <div class="row no-gutter details">
+                                    <div class="col-xs-4 text-center string">
+                                        <p>${windType(windDTwoAverage.windDirection)}</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center desc">
+                                        <h3>WIND</h3>
+                                        <p>&#8592 TYPE</p>
+                                        <p>SPEED (kph) &#8594</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${windDTwoAverage.windSpeed = windDTwoAverage.windSpeed || '-'}</p>
+                                    </div>
+                                </div>                    
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
+                            <h2>${dayWeek[(date.addDays(2)).getDay()]}</h2>
+                            <div class="container-fluid">
+                                <div class="row no-gutter details">
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${waveDThreeAverage.waveHeight = waveDThreeAverage.waveHeight || '-'}</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center desc">
+                                        <h3>WAVE</h3>
+                                        <p>&#8592 HEIGHT (m)</p>
+                                        <p>PERIOD (s) &#8594</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${waveDThreeAverage.wavePeriod = waveDThreeAverage.wavePeriod || '-'}</p>
+                                    </div>
+                                </div>                    
+                                <div class="row no-gutter details">
+                                    <div class="col-xs-4 text-center string">
+                                        <p>${windType(windDThreeAverage.windDirection)}</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center desc">
+                                        <h3>WIND</h3>
+                                        <p>&#8592 TYPE</p>
+                                        <p>SPEED (kph) &#8594</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${windDThreeAverage.windSpeed = windDThreeAverage.windSpeed || '-'}</p>
+                                    </div>
+                                </div>                    
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6 col-lg-4 text-center card day">
+                            <h2>${dayWeek[(date.addDays(3)).getDay()]}</h2>
+                            <div class="container-fluid">
+                                <div class="row no-gutter details">
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${waveDFourAverage.waveHeight = waveDFourAverage.waveHeight || '-'}</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center desc">
+                                        <h3>WAVE</h3>
+                                        <p>&#8592 HEIGHT (m)</p>
+                                        <p>PERIOD (s) &#8594</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${waveDFourAverage.wavePeriod = waveDFourAverage.wavePeriod || '-'}</p>
+                                    </div>
+                                </div>                    
+                                <div class="row no-gutter details">
+                                    <div class="col-xs-4 text-center string">
+                                        <p>${windType(windDFourAverage.windDirection)}</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center desc">
+                                        <h3>WIND</h3>
+                                        <p>&#8592 TYPE</p>
+                                        <p>SPEED (kph) &#8594</p>
+                                    </div>
+                                    <div class="col-xs-4 text-center values">
+                                        <p>${windDFourAverage.windSpeed = windDFourAverage.windSpeed || '-'}</p>
+                                    </div>
+                                </div>                    
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-md-6 text-center card day">
+                            <div id="tides-extended">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>`;
+
+                // forecast setting to display immediate data for today and extended forecast
+
+                var todayFor = document.getElementById('todayFor');
+                var tmrwFor = document.getElementById('tmrwFor');
+                var nextDays = (document.getElementsByClassName('nextDays'))[0].addEventListener('click', forecastToggle);
+                var today = (document.getElementsByClassName('today'))[0].addEventListener('click', forecastToggle);
+
+                function forecastToggle(e) {
+                    if (e.target.classList.contains('nextDays')) {
+                        todayFor.classList.add('hidden');
+                        tmrwFor.classList.remove('hidden');
+                    } else if (e.target.classList.contains('today')) {
+                        todayFor.classList.remove('hidden');
+                        tmrwFor.classList.add('hidden');
+                    }
+                }       
+
+                // Day Tidal data - LINE CHART creation
+                // Data array represents only the Y values, X will be the index location
+
+                var data = tidesValue;
+
+                // Defining dimensions of graph to match different screen sizes
+
+                function screenSize() {
+                    return xxsmall.matches ? 200 :
+                            xsmall.matches ? 250 :
+                            small.matches ? 350 :
+                            medium.matches ? 500 :
+                            large.matches ? 600 :
+                            xlarge.matches ? 350 :
+                            xxlarge.matches ? 1000 :
+                            null;
+                }
+
+                var xxsmall = window.matchMedia('(max-width: 350px)');
+                var xsmall = window.matchMedia('(max-width: 500px)');
+                var small = window.matchMedia('(max-width: 650px)');
+                var medium = window.matchMedia('(max-width: 800px)');
+                var large = window.matchMedia('(max-width: 991px)');
+                var xlarge = window.matchMedia('(max-width: 1199px)');
+                var xxlarge = window.matchMedia('(min-width: 1200px)'); 
+
+                var margin = [50, 25, 50, 25];
+                var width = screenSize() - margin[1] - margin[3];
+                var height = 250 - margin[0] - margin[2];
+
+                var x = d3.scaleLinear().domain([0, tidesValue.length]).range([0, width]);
+                var y = d3.scaleLinear().domain([d3.min(tidesValue), d3.max(tidesValue)]).range([height, 0]);
+
+                var line = d3.line()
+                    .x(function(d,i) {
+                        return x(i); 
+                    })
+                    .y(function(d) { 
+                        return y(d); 
+                    })
+                    .curve(d3.curveBasis);
+
+                var graph = d3.select("#tides").append("svg:svg")
+                    .attr("width", width + margin[1] + margin[3])
+                    .attr("height", height + margin[0] + margin[2])
+                    .append("svg:g")
+                    .attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
+
+                var ticks = [0, 4, 8, 12, 16, 20, 24];
+                var tickLabels = [0, 4, 8, 12, 16, 20, 0];
+                var xAxis = d3.axisBottom().scale(x).tickValues(ticks).tickFormat(function(d, i){return tickLabels[i] }).tickSize(-height);
+
+                graph.append("svg:g")
+                    .attr("class", "x axis")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(xAxis);
+                
+                graph.append("svg:path").attr("d", line(data));
+
+                graph.append("line")
+                    .attr("y1",y(0))
+                    .attr("x2",width)
+                    .attr("y2",y(0))
+                    .style("stroke", "#3E4EA4")
+                    .style("opacity", ".5");
+
+                graph.append("text")
+                    .attr("class", "label")
+                    .attr("text-anchor", "middle")
+                    .attr("y", -6)
+                    .attr("x", -(height / 2))
+                    .attr("transform", "rotate(-90)")
+                    .text("LOW - HIGH");
+
+                graph.append("text")
+                    .attr("class", "label")
+                    .attr("text-anchor", "middle")
+                    .attr("y", height + 25)
+                    .attr("x", (width / 2))
+                    .text("TIME OF DAY (24H)");
+                
+                // Extended next 3 days forecast - LINE CHART creation
+
+                data = tidesValueEx;
+
+                margin = [50, 25, 50, 25];
+                width = screenSize() - margin[1] - margin[3];
+                height = 250 - margin[0] - margin[2];
+
+                x = d3.scaleLinear().domain([0, tidesValueEx.length]).range([0, width]);
+                y = d3.scaleLinear().domain([d3.min(tidesValueEx), d3.max(tidesValueEx)]).range([height, 0]);
+
+                line = d3.line()
+                    .x(function(d,i) { 
+                        return x(i); 
+                    })
+                    .y(function(d) { 
+                        return y(d); 
+                    })
+                    .curve(d3.curveBasis)
+
+                graph = d3.select("#tides-extended").append("svg:svg")
+                    .attr("width", width + margin[1] + margin[3])
+                    .attr("height", height + margin[0] + margin[2])
+                    .append("svg:g")
+                    .attr("transform", "translate(" + margin[3] + "," + margin[0] + ")");
+
+                ticks = [0, 12, 24, 36, 48, 60, 72];
+                tickLabels = [(dayWeekShort[(date.addDays(1)).getDay()]), 12, (dayWeekShort[(date.addDays(2)).getDay()]), 12, (dayWeekShort[(date.addDays(3)).getDay()]), 12];
+                xAxis = d3.axisBottom().scale(x).tickValues(ticks).tickFormat(function(d, i){return tickLabels[i] }).tickSize(-height);
+
+                graph.append("svg:g")
+                    .attr("class", "x axis")
+                    .attr("transform", "translate(0," + height + ")")
+                    .call(xAxis);
+                
+                graph.append("svg:path").attr("d", line(data));
+
+                graph.append("line")
+                    .attr("y1",y(0))
+                    .attr("x2",width)
+                    .attr("y2",y(0))
+                    .style("stroke", "#3E4EA4")
+                    .style("opacity", ".5");
+
+                graph.append("text")
+                    .attr("class", "label")
+                    .attr("text-anchor", "middle")
+                    .attr("y", -6)
+                    .attr("x", -(height / 2))
+                    .attr("transform", "rotate(-90)")
+                    .text("LOW - HIGH");
+
+                graph.append("text")
+                    .attr("class", "label")
+                    .attr("text-anchor", "middle")
+                    .attr("y", height + 25)
+                    .attr("x", (width / 2))
+                    .text("TIME OF DAY (12H)");
             };
 
-            forecastData();
+            forecastData()
+                .catch(function() {
+                    return forecast.innerHTML =`
+                        <div class="container-fluid">
+                            <div class="row no-gutter">
+                                <div class="col-xs-12 text-center">
+                                    <p>Due to circumstances beyond our control the forecast data is currently unavailable. We are working to fix the problem. Please come back later. Aloha!</p>
+                                </div>
+                            </div>
+                        </div>`
+            });
 
-            // Back button
+            // Back button for easier navigation
             function backToHome(e) {
-                console.log(e.target.id);
                 if (e.target.id == 'go2back') {
                     forecast.classList.add('hidden');
                     surfingSpots.classList.remove('hidden');
@@ -1093,15 +928,15 @@ function stepTwo(e) {
                     
                     map.setCenter(mapCenter(e.target.classList[1], mapLocation));
                     map.setZoom(mapZoom(e.target.classList[1], mapLocation));
-
                     window.scrollTo(0, 0);
                 }
-            };
-
+            }
             var go2BackTo = go2Back.addEventListener('click', backToHome);
-        };    
-    };
-};
+        }    
+    }
+}
+
+// Menu page definition for clear behaviour
 
 function menuReveal(e) {
     (e.target.id = 'menu') ? menuList.classList.toggle('hidden') : null;
@@ -1118,7 +953,6 @@ function aboutReveal(e){
 
 function menuLink(e) {
     var selection = e.target.parentElement.classList[0];
-    // console.log(selection);
     if (surfingSpots.classList.contains('hidden') && forecast.classList.contains('hidden')) {
         menuList.classList.add('hidden');
         menuNav.innerHTML = 'MENU'
