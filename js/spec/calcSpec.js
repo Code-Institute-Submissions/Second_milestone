@@ -144,23 +144,14 @@ describe('Calculate average wind values for defined data', function() {
         it('should return an average value of wind direction', function() {
             expect(average.windDirection).toBe(334);
         });
+        it('should not throw an error for wind direction', function() {
+            expect(average.windDirection).toBeTruthy();
+        });
         it('should return an average value of wind speed', function() {
             expect(average.windSpeed).toBe(70);
         });
+        it('should not throw an error for wind speed', function() {
+            expect(average.windSpeed).toBeTruthy();
+        });
     });
 });
-
-// function wind(time) {
-//     var totalWindDirection = 0;
-//     var totalWindSpeed = 0;
-
-//     time.forEach(function(hour) {
-//         totalWindDirection += hour[3];
-//         totalWindSpeed += hour[2];
-//         });
-
-//     var average = new Object();
-//     average['windDirection'] = Math.round(totalWindDirection / time.length);
-//     average['windSpeed'] = Math.round((totalWindSpeed * 1.851999999984) / time.length);
-//     return average;
-// }

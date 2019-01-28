@@ -475,10 +475,11 @@ function stepTwo(e) {
                     return average;
                 }
                 
+
                 // console.log(waveMorning);
                 // console.log(waveMidday);
                 // console.log(waveAfternoon);
-                console.log(windMorning);
+                // console.log(windMorning);
                 // console.log(windMidday);
                 // console.log(windAfternoon);
 
@@ -505,9 +506,9 @@ function stepTwo(e) {
                 // console.log(windMorningAverage);
                 // console.log(windMiddayAverage);
                 // console.log(windAfternoonAverage);
-                console.log(windDTwoAverage);
-                console.log(windDThreeAverage);
-                console.log(windDFourAverage);
+                // console.log(windDTwoAverage);
+                // console.log(windDThreeAverage);
+                // console.log(windDFourAverage);
 
                 // var dayOneAverage = timeOfDay(dayOne);
                 // var dayTwoAverage = timeOfDay(dayTwo);
@@ -526,7 +527,7 @@ function stepTwo(e) {
                     : (value >= 292.5) ? 315
                     : "Error!";
             }
-            console.log(windMorningAverage);
+            // console.log(windMorningAverage);
             // console.log(direction(windMorningAverage.windDirection)); 
             // console.log(surfSpots.point);
  
