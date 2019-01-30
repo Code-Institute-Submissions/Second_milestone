@@ -6,7 +6,7 @@ Surfin is a quick surf forecast tool created for surfers in Ireland. The main pu
 
 ## The Brief
 
-I have decided to combine two example briefs and create a single page application that relies heavily on more than one APIs with emphasis on Google Maps API and create a data visualization sourced from an API and visualised using D3.js.
+I have decided to combine two example briefs and create a single page application that relies heavily on APIs including Google Maps API and create a data visualization sourced from an API and visualised using D3.js library.
 
 ## UX
 
@@ -14,27 +14,40 @@ The UX process played a major role in the design of the _Surfin_ application wit
 
 ### Strategy and Scope
 
-The target users of the _Surfin_ application are surfers but the website could attract all water sports enthusiasts like kitesurfers, windsurfers, kayakers, etc. The main purpose of the site is to provide users with up to date forecast that display wave, wind and tidal information for specific locations around Irish coast.
+The target users of the _Surfin_ application are surfers but the website could attract all water sports enthusiasts like kitesurfers, windsurfers, kayakers, etc. or anyone looking to verify sea conditions before exploring any of the locations.
 
-User stories:
+The site should provide users with up to date forecast that display wave, wind and tidal information for specific locations around Irish coast. The forecast should display forecast for up to 4 days with its emphasis on clarity and simplicity.
 
-- I want a simplified forecast of surf conditions
-- I want a day surf forecast that shows wave and wind conditions
-- I want to see the tidal data
-- I want to see extended 3 day forecast
-- I want simplified wind forecast like 'Offshore wind' or 'Onshore wind' instead of trying to guess the surf spot and wind direction myslef
-- I want see all the surf spots on the map
-- I want a visualy appealing applicaton instead of rows and columns of data
-- I want an average forecast values for quick surf condition estimate that I could later explore in detail on other platforms
-- I want to see clear distinguish between cardinal directions of the surf spots to quickly identify locations of my interest
+Based on the above description the following user stories were identified:
 
+- As a user _A_, I want a simplified forecast of surfing conditions.
+- As a user _B_, I want a day forecast showing wave and wind conditions.
+- As a user _C_, I want to see the tidal data.
+- As a user _D_, I want to see extended forecast for up to 3 days.
+- As a user _E_, I want a simplified wind forecast like 'Offshore wind' or 'Onshore wind' instead of trying to guess the surf spot and wind direction myslef.
+- As a user _F_, I want see all the surf spots on the map so I can locate them easly.
+- As a user _G_, I want a visualy appealing and minimalistic applicaton instead of large number of rows and columns of data.
+- As a user _H_, I, as a experienced surfer want an average forecast values for quick surf condition estimate that I could later explore in detail on other platforms or evaluate based on my own experiece and knowledge.
+- As a user _I_, I, as a beginner want a simple and clear average forecast values to tell me whether there are waves or not.
+- As a user _J_, I want to see clear distinguish between cardinal directions of the surf spots to quickly identify locations of my interest, whether it is West or North part of Ireland for example.
 
-<!-- Use this section to provide insight into your UX process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
+### Structure and Skeleton
 
-In particular, as part of this section we recommend that you provide a list of User Stories, with the following general structure:
-- As a user type, I want to perform an action, so that I can achieve a goal.
+Due to the application requirements and characteristics, the site design should be minimal in its form. The way in which the data is provided should lack any clutter but be informative as much as possible at the same time. There shouldn't be any distraction to the user so the focus should be primarly on the forecast. The website's simplicity and its responsive structure should provide functionality and intuitive interactions for the users.
 
-This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser. -->
+The following wireframes were created in order to provide a starting point for the website skeleton:
+
+- <a href="mockup/small.png" target="_blank">Small device</a>
+- <a href="mockup/medium.png" target="_blank">Medium device</a>
+- <a href="mockup/large.png" target="_blank">Large device</a>
+
+### Surface
+
+Once the wireframes were in place, the following visuals were introduced:
+
+- The base colors for the site are dark blue, bright red and white. These colors were selected based on the personal aesthetics and to make the site stand out from the crowd. The colors combination makes the application and its content easy to read and memorable. The limited number of colors makes the site clean and simple.
+- Typography is limited to one typeface only, that is 'Roboto'. It's a clean and modern sans serif typeface which makes the site readable on both mobile and larger devices. 
+- The Google Maps API map is styled to reflect the overall design approach. The map features and elements like labels, roads, water, etc. are set to either minimal or none visibility in order to remove any distraction to the user.  
 
 ## Features
 
@@ -50,6 +63,9 @@ In addition, you may also use this section to discuss plans for additional featu
 
 ### Features Left to Implement
 <!-- - Another feature idea -->
+
+local storage for returning users on the same day
+local storage for favourite spots
 
 ## Technologies Used
 
