@@ -45,15 +45,44 @@ The following wireframes were created in order to provide a starting point for t
 
 Once the wireframes were in place, the following visuals were introduced:
 
-- The base colors for the site are dark blue, bright red and white. These colors were selected based on the personal aesthetics and to make the site stand out from the crowd. The colors combination makes the application and its content easy to read and memorable. The limited number of colors makes the site clean and simple.
-- Typography is limited to one typeface only, that is 'Roboto'. It's a clean and modern sans serif typeface which makes the site readable on both mobile and larger devices. 
-- The Google Maps API map is styled to reflect the overall design approach. The map features and elements like labels, roads, water, etc. are set to either minimal or none visibility in order to remove any distraction to the user.  
+- The base colors for the site are dark blue, bright red and white. These colors were selected based on the personal aesthetics and to make the site stand out from the crowd. The colors combination makes the application and its content memorable. The limited number of colors makes the site clean and simple.
+- Typography is limited to one typeface only, that is 'Roboto'. It's a clean and modern sans serif typeface which makes the site readable on both small and larg devices. 
+- The Google Maps API map is styled to reflect the overall design approach. The map features and elements like labels, roads, water, etc. are set to either minimal or no visibility in order to remove any distraction to the user. Furthermore a custom markers were added to the map that are styled accordingly to the site.
 
 ## Features
 
-<!-- In this section, you should go over the different parts of your project, and describe each in a sentence or so. -->
+The main idea behind the _Surfin_ application is to show a minimalistic, distraction free design that is visually appealing to the user. There are three main elements on the page which are triggged by user actions and they are as follows:
+
+- the navigation and menu content,
+- Google Maps section,
+- main interactive content.
+
+### Navigation and Menu
+
+The navigation bar is fixed to the top of the page to make it accessible at all times, making the site easy to navigate. The navigation bar consists of 'MENU' and 'BACK' elements.
+
+The 'MENU' element onced engaged by the user reveals a full screen view of the page navigation which include the Cardinal directions i.e. North, East, West and South, and the 'About' section. The Cardinal directions will display list of Surfing Spots for selected direction of choice. The 'ABOUT' section will display application information and link to its developer website.
+
+The 'BACK' element, which is basically a navigating back action, is not visible on the landing page but will appear once the user pass the first step of selecting the Cardinal Direction of choice, whether it is North, South, etc. The user will have an option to go back to the selection or move to the next step of selecting a Surfing Spot to display the forecast. The 'BACK' element will be visible in the surfing forecast as well and will bring the user back to the list of surfing spots for previously selected Cardinal Direction.
+
+### Google Maps
+
+The top element which is displayed when the page loads, contains a Google Map showing map of Ireland with all of the Surfing Spots clearly marked on it. The user can click on each of the markers to see the Surfing Spot title, the county it belongs to and its Cardinal direction. Once the user navigate through the application, the map will adjust to user behaviour. If the user select one of the Cardinal directions, the map will change its position and zoom in towards Surfing locations that belong to the selection. Same will happen when user choose a Surfing Spot Title to display the forecast. The Map will center its location and zoom in to show the spot. Once the user navigate back to the previous selections, the map will readjust accordingly.
+
+### Main Content
+
+The main content of the application consists of three interactive elements that are dependable on each other. The first element which is displayed when the page loads, is positioned below Google Maps container. It display a selection of 4 buttons that contain Cardinal directions. Each of the buttons, once engaged will be replaced by a list of available Surfing Spot Titles for selected direction. These Titles are displayed as buttons as well and once a user selects any one of them, they will be replaced by the Surfing Forecast. 
+
+The Surfing Forecast consists of the Surfing Spot Title, followed by range of forecast, whether Today's that is displayed by default, or Extended. The Forecast range can be changed at any time by selecting its description that lays underneath the currently displayed range. Below the headings the user will find 4 cards that display the Surfing forecast. The first three cards show the forecast for time of a day if Today's range is selected, i.e. Morning, Midday and Afternoon, or the following 3 days for extended forecast. Each of the 3 cards show wave height, wave period, wind type and wind speed. The fourth card display a Tidal data which is presented in a form of a line chart that show either Today's or Extended tidal predictions for selected Surfing location.    
  
 ### Existing Features
+
+The main _Surfin_ application features are as follows:
+
+- Responsive layout allows users to preview website on all devices.
+- Active links on phone number and email address to allow effortless and immediate contact either by making a phone call (mobile, facetime, etc.) or by creating an email template to be filled with email body and send over.
+- Direct links to social media via social media icons at the bottom of the pages.
+
 <!-- - Feature 1 - allows users X to achieve Y, by having them fill out Z
 - ...
 
