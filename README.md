@@ -2,11 +2,11 @@
 
 The [Surfin](https://clever-darwin-2debfe.netlify.com/) application is a Second Milestone project build for [Code Institute's](https://www.codeinstitute.net/) Full Stack Web Developer Course.
 
-Surfin is a quick surf forecast tool created for surfers in Ireland. The main purpose of Surfin is to show a clean and simple wave, wind and tide forecast in several Surfing Spots around Irish coast. The data provided is sourced from weather buoy's and coastal weather stations around Ireland.
+Surfin is a quick surf forecast tool created for surfers in Ireland. The main purpose of Surfin is to show a clean and simple wave, wind and tide forecast for several Surfing Spots around Irish coast. The data provided is sourced from weather buoy's and coastal weather stations around Ireland.
 
 ## The Brief
 
-I have decided to combine two example briefs and create a single page application that relies heavily on APIs including Google Maps API and create a data visualization sourced from an API and visualised using D3.js library.
+I have decided to combine two example briefs and create a single page application that relies heavily on APIs including Google Maps API and to create a data visualization, that is sourced from an API and displayed using D3.js library.
 
 ## UX
 
@@ -14,7 +14,7 @@ The UX process played a major role in the design of the _Surfin_ application wit
 
 ### Strategy and Scope
 
-The target users of the _Surfin_ application are surfers but the website could attract all water sports enthusiasts like kitesurfers, windsurfers, kayakers, etc. or anyone looking to verify sea conditions before exploring any of the locations.
+The target users of the _Surfin_ application are surfers but the website could attract all water sports enthusiasts like kitesurfers, windsurfers, kayakers, etc. or anyone looking to verify ocean conditions before exploring any of the locations.
 
 The site should provide users with up to date forecast that display wave, wind and tidal information for specific locations around Irish coast. The forecast should display forecast for up to 4 days with its emphasis on clarity and simplicity.
 
@@ -45,9 +45,9 @@ The following wireframes were created in order to provide a starting point for t
 
 Once the wireframes were in place, the following visuals were introduced:
 
-- The base colors for the site are dark blue, bright red and white. These colors were selected based on the personal aesthetics and to make the site stand out from the crowd. The colors combination makes the application and its content memorable. The limited number of colors makes the site clean and simple.
-- Typography is limited to one typeface only, that is 'Roboto'. It's a clean and modern sans serif typeface which makes the site readable on both small and larg devices. 
-- The Google Maps API map is styled to reflect the overall design approach. The map features and elements like labels, roads, water, etc. are set to either minimal or no visibility in order to remove any distraction to the user. Furthermore a custom markers were added to the map that are styled accordingly to the site.
+- The base colors for the site are dark blue, bright red and white. These colors were selected to make the site stand out from the crowd and make the application and its content memorable. The limited number of colors makes the site clean and simple.
+- Typography is limited to one typeface only, that is 'Roboto'. It's a clean and modern sans serif typeface which makes the site readable on both small and large devices. 
+- The map sourced from Google Maps API is styled to reflect the overall design approach. The map features and elements like labels, roads, water, etc. are either minimalized or removed in order to avoid any distraction to the user and make it clean. Furthermore, a custom markers were added to the map and styled accordingly to the site.
 
 ## Features
 
@@ -59,53 +59,60 @@ The main idea behind the _Surfin_ application is to show a minimalistic, distrac
 
 ### Navigation and Menu
 
-The navigation bar is fixed to the top of the page to make it accessible at all times, making the site easy to navigate. The navigation bar consists of 'MENU' and 'BACK' elements.
+The navigation bar is fixed to the top of the page to make it accessible at all times, making the site easy to navigate. It consists of two interactive elements, the 'MENU' and 'BACK' headings.
 
-The 'MENU' element onced engaged by the user reveals a full screen view of the page navigation which include the Cardinal directions i.e. North, East, West and South, and the 'About' section. The Cardinal directions will display list of Surfing Spots for selected direction of choice. The 'ABOUT' section will display application information and link to its developer website.
+The 'MENU' element onced engaged by the user reveals a full screen view of the application navigation which include the Cardinal directions i.e. North, East, West and South, and the 'About' section. The Cardinal directions will display list of Surfing Spots for selected direction of choice. The 'ABOUT' section will display application information and a link to its developer website.
 
-The 'BACK' element, which is basically a navigating back action, is not visible on the landing page but will appear once the user pass the first step of selecting the Cardinal Direction of choice, whether it is North, South, etc. The user will have an option to go back to the selection or move to the next step of selecting a Surfing Spot to display the forecast. The 'BACK' element will be visible in the surfing forecast as well and will bring the user back to the list of surfing spots for previously selected Cardinal Direction.
+The 'BACK' element, which is basically a navigating back action, is not visible on the landing page but will appear once the user pass the first step of selecting the Cardinal Direction of choice, whether it is North, South, etc. The user will have an option to go back to the selection or move to the next step of selecting a Surfing Spot to display the forecast. The 'BACK' element will be visible in the surfing forecast as well and will bring the user back to the list of surfing spots of previously selected Cardinal Direction.
 
 ### Google Maps
 
-The top element which is displayed when the page loads, contains a Google Map showing map of Ireland with all of the Surfing Spots clearly marked on it. The user can click on each of the markers to see the Surfing Spot title, the county it belongs to and its Cardinal direction. Once the user navigate through the application, the map will adjust to user behaviour. If the user select one of the Cardinal directions, the map will change its position and zoom in towards Surfing locations that belong to the selection. Same will happen when user choose a Surfing Spot Title to display the forecast. The Map will center its location and zoom in to show the spot. Once the user navigate back to the previous selections, the map will readjust accordingly.
+The top element which is displayed when the page loads, contains a Google Map showing a map of Ireland with all of the Surfing Spots clearly marked on it. The user can click on each of the markers to see the Surfing Spot title, the county it belongs to and its Cardinal direction. Once the user navigate through the application, the map will adjust to user behaviour. If the user select one of the Cardinal directions, the map will change its position and zoom in towards Surfing locations that belong to the selection. Same will happen when user choose a Surfing Spot Title to display the forecast. The Map will center its location and zoom in to show the spot. Once the user navigate back to the previous selections, the map will readjust accordingly.
 
 ### Main Content
 
 The main content of the application consists of three interactive elements that are dependable on each other. The first element which is displayed when the page loads, is positioned below Google Maps container. It display a selection of 4 buttons that contain Cardinal directions. Each of the buttons, once engaged will be replaced by a list of available Surfing Spot Titles for selected direction. These Titles are displayed as buttons as well and once a user selects any one of them, they will be replaced by the Surfing Forecast. 
 
-The Surfing Forecast consists of the Surfing Spot Title, followed by range of forecast, whether Today's that is displayed by default, or Extended. The Forecast range can be changed at any time by selecting its description that lays underneath the currently displayed range. Below the headings the user will find 4 cards that display the Surfing forecast. The first three cards show the forecast for time of a day if Today's range is selected, i.e. Morning, Midday and Afternoon, or the following 3 days for extended forecast. Each of the 3 cards show wave height, wave period, wind type and wind speed. The fourth card display a Tidal data which is presented in a form of a line chart that show either Today's or Extended tidal predictions for selected Surfing location.    
+The Surfing Forecast consists of the Surfing Spot Title, followed by range of forecast, whether Today's that is displayed by default, or Extended. The Forecast range can be changed at any time by selecting its description that lays underneath the currently displayed range. Below the headings the user will find 4 cards that display the Surfing forecast. The first three cards show the forecast for time of a day, so if Today's day range is selected, it will display Morning, Midday and Afternoon, . If the extended range of days is selected, it will display the following 3 days with an average forecast for each day. Each of the 3 cards show wave height, wave period, wind type and wind speed. The fourth card display a Tidal data which is presented in a form of a line chart that show either Today's or Extended tidal predictions for selected Surfing location.    
  
 ### Existing Features
 
 The main _Surfin_ application features are as follows:
 
-- Responsive layout allows users to preview website on all devices.
-- Active links on phone number and email address to allow effortless and immediate contact either by making a phone call (mobile, facetime, etc.) or by creating an email template to be filled with email body and send over.
-- Direct links to social media via social media icons at the bottom of the pages.
-
-<!-- - Feature 1 - allows users X to achieve Y, by having them fill out Z
-- ...
-
-For some/all of your features, you may choose to reference the specific project files that implement them, although this is entirely optional.
-
-In addition, you may also use this section to discuss plans for additional features to be implemented in the future: -->
+- Responsive layout that allows users to preview website on all devices.
+- 'Back' buttons to make the site navigation easier.
+- 'Menu' button to make a shortcuts to the Cardinal directions.
+- Interactive Google Map to show the exact Surfing Spot location.
+- Simple and clean design with intuitive navigation
 
 ### Features Left to Implement
-<!-- - Another feature idea -->
 
-local storage for returning users on the same day
-local storage for favourite spots
+The features that could potentially be implemented are as follows:
+
+- Local storage for returning users on the same day in order to prevent fetching the data several times a day for the same Surfing locations.
+- Create a user database to allow users to create an account and to choose and save Surfing spots they visit frequently as favourite spots.
+- Extend the application to include current (live) forecast on demand. It could be a paid option for subscribed users. 
 
 ## Technologies Used
 
-<!-- In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
+The following languages, technologies and tools were used to construct this website:
 
-- [JQuery](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation. -->
-
-// Day Tidal data - LINE CHART creation
-// implementation heavily influenced by http://bl.ocks.org/1166403  
-
+- [HTML5](https://www.w3.org/TR/html52/) - Core structure of the website.
+- [CSS](https://www.w3.org/Style/CSS/) - Main style of the website.
+- [Bootstrap](https://getbootstrap.com/docs/3.3/) - Used to develop responsive website fast and efficiently.
+- [JavaScript](https://developer.mozilla.org/bm/docs/Web/JavaScript) - Used to make the application interactive.
+- [3D.js](https://d3js.org/) - Used to produce line chart data visualizations inside the application.
+- [Google Maps API](https://cloud.google.com/maps-platform/) - Dynamic and customized real world map.
+- [The Marine Institute API](https://www.marine.ie/Home/home) - Main source of Surfing Forecast data.
+- [Balsamiq Mockups](https://balsamiq.com/) - Used to sketch quick wireframes for website's UX design.
+- [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/) - Chrome browser tool used to iterate and debug the website.
+- [HTML Checker](https://validator.w3.org/nu/) - Online HTML checker used to validate code semantics.
+- [JSHint](https://jshint.com/) - Online Static Code Analysis Tool for JavaScript.
+- [Lighthouse](https://developers.google.com/web/tools/lighthouse/) - Online Chrome tool used to audit the website's performance and accessibility.
+- [Netlify](https://www.netlify.com/) - Platform used to integrate the project with Github and deploy the website.
+- [Github](https://github.com/) - Project's repository.
+- [Visual Studio Code](https://code.visualstudio.com/) - Text editor used to write down all the code.
+- [Google Fonts](https://fonts.google.com/) - Typefaces used to style the website.
 
 ## Testing
 
@@ -179,3 +186,6 @@ The website was deployed to [Netlify](https://www.netlify.com/) with the followi
 ### Acknowledgements
 
 <!-- - I received inspiration for this project from X -->
+
+// Day Tidal data - LINE CHART creation
+// implementation heavily influenced by http://bl.ocks.org/1166403  
