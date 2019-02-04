@@ -92,7 +92,8 @@ The features that could potentially be implemented are as follows:
 
 - Local storage for returning users on the same day in order to prevent fetching the data several times a day for the same Surfing locations.
 - Create a user database to allow users to create an account and to choose and save Surfing spots they visit frequently as favourite spots.
-- Extend the application to include current (live) forecast on demand. It could be a paid option for subscribed users. 
+- Extend the application to include current (live) forecast on demand. It could be a paid option for subscribed users.
+- Direct link to the forecast from the Google Maps markers. 
 
 ## Technologies Used
 

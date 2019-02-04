@@ -1,4 +1,4 @@
-describe('Selecting one of four Cardinal directions', function() {
+describe('Select one of four Cardinal directions', function() {
     describe('Iterate over surf spots array to match spots id with selected direction', function() {
         var myArray = mapLocation;
         var nameKey = 'east';
@@ -153,5 +153,16 @@ describe('Calculate average wind values for defined data', function() {
         it('should not throw an error for wind speed', function() {
             expect(average.windSpeed).toBeTruthy();
         });
+    });
+});
+
+describe("add direction classes", function() {
+    beforeEach(function() {
+      stepone();
+      var element = document.getElementById('btn-n');
+    });
+    it ("add a north class", function() {
+        element.onclick();
+        expect(element.attr('class')).toEqual('north');
     });
 });

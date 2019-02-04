@@ -155,7 +155,7 @@ var goBack = document.getElementById('goback');
 var go2Back = document.getElementById('go2back');
 
 var menu = document.getElementById('menu').addEventListener('click', menuReveal);
-var close = document.getElementById('close').addEventListener('click', menuHide);
+var menuClose = document.getElementById('close').addEventListener('click', menuHide);
 var about = document.getElementById('about');
 var aboutIn = document.getElementById('about-li').addEventListener('click', aboutReveal);
 
