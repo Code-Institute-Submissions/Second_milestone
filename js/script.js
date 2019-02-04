@@ -206,6 +206,7 @@ function mapZoom(nameKey, myArray) {
 }
 
 // Generating list of surf spots based on the selected cardinal direction. This step leads to providing a tailored surfing forecast for specific spot. The back button is created to allow easy page navigation by returning to previous step
+var backToHome = '';
 
 function stepOne(e) {
     if (surfingSpots.classList.contains('hidden')) {
@@ -213,7 +214,7 @@ function stepOne(e) {
         surfingSpots.classList.remove('hidden');
         goBack.classList.remove('hidden');
         
-        function backToHome(e) {
+        backToHome = function(e) {
             if (e.target.id == 'goback') {
                 directions.classList.remove('hidden');
                 surfingSpots.classList.add('hidden');
@@ -222,7 +223,7 @@ function stepOne(e) {
                 map.setZoom(6);
                 window.scrollTo(0, 0);
             }
-        }
+        };
 
         var goBackTo = goBack.addEventListener('click', backToHome);
 
@@ -377,9 +378,10 @@ function stepTwo(e) {
                         totalWavePeriod += hour[3];
                         });
                     
-                    var average = new Object();
-                    average['waveHeight'] = Math.round(totalWaveHeight / time.length);
-                    average['wavePeriod'] = Math.round(totalWavePeriod / time.length);
+                    var average = {
+                        waveHeight: Math.round(totalWaveHeight / time.length),
+                        wavePeriod: Math.round(totalWavePeriod / time.length)
+                    };
                     return average;
                 }
 
@@ -392,9 +394,10 @@ function stepTwo(e) {
                         totalWindSpeed += hour[2];
                         });
                 
-                    var average = new Object();
-                    average['windDirection'] = Math.round(totalWindDirection / time.length);
-                    average['windSpeed'] = Math.round((totalWindSpeed * 1.851999999984) / time.length);
+                    var average = {
+                        windDirection: Math.round(totalWindDirection / time.length),
+                        windSpeed: Math.round((totalWindSpeed * 1.851999999984) / time.length)
+                    };
                     return average;
                 }
 
@@ -864,7 +867,7 @@ function stepTwo(e) {
                     .y(function(d) { 
                         return y(d); 
                     })
-                    .curve(d3.curveBasis)
+                    .curve(d3.curveBasis);
 
                 graph = d3.select("#tides-extended").append("svg:svg")
                     .attr("width", width + margin[1] + margin[3])
@@ -904,7 +907,7 @@ function stepTwo(e) {
                     .attr("y", height + 25)
                     .attr("x", (width / 2))
                     .text("TIME OF DAY (12H)");
-            };
+            }
 
             forecastData()
                 .catch(function() {
@@ -915,11 +918,11 @@ function stepTwo(e) {
                                     <p>Due to circumstances beyond our control the forecast data is currently unavailable. We are working to fix the problem. Please come back later. Aloha!</p>
                                 </div>
                             </div>
-                        </div>`
+                        </div>`;
             });
 
             // Back button for easier navigation
-            function backToHome(e) {
+            backToHome = function(e) {
                 if (e.target.id == 'go2back') {
                     forecast.classList.add('hidden');
                     surfingSpots.classList.remove('hidden');
@@ -930,7 +933,7 @@ function stepTwo(e) {
                     map.setZoom(mapZoom(e.target.classList[1], mapLocation));
                     window.scrollTo(0, 0);
                 }
-            }
+            };
             var go2BackTo = go2Back.addEventListener('click', backToHome);
         }    
     }
@@ -955,12 +958,12 @@ function menuLink(e) {
     var selection = e.target.parentElement.classList[0];
     if (surfingSpots.classList.contains('hidden') && forecast.classList.contains('hidden')) {
         menuList.classList.add('hidden');
-        menuNav.innerHTML = 'MENU'
+        menuNav.innerHTML = 'MENU';
         directions.classList.add('hidden');
         surfingSpots.classList.remove('hidden');
         goBack.classList.remove('hidden');
         
-        function backToHome(e) {
+        backToHome = function(e) {
             if (e.target.id == 'goback') {
                 directions.classList.remove('hidden');
                 surfingSpots.classList.add('hidden');
@@ -979,13 +982,13 @@ function menuLink(e) {
         window.scrollTo(0, 0);
     } else if (surfingSpots.classList.contains('hidden') && directions.classList.contains('hidden')) {
         menuList.classList.add('hidden');
-        menuNav.innerHTML = 'MENU'
+        menuNav.innerHTML = 'MENU';
         forecast.classList.add('hidden');
         surfingSpots.classList.remove('hidden');
         goBack.classList.remove('hidden');
         go2Back.classList.add('hidden');
         
-        function backToHome(e) {
+        backToHome = function(e) {
             if (e.target.id == 'goback') {
                 directions.classList.remove('hidden');
                 surfingSpots.classList.add('hidden');
@@ -1004,11 +1007,11 @@ function menuLink(e) {
         window.scrollTo(0, 0);
     } else if (forecast.classList.contains('hidden') && directions.classList.contains('hidden')) {
         menuList.classList.add('hidden');
-        menuNav.innerHTML = 'MENU'
+        menuNav.innerHTML = 'MENU';
 
         listSpots(selection, mapLocation);
         map.setCenter(mapCenter(selection, mapLocation));
         map.setZoom(mapZoom(selection, mapLocation));
         window.scrollTo(0, 0);
     }
-};
+}

@@ -133,48 +133,7 @@ data.forEach(function(hour) {
     totalWindSpeed += hour[2];
     });
 
-var average = new Object();
-average['windDirection'] = Math.round(totalWindDirection / data.length);
-average['windSpeed'] = Math.round((totalWindSpeed * 1.851999999984) / data.length);
-
-var element = '';
-
-function stepOne(e) {
-    if (surfingSpots.classList.contains('hidden')) {
-        directions.classList.add('hidden');
-        surfingSpots.classList.remove('hidden');
-        goBack.classList.remove('hidden');
-        
-        function backToHome(e) {
-            if (e.target.id == 'goback') {
-                directions.classList.remove('hidden');
-                surfingSpots.classList.add('hidden');
-                goBack.classList.add('hidden');
-                map.setCenter({ lat: 53.326116, lng: -7.946834 });
-                map.setZoom(6);
-                window.scrollTo(0, 0);
-            }
-        }
-
-        var goBackTo = goBack.addEventListener('click', backToHome);
-
-        listSpots(e.target.classList[4], mapLocation);
-        map.setCenter(mapCenter(e.target.classList[4], mapLocation));
-        map.setZoom(mapZoom(e.target.classList[4], mapLocation));
-        window.scrollTo(0, 0);
-        
-        if (e.target.id === 'btn-n') {
-            go2Back.classList.add('north');
-            go2Back.classList.remove('west', 'east', 'south');
-        } else if (e.target.id === 'btn-w') {
-            go2Back.classList.add('west');
-            go2Back.classList.remove('north', 'east', 'south');
-        } else if (e.target.id === 'btn-s') {
-            go2Back.classList.add('south');
-            go2Back.classList.remove('west', 'east', 'north');
-        } else if (e.target.id === 'btn-e') {
-            go2Back.classList.add('east');
-            go2Back.classList.remove('west', 'north', 'south');
-        }
-    }
-}
+var average = {
+    windDirection: Math.round(totalWindDirection / data.length),
+    windSpeed: Math.round((totalWindSpeed * 1.851999999984) / data.length)
+};

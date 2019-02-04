@@ -155,14 +155,3 @@ describe('Calculate average wind values for defined data', function() {
         });
     });
 });
-
-describe("add direction classes", function() {
-    beforeEach(function() {
-      stepone();
-      var element = document.getElementById('btn-n');
-    });
-    it ("add a north class", function() {
-        element.onclick();
-        expect(element.attr('class')).toEqual('north');
-    });
-});
