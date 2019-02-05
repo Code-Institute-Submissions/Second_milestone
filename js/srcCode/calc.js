@@ -48,6 +48,8 @@ var mapLocation = [
     },
 ];
 
+// Select one of four Cardinal directions
+
 function surfTitle(spot) {
     var result = '';
     for (var i = 0; i < spot.length; i++) {
@@ -67,9 +69,13 @@ function listSpots(nameKey, myArray) {
     }
 }
 
+// Fix date value
+
 function addZero(n) {
     return n < 10 ? '0' + n : '' + n;
 }
+
+// Simplify wind Cardinal directions
 
 function direction(value) {
     return ((value >= 0 && value < 22.5) || value >=337.5) ? 0
@@ -82,6 +88,8 @@ function direction(value) {
         : (value >= 292.5) ? 315
         : "Error!";
 }
+
+// Set wind type from two parameters
 
 var wind ='';
 var point = '';
@@ -105,7 +113,7 @@ function check() {
     }
   }
 
-// Day format for data content display
+// Convert date to display days of the week
 
 var day = new Date();
 var dayWeek = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
@@ -119,7 +127,7 @@ Date.prototype.addDays = function(days) {
 }
 var date = new Date();
 
-// Average
+// Calculate average wind values for defined data
 
 var data = [
     ["2019-01-27T06:00:00Z", "Malin_Head", 39.81442568773671, 335.5327186116288],
@@ -139,7 +147,7 @@ var average = {
     windSpeed: Math.round((totalWindSpeed * 1.851999999984) / data.length)
 };
 
-// Defining Surfing spots elements for given key parameter, array and type
+// Display Forecast source for selected Surf Spot
 
 function spotSearch(nameKey, myArray, type) {
     for (var i = 0; i < myArray.length; i++) {
