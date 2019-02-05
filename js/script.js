@@ -44,49 +44,68 @@ var surfSpots = [
 // Surfing Spots Cardinal direction definition
 
 var mapLocation = [
-    {   id: 'north',
+    {   
+        id: 'north',
         listOfSpots: [surfSpots[0].title, surfSpots[1].title, surfSpots[2].title],
         setCenter: { lat : 55.307211, lng : -7.373801 },
-        setZoom: 8 },
+        setZoom: 8
+    },
     {   id: 'west',
         listOfSpots: [surfSpots[3].title, surfSpots[4].title, surfSpots[5].title, surfSpots[6].title, surfSpots[7].title, surfSpots[8].title, surfSpots[9].title, surfSpots[10].title, surfSpots[11].title, surfSpots[12].title],
         setCenter: { lat : 53.365468, lng : -9.814509 },
-        setZoom: 6.8 },
+        setZoom: 6.8
+    },
     {   id: 'south',
         listOfSpots: [surfSpots[13].title, surfSpots[14].title, surfSpots[15].title, surfSpots[16].title, surfSpots[17].title],
         setCenter: { lat : 51.789279, lng : -8.285663 },
-        setZoom: 7 },
+        setZoom: 7
+    },
     {   id: 'east',
         listOfSpots: [surfSpots[18].title, surfSpots[19].title],
         setCenter: { lat : 53.148223, lng : -6.077892 },
-        setZoom: 9 },
+        setZoom: 9
+    }
 ];
 
 // Google Maps API
 
 var map;
 var styles = [
-    {   featureType: 'landscape',
+    {   
+        featureType: 'landscape',
         elementType: 'all',
-        stylers: [{ color: '#3E4EA4' }] },
-    {   featureType: 'poi',
+        stylers: [{ color: '#3E4EA4' }] 
+    },
+    {   
+        featureType: 'poi',
         elementType: 'all',
-        stylers: [{ visibility: 'off' }] },
-    {   featureType: 'administrative',
+        stylers: [{ visibility: 'off' }]
+    },
+    {   
+        featureType: 'administrative',
         elementType: 'labels.text.fill',
-        stylers: [{ color: '#ffffff' }] },
-    {   featureType: 'administrative',
+        stylers: [{ color: '#ffffff' }]
+    },
+    {   
+        featureType: 'administrative',
         elementType: 'labels.text.stroke',
-        stylers: [{ visibility: 'off' }] },
-    {   featureType: 'road',
+        stylers: [{ visibility: 'off' }]
+    },
+    {   
+        featureType: 'road',
         elementType: 'geometry',
-        stylers: [{ visibility: 'off' }] },
-    {   featureType: 'road',
+        stylers: [{ visibility: 'off' }]
+    },
+    {   
+        featureType: 'road',
         elementType: 'labels',
-        stylers: [{ visibility: 'off' }] },
-    {   featureType: 'water',
+        stylers: [{ visibility: 'off' }]
+    },
+    {   
+        featureType: 'water',
         elementType: 'all',
-        stylers: [{ color: '#FD6591' }] }
+        stylers: [{ color: '#FD6591' }]
+    }
 ];
 
 // Map initializing and markers definition
@@ -150,6 +169,7 @@ var forecast = document.getElementById('forecast');
 var menuList = document.getElementById('menuList');
 var menuNav = document.getElementById('menu');
 var menuClose = document.getElementById('close');
+var backToHome = '';
 
 var goBack = document.getElementById('goback');
 var go2Back = document.getElementById('go2back');
@@ -187,26 +207,17 @@ function listSpots(nameKey, myArray) {
     }
 }
 
-// Defining Google map location and map zoom for given parameters
+// Defining Google maps location and map zoom for given key parameter, array and type
 
-function mapCenter(nameKey, myArray) {
+function mapSearch(nameKey, myArray, type) {
     for (var i = 0; i < myArray.length; i++) {
         if (myArray[i].id === nameKey) {
-            return myArray[i].setCenter;
-        }
-    }
-}
-
-function mapZoom(nameKey, myArray) {
-    for (var i = 0; i < myArray.length; i++) {
-        if (myArray[i].id === nameKey) {
-            return myArray[i].setZoom;
+            return myArray[i][type];
         }
     }
 }
 
 // Generating list of surf spots based on the selected cardinal direction. This step leads to providing a tailored surfing forecast for specific spot. The back button is created to allow easy page navigation by returning to previous step
-var backToHome = '';
 
 function stepOne(e) {
     if (surfingSpots.classList.contains('hidden')) {
@@ -228,8 +239,8 @@ function stepOne(e) {
         var goBackTo = goBack.addEventListener('click', backToHome);
 
         listSpots(e.target.classList[4], mapLocation);
-        map.setCenter(mapCenter(e.target.classList[4], mapLocation));
-        map.setZoom(mapZoom(e.target.classList[4], mapLocation));
+        map.setCenter(mapSearch(e.target.classList[4], mapLocation, 'setCenter'));
+        map.setZoom(mapSearch(e.target.classList[4], mapLocation, 'setZoom'));
         window.scrollTo(0, 0);
         
         if (e.target.id === 'btn-n') {
@@ -248,52 +259,12 @@ function stepOne(e) {
     }
 }
 
-// List of functions enabling quick access to values stored in surfSpots object
+// Defining Surfing spots elements for given key parameter, array and type
 
-function searchLocation(nameKey, myArray) {
+function spotSearch(nameKey, myArray, type) {
     for (var i = 0; i < myArray.length; i++) {
         if (myArray[i].title === nameKey) {
-            return myArray[i].location;
-        }
-    }
-}
-
-function searchPoint(nameKey, myArray) {
-    for (var i = 0; i < myArray.length; i++) {
-        if (myArray[i].title === nameKey) {
-            return myArray[i].point;
-        }
-    }
-}
-
-function searchStation(nameKey, myArray) {
-    for (var i = 0; i < myArray.length; i++) {
-        if (myArray[i].title === nameKey) {
-            return myArray[i].station;
-        }
-    }
-}
-
-function searchStationGfs(nameKey, myArray) {
-    for (var i = 0; i < myArray.length; i++) {
-        if (myArray[i].title === nameKey) {
-            return myArray[i].stationGfs;
-        }
-    }
-}
-
-function searchBuoy(nameKey, myArray) {
-    for (var i = 0; i < myArray.length; i++) {
-        if (myArray[i].title === nameKey) {
-            return myArray[i].buoy;
-        }
-    }
-}
-
-function storageKey(nameKey, myArray) {
-    for (var i = 0; i < myArray.length; i++) {
-        if (myArray[i].title === nameKey) {
-            return myArray[i].title;
+            return myArray[i][type];
         }
     }
 }
@@ -311,7 +282,7 @@ function stepTwo(e) {
             goBack.classList.add('hidden');
             go2Back.classList.remove('hidden');  
 
-            map.setCenter(searchLocation(selection, surfSpots));
+            map.setCenter(spotSearch(selection, surfSpots, 'location'));
             map.setZoom(12);
             window.scrollTo(0, 0);
 
@@ -335,9 +306,9 @@ function stepTwo(e) {
 
             var timeFrom = timeTodayFormat + 'T00%3A00%3A00Z';
             var timeTo = timeConverter(timeTomorrow) + 'T00%3A00%3A00Z';
-            var station = searchStation(selection, surfSpots);
-            var stationGfs = searchStationGfs(selection, surfSpots);
-            var buoy = searchBuoy(selection, surfSpots);
+            var station = spotSearch(selection, surfSpots, 'station');
+            var stationGfs = spotSearch(selection, surfSpots, 'stationGfs');
+            var buoy = spotSearch(selection, surfSpots, 'buoy');
 
             async function forecastData() {
                 var buoyApi = await fetch(`https://erddap.marine.ie/erddap/tabledap/IMI-WaveBuoyForecast.json?time%2CstationID%2Csignificant_wave_height%2Cmean_wave_period&time%3E=${timeFrom}&time%3C=${timeTo}&stationID=${buoy}`);
@@ -431,7 +402,7 @@ function stepTwo(e) {
                      
                 function windType(data) {
                     var wind = direction(data);
-                    var point = searchPoint(selection, surfSpots);
+                    var point = spotSearch(selection, surfSpots, 'point');
                     var range = [wind, point];
 
                     function check() {
@@ -929,8 +900,8 @@ function stepTwo(e) {
                     go2Back.classList.add('hidden');
                     goBack.classList.remove('hidden');
                     
-                    map.setCenter(mapCenter(e.target.classList[1], mapLocation));
-                    map.setZoom(mapZoom(e.target.classList[1], mapLocation));
+                    map.setCenter(mapSearch(e.target.classList[1], mapLocation, 'setCenter'));
+                    map.setZoom(mapSearch(e.target.classList[1], mapLocation, 'setZoom'));
                     window.scrollTo(0, 0);
                 }
             };
@@ -954,6 +925,22 @@ function aboutReveal(e){
     (e.target.innerHTML = 'ABOUT') ? about.classList.remove('hidden') : null;
 }
 
+function cardinal(direction) {
+    if (direction === 'north') {
+        go2Back.classList.add('north');
+        go2Back.classList.remove('west', 'east', 'south');
+    } else if (direction === 'west') {
+        go2Back.classList.add('west');
+        go2Back.classList.remove('north', 'east', 'south');
+    } else if (direction === 'south') {
+        go2Back.classList.add('south');
+        go2Back.classList.remove('west', 'east', 'north');
+    } else if (direction === 'east') {
+        go2Back.classList.add('east');
+        go2Back.classList.remove('west', 'north', 'south');
+    }
+}
+
 function menuLink(e) {
     var selection = e.target.parentElement.classList[0];
     if (surfingSpots.classList.contains('hidden') && forecast.classList.contains('hidden')) {
@@ -963,6 +950,8 @@ function menuLink(e) {
         surfingSpots.classList.remove('hidden');
         goBack.classList.remove('hidden');
         
+        cardinal(selection);
+
         backToHome = function(e) {
             if (e.target.id == 'goback') {
                 directions.classList.remove('hidden');
@@ -977,8 +966,8 @@ function menuLink(e) {
         var goBackTo = goBack.addEventListener('click', backToHome);
 
         listSpots(selection, mapLocation);
-        map.setCenter(mapCenter(selection, mapLocation));
-        map.setZoom(mapZoom(selection, mapLocation));
+        map.setCenter(mapSearch(selection, mapLocation, 'setCenter'));
+        map.setZoom(mapSearch(selection, mapLocation, 'setZoom'));
         window.scrollTo(0, 0);
     } else if (surfingSpots.classList.contains('hidden') && directions.classList.contains('hidden')) {
         menuList.classList.add('hidden');
@@ -988,6 +977,8 @@ function menuLink(e) {
         goBack.classList.remove('hidden');
         go2Back.classList.add('hidden');
         
+        cardinal(selection);
+
         backToHome = function(e) {
             if (e.target.id == 'goback') {
                 directions.classList.remove('hidden');
@@ -1002,16 +993,18 @@ function menuLink(e) {
         var goBackTo = goBack.addEventListener('click', backToHome);
 
         listSpots(selection, mapLocation);
-        map.setCenter(mapCenter(selection, mapLocation));
-        map.setZoom(mapZoom(selection, mapLocation));
+        map.setCenter(mapSearch(selection, mapLocation, 'setCenter'));
+        map.setZoom(mapSearch(selection, mapLocation, 'setZoom'));
         window.scrollTo(0, 0);
     } else if (forecast.classList.contains('hidden') && directions.classList.contains('hidden')) {
         menuList.classList.add('hidden');
         menuNav.innerHTML = 'MENU';
 
+        cardinal(selection);
+
         listSpots(selection, mapLocation);
-        map.setCenter(mapCenter(selection, mapLocation));
-        map.setZoom(mapZoom(selection, mapLocation));
+        map.setCenter(mapSearch(selection, mapLocation, 'setCenter'));
+        map.setZoom(mapSearch(selection, mapLocation, 'setZoom'));
         window.scrollTo(0, 0);
     }
 }

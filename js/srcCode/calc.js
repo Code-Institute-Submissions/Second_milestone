@@ -137,3 +137,36 @@ var average = {
     windDirection: Math.round(totalWindDirection / data.length),
     windSpeed: Math.round((totalWindSpeed * 1.851999999984) / data.length)
 };
+
+// TO DO
+
+function spotSearch(nameKey, myArray, type) {
+    for (var i = 0; i < myArray.length; i++) {
+        if (myArray[i].title === nameKey) {
+            return myArray[i][type];
+        }
+    }
+}
+
+// TO DO
+
+var element = document.getElementById('go2back');
+var directions = '';
+console.log(element);
+
+function cardinal(directions) {
+    if (directions === 'north') {
+        element.classList.add('north');
+        element.classList.remove('west', 'east', 'south');
+    } else if (directions === 'west') {
+        element.classList.add('west');
+        element.classList.remove('north', 'east', 'south');
+    } else if (directions === 'south') {
+        element.classList.add('south');
+        element.classList.remove('west', 'east', 'north');
+    } else if (directions === 'east') {
+        element.classList.add('east');
+        element.classList.remove('west', 'north', 'south');
+    }
+}
+
