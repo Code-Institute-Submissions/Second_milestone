@@ -156,12 +156,44 @@ describe('Calculate average wind values for defined data', function() {
     });
 });
 
+
+describe('Display Forecast source for selected Surf Spot', function() {
+    describe('Display buoy name matching Surfin Spot of choice', function() {
+        it('should display M4', function() {
+            var selection = 'Portrush';
+            expect(spotSearch(selection, surfSpots, 'buoy')).toBe('%22M4%22');
+        });
+        it('should display Spiddal', function() {
+            var selection = 'Inch Strand';
+            expect(spotSearch(selection, surfSpots, 'buoy')).toBe('%22Spiddal%22');
+        });
+        it('should not display M2', function() {
+            var selection = 'Inchydoney';
+            expect(spotSearch(selection, surfSpots, 'buoy')).not.toBe('%22M2%22');
+        });
+    });
+    describe('Display station name matching Surfin Spot of choice', function() {
+        it('should display Dublin_Port', function() {
+            var selection = 'Whiterock';
+            expect(spotSearch(selection, surfSpots, 'station')).toBe('%22Dublin_Port%22');
+        });
+        it('should display Rossaveel', function() {
+            var selection = 'Lahinch';
+            expect(spotSearch(selection, surfSpots, 'station')).toBe('%22Rossaveel%22');
+        });
+        it('should not display Aranmore', function() {
+            var selection = 'Castlefreake';
+            expect(spotSearch(selection, surfSpots, 'station')).not.toBe('%22Aranmore%22');
+        });
+    })
+});
+
 // TO DO
 
-describe("add direction classes", function() {
-    it ("add a south class", function() {
-        directions = 'south';
-        // element.onclick();
-        expect(element.attr('class')).toEqual('north');
-    });
-}); 
+// describe("add direction classes", function() {
+//     it ("add a south class", function() {
+//         var directions = 'north';
+//         // element.onclick();
+//         expect(cardinal(directions)).toEqual('north');
+//     });
+// }); 

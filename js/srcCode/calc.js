@@ -150,23 +150,32 @@ function spotSearch(nameKey, myArray, type) {
 
 // TO DO
 
-var element = document.getElementById('go2back');
-var directions = '';
-console.log(element);
+// var element = document.getElementById('go2back');
+// var directions = '';
+// var result = '';
+// console.log(element);
 
-function cardinal(directions) {
-    if (directions === 'north') {
-        element.classList.add('north');
-        element.classList.remove('west', 'east', 'south');
-    } else if (directions === 'west') {
-        element.classList.add('west');
-        element.classList.remove('north', 'east', 'south');
-    } else if (directions === 'south') {
-        element.classList.add('south');
-        element.classList.remove('west', 'east', 'north');
-    } else if (directions === 'east') {
-        element.classList.add('east');
-        element.classList.remove('west', 'north', 'south');
-    }
-}
+// function cardinal(directions) {
+//     if (directions === 'north') {
+//         // element.classList.add('north');
+//         // element.classList.remove('west', 'east', 'south');
+//         result = 'north';
+//         return result;
+//     } else if (directions === 'west') {
+//         // element.classList.add('west');
+//         // element.classList.remove('north', 'east', 'south');
+//         result = 'west';
+//         return result;
+//     } else if (directions === 'south') {
+//         // element.classList.add('south');
+//         // element.classList.remove('west', 'east', 'north');
+//         result = 'south';
+//         return result;
+//     } else if (directions === 'east') {
+//         // element.classList.add('east');
+//         // element.classList.remove('west', 'north', 'south');
+//         result = 'east';
+//         return result;
+//     }
+// }
 
