@@ -106,6 +106,7 @@ function check() {
   }
 
 // Day format for data content display
+
 var day = new Date();
 var dayWeek = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
 var dayDisplay = dayWeek[day.getDay() + 1];
@@ -138,7 +139,7 @@ var average = {
     windSpeed: Math.round((totalWindSpeed * 1.851999999984) / data.length)
 };
 
-// TO DO
+// Defining Surfing spots elements for given key parameter, array and type
 
 function spotSearch(nameKey, myArray, type) {
     for (var i = 0; i < myArray.length; i++) {
@@ -147,35 +148,3 @@ function spotSearch(nameKey, myArray, type) {
         }
     }
 }
-
-// TO DO
-
-// var element = document.getElementById('go2back');
-// var directions = '';
-// var result = '';
-// console.log(element);
-
-// function cardinal(directions) {
-//     if (directions === 'north') {
-//         // element.classList.add('north');
-//         // element.classList.remove('west', 'east', 'south');
-//         result = 'north';
-//         return result;
-//     } else if (directions === 'west') {
-//         // element.classList.add('west');
-//         // element.classList.remove('north', 'east', 'south');
-//         result = 'west';
-//         return result;
-//     } else if (directions === 'south') {
-//         // element.classList.add('south');
-//         // element.classList.remove('west', 'east', 'north');
-//         result = 'south';
-//         return result;
-//     } else if (directions === 'east') {
-//         // element.classList.add('east');
-//         // element.classList.remove('west', 'north', 'south');
-//         result = 'east';
-//         return result;
-//     }
-// }
-

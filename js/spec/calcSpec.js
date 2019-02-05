@@ -156,7 +156,6 @@ describe('Calculate average wind values for defined data', function() {
     });
 });
 
-
 describe('Display Forecast source for selected Surf Spot', function() {
     describe('Display buoy name matching Surfin Spot of choice', function() {
         it('should display M4', function() {
@@ -187,13 +186,3 @@ describe('Display Forecast source for selected Surf Spot', function() {
         });
     })
 });
-
-// TO DO
-
-// describe("add direction classes", function() {
-//     it ("add a south class", function() {
-//         var directions = 'north';
-//         // element.onclick();
-//         expect(cardinal(directions)).toEqual('north');
-//     });
-// }); 
